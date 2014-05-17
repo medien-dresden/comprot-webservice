@@ -1,3 +1,0 @@
-[submodule "frontend/src/main/resources"]
-	path = frontend/src/main/resources
-	url = git@github.com:medien-dresden/comprot-frontend.git
