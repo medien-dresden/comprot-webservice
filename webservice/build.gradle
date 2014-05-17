@@ -1,0 +1,25 @@
+description = 'Web-Service'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'http://repo.spring.io/release' }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.2.RELEASE")
+    }
+}
+
+apply plugin: 'spring-boot'
+
+repositories {
+    maven { url 'http://repo.spring.io/release' }
+}
+
+dependencies {
+    compile project(':frontend')
+
+    compile('org.codehaus.groovy:groovy-all:2.3.0')
+    compile('org.springframework.boot:spring-boot-starter-web')
+}

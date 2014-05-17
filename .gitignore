@@ -1,0 +1,15 @@
+build
+out
+bin
+catalina*
+.gradle
+.idea
+.project
+.settings
+.classpath
+*.iml
+*.war
+*.launch
+*.jar
+!gradle-wrapper.jar
+!.gitkeep
