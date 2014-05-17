@@ -1,3 +1,4 @@
 rootProject.name = 'comprot'
 
 include 'webservice'
+include 'frontend'
