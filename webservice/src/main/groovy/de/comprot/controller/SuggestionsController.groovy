@@ -1,9 +1,10 @@
 package de.comprot.controller
 
 import groovy.json.JsonBuilder
-import org.springframework.web.bind.annotation.PathVariable
+
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -11,20 +12,19 @@ import org.springframework.web.bind.annotation.RestController
 class SuggestionsController {
 
     @RequestMapping(
-            value    = "/{query}",
+            value    = "",
             method   = RequestMethod.GET,
             produces = "application/json")
-    String getJson(@PathVariable("query") String query) {
-        new JsonBuilder(
-            suggestions: [
+    String getJson(@RequestParam(value = "query", required = true) String query) {
+        new JsonBuilder([
                     {
-                        'label' query + '-suggestion-a'
+                        'label' query + ' Protein 564'
                         'hits' 1456
                     }, {
-                        'label' query + '-suggestion-b'
+                        'label' query + ' Target 23'
                         'hits' 8946
                     }, {
-                        'label' query + '-suggestion-c'
+                        'label' query + ' Target 65465'
                         'hits' 654
                     }
             ]).toPrettyString()

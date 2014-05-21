@@ -14,7 +14,11 @@ class SimpleCORSFilter implements Filter {
     @Override
     void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+
         response.setHeader('Access-Control-Allow-Origin', '*')
+        response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, DELETE')
+        response.setHeader('Access-Control-Max-Age', '3600')
+
         chain.doFilter(request, response)
     }
 
