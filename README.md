@@ -3,6 +3,16 @@
 [![Build Status](https://travis-ci.org/medien-dresden/comprot-webservice.svg?branch=develop)](https://travis-ci.org/medien-dresden/comprot-webservice)
 [![Stories in Ready](https://badge.waffle.io/medien-dresden/comprot-webservice.png?label=ready&title=Ready)](http://waffle.io/medien-dresden/comprot-webservice)
 
+## Installation
+
+### Platform & tools
+
+* Run with
+
+    ```
+    ./gradlew run
+    ```
+
 ## License
 
     This program is free software: you can redistribute it and/or modify
