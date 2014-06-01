@@ -1,7 +1,8 @@
 package de.comprot.controller
 
+import de.comprot.service.SuggestionService
 import groovy.json.JsonBuilder
-
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestParam
@@ -11,23 +12,14 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/suggestions")
 class SuggestionsController {
 
+    @Autowired SuggestionService service;
+
     @RequestMapping(
             value    = "",
             method   = RequestMethod.GET,
             produces = "application/json")
     String getJson(@RequestParam(value = "query", required = true) String query) {
-        new JsonBuilder([
-                    {
-                        'label' query + ' Protein 564'
-                        'hits' 1456
-                    }, {
-                        'label' query + ' Target 23'
-                        'hits' 8946
-                    }, {
-                        'label' query + ' Target 65465'
-                        'hits' 654
-                    }
-            ]).toPrettyString()
+        new JsonBuilder(service.getSuggestions(query)).toPrettyString();
     }
 
 }

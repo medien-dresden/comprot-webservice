@@ -12,14 +12,15 @@ buildscript {
 }
 
 apply plugin: 'spring-boot'
+apply plugin: 'application'
+
+mainClassName = 'de.comprot.Comprot'
 
 repositories {
     maven { url 'http://repo.spring.io/release' }
 }
 
 dependencies {
-    compile project(':frontend')
-
     compile('org.codehaus.groovy:groovy-all:2.3.0')
     compile('org.springframework.boot:spring-boot-starter-web')
 }
