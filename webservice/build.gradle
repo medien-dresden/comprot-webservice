@@ -14,13 +14,27 @@ buildscript {
 apply plugin: 'spring-boot'
 apply plugin: 'application'
 
-mainClassName = 'de.comprot.Comprot'
-
 repositories {
     maven { url 'http://repo.spring.io/release' }
 }
 
 dependencies {
-    compile('org.codehaus.groovy:groovy-all:2.3.0')
-    compile('org.springframework.boot:spring-boot-starter-web')
+    // make it groovy
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.3.0'
+
+    // spring mvc for architecture
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework', name: 'spring-orm'
+
+    // json entity mapping for rest service
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.1.2'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.1.2'
+
+    // hibernate for persistence and validation
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.5.Final'
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.3.5.Final'
+    compile group: 'org.hibernate', name: 'hibernate-validator', version: '5.1.1.Final'
+
+    // simple db for the beginning
+    compile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.2'
 }

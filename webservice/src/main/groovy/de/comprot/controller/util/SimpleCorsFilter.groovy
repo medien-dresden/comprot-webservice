@@ -1,4 +1,4 @@
-package de.comprot
+package de.comprot.controller.util
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -8,8 +8,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import org.springframework.stereotype.Component;
 
-@Component
-class SimpleCORSFilter implements Filter {
+@Component class SimpleCorsFilter implements Filter {
 
     @Override
     void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
