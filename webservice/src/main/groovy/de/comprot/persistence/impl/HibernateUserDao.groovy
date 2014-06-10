@@ -1,6 +1,6 @@
-package de.comprot.data.impl
+package de.comprot.persistence.impl
 
-import de.comprot.data.UserDao
+import de.comprot.persistence.UserDao
 import de.comprot.model.User
 import org.hibernate.Session
 import org.hibernate.SessionFactory

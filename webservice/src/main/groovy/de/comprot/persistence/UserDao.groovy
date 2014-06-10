@@ -1,4 +1,4 @@
-package de.comprot.data
+package de.comprot.persistence
 
 import de.comprot.model.User
 

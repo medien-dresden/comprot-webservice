@@ -3,11 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <jdbc:embedded-database id="dataSource" type="HSQL"/>
+    <tx:annotation-driven/>
 
     <bean   id="sessionFactory"
             class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
@@ -24,5 +27,7 @@
     <bean   id="transactionManager"
             class="org.springframework.orm.hibernate4.HibernateTransactionManager"
             p:sessionFactory-ref="sessionFactory"/>
+
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
 </beans>

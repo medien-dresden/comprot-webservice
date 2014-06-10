@@ -11,6 +11,6 @@ class User {
 
     @Pattern(regexp = '[\\w]*', message = 'can only contain letters and digits')
     @Length(min = 3, max = 100)
-    @Id String userName;
+    @Id String userName
 
 }
