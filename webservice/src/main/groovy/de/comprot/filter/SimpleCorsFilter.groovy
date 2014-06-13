@@ -1,4 +1,4 @@
-package de.comprot
+package de.comprot.filter
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

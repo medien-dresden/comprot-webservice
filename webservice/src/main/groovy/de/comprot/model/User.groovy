@@ -1,6 +1,6 @@
 package de.comprot.model
 
-import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonView
 import org.hibernate.validator.constraints.Length
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -14,23 +14,23 @@ import javax.validation.constraints.Pattern
 @Entity class User implements UserDetails {
 
     static def ROLE_ADMIN = 'ROLE_ADMIN'
-
-    static def ROLE_USER = 'ROLE_USER'
+    static def ROLE_USER  = 'ROLE_USER'
 
     @Pattern(
         message = 'can only contain letters and digits',
         regexp = '[\\w]*')
-    @Length(min = 3, max = 100)
-    @Id @NotNull String username
+    @Id @NotNull @Length(min = 3, max = 100)
+    @JsonView(Views.Public.class) String username
 
     @Pattern(
         message = 'should contain eight to twenty letters and numbers',
         regexp  = '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,20}$')
-    @NotNull String password
+    @JsonView(Views.Internal.class) @NotNull String password
 
-    @NotNull String[] roles = ['ROLE_USER']
+    @JsonView(Views.Internal.class) @NotNull String[] roles = ['ROLE_USER']
 
-    @JsonIgnore @Override Collection<? extends GrantedAuthority> getAuthorities() {
+    @Override @JsonView(Views.Internal.class)
+    Collection<? extends GrantedAuthority> getAuthorities() {
         roles.collect({ new SimpleGrantedAuthority(it) })
     }
 
@@ -39,9 +39,9 @@ import javax.validation.constraints.Pattern
 
     // no extended account flags for the sake of simplicity
 
-    @Override @JsonIgnore boolean isAccountNonExpired()     { true }
-    @Override @JsonIgnore boolean isAccountNonLocked()      { true }
-    @Override @JsonIgnore boolean isCredentialsNonExpired() { true }
-    @Override @JsonIgnore boolean isEnabled()               { true }
+    @Override @JsonView(Views.Internal.class) boolean isAccountNonExpired()     { true }
+    @Override @JsonView(Views.Internal.class) boolean isAccountNonLocked()      { true }
+    @Override @JsonView(Views.Internal.class) boolean isCredentialsNonExpired() { true }
+    @Override @JsonView(Views.Internal.class) boolean isEnabled()               { true }
 
 }

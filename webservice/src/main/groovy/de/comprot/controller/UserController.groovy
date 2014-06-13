@@ -1,6 +1,8 @@
 package de.comprot.controller
 
+import com.fasterxml.jackson.annotation.JsonView
 import de.comprot.model.User
+import de.comprot.model.Views
 import de.comprot.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
@@ -18,6 +20,7 @@ import javax.validation.Valid
 
     @Autowired UserService service;
 
+    @JsonView(Views.Public.class)
     @RequestMapping(method = RequestMethod.POST)
     def register(@Valid @RequestBody User user) {
         service.register(user)

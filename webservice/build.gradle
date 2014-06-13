@@ -20,7 +20,7 @@ jar {
 }
 
 repositories {
-    maven { url 'http://repo.spring.io/release' }
+    maven { url 'http://repo.spring.io/snapshot' }
 }
 
 dependencies {
@@ -29,6 +29,8 @@ dependencies {
 
     // spring mvc for architecture
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework', name: 'spring-web', version: '4.1.0.BUILD-SNAPSHOT' // JsonView (SPR-7156)
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '4.1.0.BUILD-SNAPSHOT' // JsonView (SPR-7156)
     compile group: 'org.springframework', name: 'spring-orm'
 
     // spring security
