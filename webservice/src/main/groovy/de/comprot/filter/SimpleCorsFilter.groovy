@@ -10,21 +10,14 @@ import org.springframework.stereotype.Component;
 
 @Component class SimpleCorsFilter implements Filter {
 
-    @Override
-    void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
-
+    @Override void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) {
         response.setHeader('Access-Control-Allow-Origin', '*')
         response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, DELETE')
         response.setHeader('Access-Control-Max-Age', '3600')
-
         chain.doFilter(request, response)
     }
 
-    @Override
-    void init(FilterConfig filterConfig) throws ServletException {}
-
-    @Override
-    void destroy() {}
+    @Override void init(FilterConfig filterConfig) {}
+    @Override void destroy() {}
 
 }

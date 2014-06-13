@@ -4,6 +4,8 @@ class Views {
 
     static class Public {}
 
-    static class Internal extends Public {}
+    static class Owner extends Public {}
+
+    static class Internal extends Owner {}
 
 }

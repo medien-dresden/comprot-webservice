@@ -1,5 +1,6 @@
-package de.comprot
+package de.comprot.controller
 
+import de.comprot.model.NoSuchUserException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.MethodArgumentNotValidException
@@ -23,6 +24,12 @@ import org.springframework.web.bind.annotation.ResponseStatus
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseBody def handle(DataIntegrityViolationException exception) {
         [ message: 'data integrity violation' ]
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NoSuchUserException.class)
+    @ResponseBody def handle(NoSuchUserException exception) {
+        [ message: 'no such user' ]
     }
 
 }

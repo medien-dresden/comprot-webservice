@@ -13,9 +13,6 @@ import javax.validation.constraints.Pattern
 @Table(name = 'comprot_user')
 @Entity class User implements UserDetails {
 
-    static def ROLE_ADMIN = 'ROLE_ADMIN'
-    static def ROLE_USER  = 'ROLE_USER'
-
     @Pattern(
         message = 'can only contain letters and digits',
         regexp = '[\\w]*')
@@ -25,7 +22,7 @@ import javax.validation.constraints.Pattern
     @Pattern(
         message = 'should contain eight to twenty letters and numbers',
         regexp  = '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,20}$')
-    @JsonView(Views.Internal.class) @NotNull String password
+    @JsonView(Views.Owner.class) @NotNull String password
 
     @JsonView(Views.Internal.class) @NotNull String[] roles = ['ROLE_USER']
 

@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 import javax.validation.Valid
@@ -22,12 +24,19 @@ import javax.validation.Valid
 
     @JsonView(Views.Public.class)
     @RequestMapping(method = RequestMethod.POST)
-    def register(@Valid @RequestBody User user) {
+    def post(@Valid @RequestBody User user) {
         service.register(user)
         new ResponseEntity<User>(user,
                 new HttpHeaders().with {
                     location: "api/users/${user.getUsername()}"
                     return it }, HttpStatus.CREATED)
+    }
+
+    @JsonView(Views.Owner.class)
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = '{username}', method = RequestMethod.GET)
+    def get(@PathVariable String username) {
+        service.loadByUsername(username)
     }
 
 }

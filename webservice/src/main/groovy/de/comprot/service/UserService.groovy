@@ -6,4 +6,6 @@ interface UserService {
 
     void register(User user)
 
+    User loadByUsername(String username)
+
 }
