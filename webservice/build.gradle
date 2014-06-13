@@ -20,20 +20,24 @@ repositories {
 
 dependencies {
     // make it groovy
-    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.3.0'
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.3.+'
 
     // spring mvc for architecture
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework', name: 'spring-orm'
 
+    // spring security
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '3.2.+'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '3.2.+'
+
     // hibernate for persistence and validation
-    compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.5.Final'
-    compile group: 'org.hibernate', name: 'hibernate-validator', version: '5.1.1.Final'
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.+'
+    compile group: 'org.hibernate', name: 'hibernate-validator', version: '5.1.+'
 
     // json entity mapping for rest service
-    runtime group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.1.2'
-    runtime group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.1.2'
+    runtime group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.1.+'
+    runtime group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.1.+'
 
     // simple db for now
-    runtime group: 'org.hsqldb', name: 'hsqldb', version: '2.3.2'
+    runtime group: 'org.hsqldb', name: 'hsqldb', version: '2.3.+'
 }

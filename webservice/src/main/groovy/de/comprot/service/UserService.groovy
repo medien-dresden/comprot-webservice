@@ -1,9 +1,10 @@
 package de.comprot.service
 
+import de.comprot.UsernameAlreadyTakenException
 import de.comprot.model.User
 
 interface UserService {
 
-    void addUser(User user);
+    void register(User user) throws UsernameAlreadyTakenException
 
 }

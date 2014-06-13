@@ -4,6 +4,8 @@ import de.comprot.model.User
 
 interface UserDao {
 
-    void addUser(User user);
+    void persist(User user);
+
+    User findByUsername(String username);
 
 }

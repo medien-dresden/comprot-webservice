@@ -9,5 +9,6 @@
     <context:component-scan base-package="de.comprot" />
 
     <import resource="data-context.xml" />
+    <import resource="security-context.xml" />
 
 </beans>
