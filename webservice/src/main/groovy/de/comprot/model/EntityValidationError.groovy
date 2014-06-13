@@ -1,6 +1,6 @@
 package de.comprot.model
 
-class EntityFieldError {
+class EntityValidationError {
 
     String field
 

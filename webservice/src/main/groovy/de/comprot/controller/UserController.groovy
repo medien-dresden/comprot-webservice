@@ -1,7 +1,7 @@
 package de.comprot.controller
 
 import de.comprot.UsernameAlreadyTakenException
-import de.comprot.model.EntityFieldError
+import de.comprot.model.EntityValidationError
 import de.comprot.model.User
 import de.comprot.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -33,8 +33,8 @@ import javax.validation.Valid
                         return it }, HttpStatus.CREATED)
 
         } catch (UsernameAlreadyTakenException ignored) {
-            new ResponseEntity<EntityFieldError>(
-                    new EntityFieldError(field: 'username', message: 'already taken'), HttpStatus.CONFLICT)
+            new ResponseEntity<EntityValidationError>(
+                    new EntityValidationError(field: 'username', message: 'already taken'), HttpStatus.CONFLICT)
         }
     }
 
