@@ -1,9 +1,9 @@
 package de.comprot
 
-import de.comprot.model.EntityValidationError
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ControllerAdvice
-import org.springframework.validation.BindException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -12,9 +12,17 @@ import org.springframework.web.bind.annotation.ResponseStatus
 @ControllerAdvice class ControllerExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(BindException.class)
-    @ResponseBody def handle(BindException exception) {
-        exception.fieldErrors.collect { new EntityValidationError(field: it.field, message: it.defaultMessage) }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseBody def handle(MethodArgumentNotValidException exception) {
+        exception.bindingResult.fieldErrors.collect {
+            [ property: it.field, message: it.defaultMessage ]
+        }
+    }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseBody def handle(DataIntegrityViolationException exception) {
+        [ message: 'data integrity violation' ]
     }
 
 }

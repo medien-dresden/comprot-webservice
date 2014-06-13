@@ -1,11 +1,9 @@
 package de.comprot.service.impl
 
-import de.comprot.UsernameAlreadyTakenException
 import de.comprot.model.User
 import de.comprot.persistence.UserDao
 import de.comprot.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
@@ -16,12 +14,8 @@ import org.springframework.transaction.annotation.Transactional
     @Autowired UserDao userDao
 
     @Transactional
-    @Override void register(User user) throws UsernameAlreadyTakenException {
-        try {
-            userDao.persist(user)
-        } catch (DataIntegrityViolationException exception) {
-            throw new UsernameAlreadyTakenException(user.getUsername(), exception)
-        }
+    @Override void register(User user) {
+        userDao.persist(user)
     }
 
     @Transactional(readOnly = true)

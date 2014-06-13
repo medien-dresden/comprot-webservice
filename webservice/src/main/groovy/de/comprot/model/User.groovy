@@ -28,7 +28,7 @@ import javax.validation.constraints.Pattern
         regexp  = '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,20}$')
     @NotNull String password
 
-    @JsonIgnore @NotNull String[] roles = ['ROLE_USER']
+    @NotNull String[] roles = ['ROLE_USER']
 
     @JsonIgnore @Override Collection<? extends GrantedAuthority> getAuthorities() {
         roles.collect({ new SimpleGrantedAuthority(it) })
