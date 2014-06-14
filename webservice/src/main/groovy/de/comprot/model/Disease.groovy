@@ -1,3 +1,3 @@
 package de.comprot.model
 
-class Disease extends ComprotEntity {}
+class Disease extends IndexEntity {}

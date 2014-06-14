@@ -1,3 +1,3 @@
 package de.comprot.model
 
-class Protein extends ComprotEntity {}
+class Protein extends IndexEntity {}

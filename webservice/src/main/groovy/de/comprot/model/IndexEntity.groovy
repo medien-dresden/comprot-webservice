@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id
 /**
  * represents a single drug, protein or disease
  */
-class ComprotEntity {
+class IndexEntity {
 
 	/**
 	 * internal unique search id of this entity 
