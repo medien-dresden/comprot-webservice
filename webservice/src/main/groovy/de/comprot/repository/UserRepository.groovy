@@ -1,11 +1,11 @@
 package de.comprot.repository
 
-import de.comprot.model.User
+import de.comprot.model.UserEntity
 
 interface UserRepository {
 
-    void persist(User user);
+    void persist(UserEntity user);
 
-    User findByUsername(String username);
+    UserEntity findByUsername(String username);
 
 }

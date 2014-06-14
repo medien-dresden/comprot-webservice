@@ -9,16 +9,14 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service class SolrIndexEntityService implements IndexEntityService {
 
-    @Autowired IndexEntityRepository comprotEntityRepository
+    @Autowired IndexEntityRepository indexEntityRepository
 
-    @Transactional
     @Override void addToIndex(IndexEntity entity) {
-        comprotEntityRepository.save(entity)
+        indexEntityRepository.save(entity)
     }
 
-    @Transactional
     @Override void deleteFromIndex(Long id) {
-        comprotEntityRepository.delete(id.toString())
+        indexEntityRepository.delete(id.toString())
     }
 
 }

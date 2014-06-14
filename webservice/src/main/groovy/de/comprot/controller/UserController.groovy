@@ -1,7 +1,7 @@
 package de.comprot.controller
 
 import com.fasterxml.jackson.annotation.JsonView
-import de.comprot.model.User
+import de.comprot.model.UserEntity
 import de.comprot.model.View
 import de.comprot.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,9 +24,9 @@ import javax.validation.Valid
 
     @JsonView(View.Public.class)
     @RequestMapping(method = RequestMethod.POST)
-    def post(@Valid @RequestBody User user) {
+    def post(@Valid @RequestBody UserEntity user) {
         service.register(user)
-        new ResponseEntity<User>(user,
+        new ResponseEntity<UserEntity>(user,
                 new HttpHeaders().with {
                     location: "api/users/${user.getUsername()}"
                     return it }, HttpStatus.CREATED)

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+
+    <!-- Application database settings -->
+
+    <bean   id="sessionFactory"
+            class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+            p:dataSource-ref="dataSource"
+            p:packagesToScan="de.comprot">
+
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop><!-- FIXME considered evil -->
+            </props>
+        </property>
+    </bean>
+
+    <bean   id="dataSource"
+            class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+            p:driverClassName="${app.database.driver}"
+            p:url="${app.database.url}"
+            p:username="${app.database.username}"
+            p:password="${app.database.password}" />
+
+    <bean   id="transactionManager"
+            class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+            p:sessionFactory-ref="sessionFactory" />
+
+
+    <!-- Comprot database settings -->
+
+    <bean   id="comprotDataSource"
+            class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+            p:driverClassName="${comprot.database.driver}"
+            p:url="${comprot.database.url}"
+            p:username="${comprot.database.username}"
+            p:password="${comprot.database.password}" />
+
+</beans>

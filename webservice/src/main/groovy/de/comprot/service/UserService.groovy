@@ -1,11 +1,11 @@
 package de.comprot.service
 
-import de.comprot.model.User
+import de.comprot.model.UserEntity
 
 interface UserService {
 
-    void register(User user)
+    void register(UserEntity user)
 
-    User loadByUsername(String username)
+    UserEntity loadByUsername(String username)
 
 }

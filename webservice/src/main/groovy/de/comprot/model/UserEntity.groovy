@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull
 import javax.validation.constraints.Pattern
 
 @Table(name = 'comprot_user')
-@Entity class User implements UserDetails {
+@Entity class UserEntity implements UserDetails {
 
     @Pattern(
         message = 'can only contain letters and digits',

@@ -5,6 +5,20 @@
 
 ## Installation
 
+* create your personal ```webservice/src/main/resources/data.properties```
+
+    ```
+    comprot.database.driver=com.mysql.jdbc.Driver
+    comprot.database.url=jdbc:mysql://localhost:3306/comprot-source
+    comprot.database.username=ralf
+    comprot.database.password=flar
+    
+    app.database.driver=com.mysql.jdbc.Driver
+    app.database.url=jdbc:mysql://localhost:3306/comprot-app
+    app.database.username=ralf
+    app.database.password=flar
+    ```
+
 ### Platform & tools
 
 * Run with

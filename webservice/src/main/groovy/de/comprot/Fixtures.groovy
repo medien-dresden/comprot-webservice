@@ -1,9 +1,8 @@
 package de.comprot
 
-import de.comprot.model.User
+import de.comprot.model.UserEntity
 import org.hibernate.SessionFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.solr.core.SolrTemplate
 import org.springframework.stereotype.Component
 
 import javax.annotation.PostConstruct
@@ -12,14 +11,12 @@ import javax.annotation.PostConstruct
 
     @Autowired SessionFactory sessionFactory
 
-    @Autowired SolrTemplate solrTemplate
-
     @PostConstruct def initAdmin() {
         def session = sessionFactory.openSession()
-        def currentAdmin = session.byId(User.class).load('admin')
+        def currentAdmin = session.byId(UserEntity.class).load('admin')
 
         if (currentAdmin == null) {
-            session.save(new User(
+            session.save(new UserEntity(
                     username: 'admin',
                     password: 'admin123',
                     roles: [ 'ROLE_ADMIN', 'ROLE_USER' ]
