@@ -3,17 +3,19 @@ package de.comprot
 import de.comprot.model.User
 import org.hibernate.SessionFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.solr.core.SolrTemplate
 import org.springframework.stereotype.Component
 
 import javax.annotation.PostConstruct
 
 @Component class Fixtures {
 
-    @Autowired SessionFactory sessionFactory;
+    @Autowired SessionFactory sessionFactory
+
+    @Autowired SolrTemplate solrTemplate
 
     @PostConstruct def initAdmin() {
         def session = sessionFactory.openSession()
-        def transaction = session.beginTransaction()
         def currentAdmin = session.byId(User.class).load('admin')
 
         if (currentAdmin == null) {
@@ -25,7 +27,6 @@ import javax.annotation.PostConstruct
         }
 
         session.flush()
-        transaction.commit()
         session.close()
     }
 

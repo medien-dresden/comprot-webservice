@@ -10,16 +10,16 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service class DefaultUserService implements UserService {
 
-    @Autowired UserRepository userDao
+    @Autowired UserRepository userRepository
 
     @Transactional
     @Override void register(User user) {
-        userDao.persist(user)
+        userRepository.persist(user)
     }
 
     @Transactional(readOnly = true)
     @Override User loadByUsername(String username) {
-        def user = userDao.findByUsername(username)
+        def user = userRepository.findByUsername(username)
 
         if (user == null)
             throw new NoSuchUserException()

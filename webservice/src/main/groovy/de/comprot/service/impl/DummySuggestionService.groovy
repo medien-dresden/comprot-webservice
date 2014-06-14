@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional
             new Suggestion(label: query + ' Protein',  hits: query.length()),
             new Suggestion(label: query + ' Target',   hits: query.length() + 54),
             new Suggestion(label: query + ' Whatever', hits: query.length() + 12),
-        ];
+        ]
     }
 
 }

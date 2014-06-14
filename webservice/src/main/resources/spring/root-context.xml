@@ -12,12 +12,14 @@
         <property name="locations">
             <list>
                 <value>classpath:api.properties</value>
+                <value>classpath:solr.properties</value>
             </list>
         </property>
         <property name="ignoreUnresolvablePlaceholders" value="true" />
     </bean>
 
     <import resource="data-context.xml" />
+    <import resource="solr-context.xml" />
     <import resource="security-context.xml" />
 
 </beans>
