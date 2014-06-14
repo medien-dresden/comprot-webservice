@@ -8,6 +8,12 @@ import org.springframework.data.annotation.Id
  */
 class IndexEntity {
 
+    enum Type {
+        PROTEIN,
+        DISEASE,
+        DRUG
+    }
+
 	/**
 	 * internal unique search id of this entity 
 	 * this id will be unique for all entities (across all EntityType's)
@@ -44,6 +50,6 @@ class IndexEntity {
     /**
      * Type of the entity
      */
-    @Field String getType() { this.class.name }
+    @Field Type type
 
 }
