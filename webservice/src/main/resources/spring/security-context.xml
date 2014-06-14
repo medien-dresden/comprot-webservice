@@ -16,6 +16,10 @@
         <security:expression-handler ref="expressionHandler" />
     </security:global-method-security>
 
+    <security:http use-expressions="true" auto-config="true">
+        <security:intercept-url pattern="/**" access="permitAll" />
+    </security:http>
+
     <bean   id="expressionHandler"
             class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler" />
 
