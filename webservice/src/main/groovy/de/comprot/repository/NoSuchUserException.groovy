@@ -1,3 +1,3 @@
-package de.comprot.model
+package de.comprot.repository
 
 class NoSuchUserException extends RuntimeException {}

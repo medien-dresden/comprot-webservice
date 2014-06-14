@@ -1,6 +1,6 @@
 package de.comprot.controller
 
-import de.comprot.model.NoSuchUserException
+import de.comprot.repository.NoSuchUserException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.MethodArgumentNotValidException

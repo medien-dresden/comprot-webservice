@@ -2,7 +2,7 @@ package de.comprot.controller
 
 import com.fasterxml.jackson.annotation.JsonView
 import de.comprot.model.User
-import de.comprot.model.Views
+import de.comprot.model.View
 import de.comprot.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
@@ -22,7 +22,7 @@ import javax.validation.Valid
 
     @Autowired UserService service;
 
-    @JsonView(Views.Public.class)
+    @JsonView(View.Public.class)
     @RequestMapping(method = RequestMethod.POST)
     def post(@Valid @RequestBody User user) {
         service.register(user)
@@ -32,7 +32,7 @@ import javax.validation.Valid
                     return it }, HttpStatus.CREATED)
     }
 
-    @JsonView(Views.Owner.class)
+    @JsonView(View.Owner.class)
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = '{username}', method = RequestMethod.GET)
     def get(@PathVariable String username) {

@@ -1,6 +1,6 @@
 package de.comprot.model
 
-class Views {
+class View {
 
     static class Public {}
 

@@ -1,8 +1,8 @@
-package de.comprot.persistence
+package de.comprot.repository
 
 import de.comprot.model.User
 
-interface UserDao {
+interface UserRepository {
 
     void persist(User user);
 

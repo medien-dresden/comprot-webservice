@@ -7,7 +7,7 @@
             http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <security:authentication-manager alias="authenticationManager">
-        <security:authentication-provider user-service-ref="userService" />
+        <security:authentication-provider user-service-ref="userDetailsService" />
     </security:authentication-manager>
 
     <security:global-method-security
@@ -15,21 +15,6 @@
             pre-post-annotations="enabled">
         <security:expression-handler ref="expressionHandler" />
     </security:global-method-security>
-
-    <security:http entry-point-ref="restAuthenticationEntryPoint" use-expressions="true" auto-config="true">
-        <security:intercept-url pattern="/**" access="permitAll" />
-        <!--security:intercept-url pattern="/api/**" access="isAuthenticated()" />
-        <security:intercept-url pattern="/api/users" method="POST" access="permitAll" /-->
-
-        <security:form-login
-            authentication-success-handler-ref="savedRequestAwareAuthenticationSuccessHandler"
-            authentication-failure-handler-ref="savedRequestAwareAuthenticationFailureHandler" />
-
-        <security:logout />
-    </security:http>
-
-    <bean   id="savedRequestAwareAuthenticationFailureHandler"
-            class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"/>
 
     <bean   id="expressionHandler"
             class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler" />

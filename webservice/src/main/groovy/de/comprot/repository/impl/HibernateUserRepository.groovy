@@ -1,12 +1,10 @@
-package de.comprot.persistence.impl
+package de.comprot.repository.impl
 
 import de.comprot.model.User
-import de.comprot.persistence.UserDao
+import de.comprot.repository.UserRepository
 import org.springframework.stereotype.Repository
 
-import javax.annotation.PostConstruct
-
-@Repository class HibernateUserDao extends HibernateDao implements UserDao {
+@Repository class HibernateUserRepository extends HibernateRepository implements UserRepository {
 
     @Override void persist(User user) {
         session().save(user)

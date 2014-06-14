@@ -1,8 +1,8 @@
 package de.comprot.service.impl
 
-import de.comprot.model.NoSuchUserException
+import de.comprot.repository.NoSuchUserException
 import de.comprot.model.User
-import de.comprot.persistence.UserDao
+import de.comprot.repository.UserRepository
 import de.comprot.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service class DefaultUserService implements UserService {
 
-    @Autowired UserDao userDao
+    @Autowired UserRepository userDao
 
     @Transactional
     @Override void register(User user) {

@@ -1,6 +1,6 @@
-package de.comprot.security
+package de.comprot.service.impl
 
-import de.comprot.persistence.UserDao
+import de.comprot.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -8,9 +8,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
-@Component('userService') class UserAuthenticationDetailsService implements UserDetailsService {
+@Component('userDetailsService') class DatabaseUserDetailsService implements UserDetailsService {
 
-    @Autowired UserDao userDao
+    @Autowired UserRepository userDao
 
     @Transactional(readOnly = true)
     @Override UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

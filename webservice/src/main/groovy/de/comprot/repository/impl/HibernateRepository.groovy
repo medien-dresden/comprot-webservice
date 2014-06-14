@@ -1,9 +1,9 @@
-package de.comprot.persistence.impl
+package de.comprot.repository.impl
 
 import org.hibernate.SessionFactory
 import org.springframework.beans.factory.annotation.Autowired
 
-class HibernateDao {
+class HibernateRepository {
 
     @Autowired SessionFactory sessionFactory;
 

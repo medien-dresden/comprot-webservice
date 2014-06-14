@@ -8,6 +8,15 @@
 
     <context:component-scan base-package="de.comprot" />
 
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:api.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+    </bean>
+
     <import resource="data-context.xml" />
     <import resource="security-context.xml" />
 
