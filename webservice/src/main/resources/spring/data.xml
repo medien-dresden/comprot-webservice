@@ -22,7 +22,7 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop><!-- FIXME considered evil -->
+                <prop key="hibernate.hbm2ddl.auto">validate</prop>
             </props>
         </property>
     </bean>

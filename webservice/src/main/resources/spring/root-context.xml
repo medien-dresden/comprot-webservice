@@ -23,5 +23,6 @@
     <import resource="solr.xml" />
     <import resource="security.xml" />
     <import resource="beans.xml" />
+    <import resource="tasks.xml" />
 
 </beans>
