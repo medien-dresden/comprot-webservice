@@ -1,10 +1,14 @@
 package de.comprot.facade
 
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
+import de.comprot.core.repository.NoSuchEntityException
 import de.comprot.core.repository.NoSuchUserException
 import org.springframework.dao.DataAccessException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.orm.ObjectRetrievalFailureException
+import org.springframework.web.HttpMediaTypeNotAcceptableException
 import org.springframework.web.HttpMediaTypeNotSupportedException
 import org.springframework.web.HttpRequestMethodNotSupportedException
 import org.springframework.web.bind.MethodArgumentNotValidException
@@ -24,8 +28,9 @@ import javax.validation.ConstraintViolationException
     @ExceptionHandler([MissingServletRequestParameterException.class,
             UnsatisfiedServletRequestParameterException.class,
             HttpRequestMethodNotSupportedException.class,
-            ServletRequestBindingException.class ])
-    def handleRequestException(Exception exception) {
+            ServletRequestBindingException.class,
+            HttpMessageNotReadableException.class])
+    def handle(Exception exception) {
         [ error: 'request error', cause: exception.message ]
     }
 
@@ -33,11 +38,9 @@ import javax.validation.ConstraintViolationException
     @RequestMapping(produces = Version.V1)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ConstraintViolationException.class)
-    def handleValidationException(ConstraintViolationException exception) {
+    def handle(ConstraintViolationException exception) {
         [   error: 'validation failure',
             violations: exception.constraintViolations.collect {[
-                    value: it.invalidValue,
-                    type: it.rootBeanClass.simpleName,
                     message: it.message
             ]}]
     }
@@ -46,11 +49,10 @@ import javax.validation.ConstraintViolationException
     @RequestMapping(produces = Version.V1)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    def handleValidationException(MethodArgumentNotValidException exception) {
+    def handle(MethodArgumentNotValidException exception) {
         [   error: 'validation failure',
-            violations: exception.bindingResult.allErrors.collect {[
-                    target: exception.bindingResult.target,
-                    type: exception.bindingResult.target.class.simpleName,
+            violations: exception.bindingResult.fieldErrors.collect {[
+                    field: it.field,
                     message: it.defaultMessage
             ]}]
     }
@@ -59,7 +61,7 @@ import javax.validation.ConstraintViolationException
     @RequestMapping(produces = Version.V1)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ObjectRetrievalFailureException.class)
-    def handleValidationException(ObjectRetrievalFailureException exception) {
+    def handle(ObjectRetrievalFailureException exception) {
         [ error: 'entity not found', cause: exception.message ]
     }
 
@@ -67,7 +69,7 @@ import javax.validation.ConstraintViolationException
     @RequestMapping(produces = Version.V1)
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(DataIntegrityViolationException.class)
-    def handleDataIntegrityViolationException(DataIntegrityViolationException exception) {
+    def handle(DataIntegrityViolationException exception) {
         [ error: 'data integrity violation', cause: exception.cause.cause.localizedMessage ]
     }
 
@@ -75,7 +77,7 @@ import javax.validation.ConstraintViolationException
     @RequestMapping(produces = Version.V1)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(DataAccessException.class)
-    def handleDataAccessException(DataAccessException exception) {
+    def handle(DataAccessException exception) {
         [ error: 'data error', cause: exception.cause.message ]
     }
 
@@ -83,9 +85,19 @@ import javax.validation.ConstraintViolationException
     @RequestMapping(produces = Version.V1)
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    def handleUnsupportedMediaTypeException(HttpMediaTypeNotSupportedException exception) {
+    def handle(HttpMediaTypeNotSupportedException exception) {
         [   error: 'unsupported media type',
             cause: exception.localizedMessage,
+            supported: exception.supportedMediaTypes.collect({ (String) "${it.type}/${it.subtype}" })]
+    }
+
+    @ResponseBody
+    @RequestMapping(produces = Version.V1)
+    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+    @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
+    def handle(HttpMediaTypeNotAcceptableException exception) {
+        [   error: 'unsupported media type',
+            cause: exception.message,
             supported: exception.supportedMediaTypes.collect({ (String) "${it.type}/${it.subtype}" })]
     }
 
@@ -100,9 +112,9 @@ import javax.validation.ConstraintViolationException
     @ResponseBody
     @RequestMapping(produces = Version.V1)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NoSuchUserException.class)
-    def handle(NoSuchUserException exception) {
-        [ message: 'no such user' ]
+    @ExceptionHandler(NoSuchEntityException.class)
+    def handle(NoSuchEntityException exception) {
+        [ error: 'no such entity' ]
     }
 
 }
