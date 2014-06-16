@@ -23,4 +23,10 @@
         <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
     </mapping>
 
+    <mapping>
+        <class-a>de.comprot.facade.v1.model.Suggestion</class-a>
+        <class-b>de.comprot.core.model.SuggestionEntity</class-b>
+        <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
+    </mapping>
+
 </mappings>
