@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.2.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.1.RELEASE")
     }
 }
 
@@ -29,8 +29,7 @@ dependencies {
 
     // spring mvc for architecture
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
-    compile group: 'org.springframework', name: 'spring-web', version: '4.1.0.BUILD-SNAPSHOT' // JsonView (SPR-7156)
-    compile group: 'org.springframework', name: 'spring-webmvc', version: '4.1.0.BUILD-SNAPSHOT' // JsonView (SPR-7156)
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework', name: 'spring-context-support'
     compile group: 'org.springframework', name: 'spring-orm'
 
