@@ -1,8 +1,6 @@
 package de.comprot.facade
 
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
 import de.comprot.core.repository.NoSuchEntityException
-import de.comprot.core.repository.NoSuchUserException
 import org.springframework.dao.DataAccessException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
