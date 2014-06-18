@@ -15,8 +15,8 @@ apply plugin: 'spring-boot'
 apply plugin: 'application'
 
 jar {
-    baseName = group
-    version =  version
+    baseName = 'comprot'
+    version  = project.version
 }
 
 repositories {
@@ -28,7 +28,6 @@ dependencies {
     compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.3.+'
 
     // spring mvc for architecture
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework', name: 'spring-context-support'
     compile group: 'org.springframework', name: 'spring-orm'
