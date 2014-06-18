@@ -21,11 +21,16 @@
 
 ### Platform & tools
 
-* Run with
+* run with
 
     ```
     ./gradlew run
     ```
+    
+* for [Hot code swapping](http://en.wikipedia.org/wiki/Hot_swapping) with IntelliJ IDEA use
+    * [DCEVM plugin](http://blog.jetbrains.com/idea/2013/07/get-true-hot-swap-in-java-with-dcevm-and-intellij-idea/)
+    * [Spring Loaded](https://github.com/spring-projects/spring-loaded)
+    * in debug, press Ctrl+Shift+F9 (reload changed classes)
 
 ## License
 
