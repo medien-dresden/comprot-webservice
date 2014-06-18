@@ -60,3 +60,13 @@ dependencies {
     // mysql database
     runtime group: 'mysql', name: 'mysql-connector-java', version: '5.1.+'
 }
+
+task dataPropertiesExistence() {
+    def dataPropertiesFile = new File('src/main/resources/data.properties')
+
+    if (!dataPropertiesFile.isFile()) {
+        throw new InvalidUserDataException('data.properties is missing, please consult README.md')
+    }
+}
+
+build.dependsOn dataPropertiesExistence
