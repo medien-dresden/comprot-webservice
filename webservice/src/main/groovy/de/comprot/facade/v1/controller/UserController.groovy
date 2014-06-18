@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*
 
 import javax.validation.Valid
 
-@RequestMapping(value = "api/users",
+@RequestMapping(value = 'api/users',
         produces = Version.V1, consumes = Version.V1)
 @RestController class UserController {
 

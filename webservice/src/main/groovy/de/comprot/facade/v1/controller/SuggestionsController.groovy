@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
-@RequestMapping(value = "api/suggestions",
+@RequestMapping(value = 'api/suggestions',
         produces = Version.V1, consumes = Version.V1)
 @RestController class SuggestionsController {
 
