@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id
 /**
  * represents a single drug, protein or disease
  */
-class IndexEntity {
+class ComprotEntity {
 
     enum Type {
         PROTEIN,

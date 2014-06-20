@@ -1,6 +1,6 @@
 package de.comprot.facade
 
-import de.comprot.core.repository.NoSuchEntityException
+import de.comprot.core.service.NoSuchEntityException
 import org.springframework.dao.DataAccessException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus

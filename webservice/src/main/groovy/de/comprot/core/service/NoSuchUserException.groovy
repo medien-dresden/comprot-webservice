@@ -1,3 +1,3 @@
-package de.comprot.core.repository
+package de.comprot.core.service
 
 class NoSuchUserException extends NoSuchEntityException {}

@@ -1,7 +1,7 @@
 package de.comprot.core.task
 
 import de.comprot.core.model.UserEntity
-import de.comprot.core.repository.NoSuchUserException
+import de.comprot.core.service.NoSuchUserException
 import de.comprot.core.service.UserService
 import org.quartz.Job
 import org.quartz.JobExecutionContext

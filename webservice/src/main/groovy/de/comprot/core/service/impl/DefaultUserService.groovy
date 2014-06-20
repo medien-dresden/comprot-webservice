@@ -1,7 +1,7 @@
 package de.comprot.core.service.impl
 
 import de.comprot.core.model.UserEntity
-import de.comprot.core.repository.NoSuchUserException
+import de.comprot.core.service.NoSuchUserException
 import de.comprot.core.repository.UserRepository
 import de.comprot.core.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
