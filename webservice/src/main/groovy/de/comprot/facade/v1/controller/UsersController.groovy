@@ -16,7 +16,7 @@ import javax.validation.Valid
 
 @RequestMapping(value = 'api/users',
         produces = Version.V1, consumes = Version.V1)
-@RestController class UserController {
+@RestController class UsersController {
 
     @Autowired UserService userService
 

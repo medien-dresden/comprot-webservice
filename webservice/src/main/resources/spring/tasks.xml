@@ -11,13 +11,13 @@
     <task:executor id="executor" pool-size="10" />
 
     <bean id="initAdminUserJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
-        p:jobClass="de.comprot.core.task.InitAdminUserJob" p:durability="true" />
+        p:jobClass="de.comprot.task.InitAdminUserJob" p:durability="true" />
 
     <bean id="initAdminUserJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean"
         p:jobDetail-ref="initAdminUserJobDetail" p:startDelay="0" p:repeatCount="0" />
 
     <bean id="buildIndexJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
-          p:jobClass="de.comprot.core.task.BuildIndexJob" p:durability="true" />
+          p:jobClass="de.comprot.task.BuildIndexJob" p:durability="true" />
 
     <bean id="buildIndexJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean"
           p:jobDetail-ref="buildIndexJobDetail" p:startDelay="0" p:repeatCount="0" />
@@ -29,7 +29,7 @@
 
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobFactory">
-            <bean class="de.comprot.core.task.AutowiringJobFactory"/>
+            <bean class="de.comprot.task.AutowiringJobFactory"/>
         </property>
         <property name="triggers">
             <list>

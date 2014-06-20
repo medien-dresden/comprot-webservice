@@ -1,4 +1,4 @@
-package de.comprot.core.task
+package de.comprot.task
 
 import de.comprot.core.model.UserEntity
 import de.comprot.core.service.NoSuchUserException

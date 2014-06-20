@@ -1,4 +1,4 @@
-package de.comprot.core.task
+package de.comprot.task
 
 import org.quartz.spi.TriggerFiredBundle
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory
