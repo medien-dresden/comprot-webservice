@@ -1,5 +1,6 @@
 package de.comprot.core.model
 
+import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.apache.solr.client.solrj.beans.Field
 import org.springframework.data.annotation.Id
 
@@ -45,11 +46,19 @@ class ComprotEntity {
 	/**
 	 * known secondary names or synonyms
 	 */
-    @Field Collection<String> synonyms = []
+    @Field String[] synonyms = []
 
     /**
      * Type of the entity
      */
     @Field Type type
+
+    @Override int hashCode() {
+        new HashCodeBuilder()
+                .append(comprotId)
+                .append(taxonomyId)
+                .append(sourceId)
+                .toHashCode()
+    }
 
 }

@@ -10,16 +10,14 @@ import org.springframework.stereotype.Service
 
     @Autowired ComprotEntityIndexRepository comprotEntityRepository
 
+    @Override boolean hasEmptyIndex() {
+        comprotEntityRepository.count() == 0
+    }
+
     @Override void addToIndex(ComprotEntity entity) {
+        // this might not be the best way
+        entity.setId(entity.hashCode())
         comprotEntityRepository.save(entity)
-    }
-
-    @Override void deleteFromIndex(Long id) {
-        comprotEntityRepository.delete(id.toString())
-    }
-
-    @Override void getComprotEntityCount() {
-        comprotEntityRepository.count()
     }
 
 }

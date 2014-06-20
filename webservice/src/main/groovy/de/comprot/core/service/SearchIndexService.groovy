@@ -4,10 +4,8 @@ import de.comprot.core.model.ComprotEntity
 
 interface SearchIndexService {
 
+    boolean hasEmptyIndex()
+
     void addToIndex(ComprotEntity entity)
-
-    void deleteFromIndex(Long id)
-
-    void getComprotEntityCount();
 
 }

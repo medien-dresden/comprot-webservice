@@ -28,6 +28,9 @@ dependencies {
     // make it groovy
     compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.3.+'
 
+    // utils
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.3.+'
+
     // spring mvc for architecture
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework', name: 'spring-context-support'
