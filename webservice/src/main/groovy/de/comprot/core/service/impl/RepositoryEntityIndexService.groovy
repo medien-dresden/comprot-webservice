@@ -20,11 +20,9 @@ import org.springframework.stereotype.Service
     }
 
     @Override List<SuggestionEntity> getSuggestions(String query) {
-        [   // return some dummy data
-            new SuggestionEntity(label: query + ' Protein',  hits: query.length()),
-            new SuggestionEntity(label: query + ' Target',   hits: query.length() + 54),
-            new SuggestionEntity(label: query + ' Whatever', hits: query.length() + 12),
-        ]
+        repository.findSuggestions(query).collect({
+            new SuggestionEntity(label: it.name)
+        })
     }
 
 }

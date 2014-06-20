@@ -1,41 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
 	<luceneMatchVersion>LUCENE_40</luceneMatchVersion>
-
-	<!--
-	    The DirectoryFactory to use for indexes. solr.StandardDirectoryFactory,
-		the default, is filesystem based. solr.RAMDirectoryFactory is memory based, 
-		not persistent, and doesn't work with replication.
-    -->
 	<directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.StandardDirectoryFactory}" />
-
-	<!--
-	    Data Directory Used to specify an alternate directory to hold all index
-		data other than the default ./data under the Solr home. If replication is 
-		in use, this should match the replication configuration. Value will be provided 
-		through an according System properties entry.
-	-->
 	<dataDir>/tmp/comprot-data</dataDir>
 
 	<updateHandler class="solr.DirectUpdateHandler2">
-		<!-- Limit the number of deletions Solr will buffer during doc updating. 
-			Setting this lower can help bound memory use during indexing. -->
 		<maxPendingDeletes>100</maxPendingDeletes>
-		<!-- autocommit pending docs if certain criteria are met. -->
-		<!--<autoCommit> -->
-		<!-- maximum uncommited docs before autocommit triggered -->
-		<!--<maxDocs>100</maxDocs> -->
-		<!-- maximum time (in mills.) after adding a doc before an autocommit is 
-			triggered -->
-		<!--<maxTime>30000</maxTime> -->
-		<!-- SOLR 4.0. Optionally don't open a searcher on hard commit. This is 
-			useful to minimize the size of transaction logs that keep track of uncommitted 
-			updates. -->
-		<!--<openSearcher>false</openSearcher> -->
-		<!--</autoCommit> -->
 	</updateHandler>
 
-    <!-- auto generate document ids -->
     <updateRequestProcessorChain>
         <processor class="solr.UUIDUpdateProcessorFactory">
             <str name="fieldName">id</str>
@@ -51,66 +23,27 @@
 	<requestHandler name="standard" class="solr.StandardRequestHandler" default="true" />
 	<requestHandler name="/update" class="solr.UpdateRequestHandler" />
 
-	<searchComponent name="spellcheck" class="solr.SpellCheckComponent">
-		<str name="queryAnalyzerFieldType">text_spell</str>
-		<lst name="spellchecker">
-			<str name="name">default</str>
-			<str name="field">term_spell</str>
-			<!-- Optional, by default use in-memory index (RAMDirectory) -->
-			<str name="spellcheckIndexDir">./spellcheck</str>
-			<str name="buildOnCommit">true</str>
-			<!--<str name="buildOnOptimize">true</str>-->
-		</lst>
-	</searchComponent>
+    <searchComponent name="suggest" class="solr.SpellCheckComponent">
+        <lst name="spellchecker">
+            <str name="name">suggest</str>
+            <str name="classname">org.apache.solr.spelling.suggest.Suggester</str>
+            <str name="lookupImpl">org.apache.solr.spelling.suggest.tst.TSTLookup</str>
+            <str name="field">term_suggest</str>
+        </lst>
+    </searchComponent>
 
-	<!-- add spellcheck component to the standard search handler (/select) -->
-	<requestHandler name="/select" class="solr.SearchHandler">
-		<lst name="defaults">
-			<str name="spellcheck">true</str>
-			<str name="spellcheck.count">3</str>
-			<str name="spellcheck.onlyMorePopular">true</str>
-			<str name="spellcheck.collate">true</str>
-		</lst>
-		<arr name="last-components">
-			<str>spellcheck</str>
-		</arr>
-	</requestHandler>
-
-	<!--
-	    some warmup queries to be executed automatically to not let the user
-		do (and wait for ;) that ...
-	-->
-	<query>
-		<useColdSearcher>false</useColdSearcher>
-		<listener event="newSearcher" class="solr.QuerySenderListener">
-			<arr name="queries">
-				<lst>
-					<str name="q">*:*</str>
-					<str name="facet.prefix">foo</str>
-					<str name="facet">true</str>
-					<str name="facet.field">term_suggest</str>
-					<str name="facet.mincount">1</str>
-				</lst>
-				<lst>
-					<str name="q">name:chlor</str>
-				</lst>
-			</arr>
-		</listener>
-		<listener event="firstSearcher" class="solr.QuerySenderListener">
-			<arr name="queries">
-				<lst>
-					<str name="q">*:*</str>
-					<str name="facet.prefix">foo</str>
-					<str name="facet">true</str>
-					<str name="facet.field">term_suggest</str>
-					<str name="facet.mincount">1</str>
-				</lst>
-				<lst>
-					<str name="q">name:chlor</str>
-				</lst>
-			</arr>
-		</listener>
-	</query>
+    <requestHandler name="/select" class="org.apache.solr.handler.component.SearchHandler">
+        <lst name="defaults">
+            <str name="spellcheck">true</str>
+            <str name="spellcheck.dictionary">suggest</str>
+            <str name="spellcheck.onlyMorePopular">true</str>
+            <str name="spellcheck.count">5</str>
+            <str name="spellcheck.collate">true</str>
+        </lst>
+        <arr name="last-components">
+            <str>suggest</str>
+        </arr>
+    </requestHandler>
 
 </config>
 
