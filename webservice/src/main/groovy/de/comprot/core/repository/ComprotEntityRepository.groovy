@@ -1,6 +1,7 @@
 package de.comprot.core.repository
 
-import de.comprot.core.model.ComprotEntity
-import org.springframework.data.solr.repository.SolrCrudRepository
+interface ComprotEntityRepository {
 
-interface ComprotEntityRepository extends SolrCrudRepository<ComprotEntity, String> {}
+    Range<Long> getIdRange()
+
+}

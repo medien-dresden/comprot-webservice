@@ -41,6 +41,11 @@
 
     <!-- Comprot database settings -->
 
+    <bean   id="comprotJdbcTemplate"
+            class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="comprotDataSource" />
+    </bean>
+
     <bean   id="comprotDataSource"
             class="org.springframework.jdbc.datasource.DriverManagerDataSource"
             p:driverClassName="${comprot.database.driver}"

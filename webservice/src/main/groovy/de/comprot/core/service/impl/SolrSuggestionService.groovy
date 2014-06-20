@@ -1,14 +1,14 @@
 package de.comprot.core.service.impl
 
 import de.comprot.core.model.SuggestionEntity
-import de.comprot.core.repository.ComprotEntityRepository
+import de.comprot.core.repository.ComprotEntityIndexRepository
 import de.comprot.core.service.SuggestionService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service class SolrSuggestionService implements SuggestionService {
 
-    @Autowired ComprotEntityRepository indexEntityRepository
+    @Autowired ComprotEntityIndexRepository indexEntityRepository
 
     @Override List<SuggestionEntity> getSuggestions(String query) {
         [   // return some dummy data
