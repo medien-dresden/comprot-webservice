@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<solr persistent="false">
-    <cores defaultCoreName="comprot">
-        <core name="comprot" instanceDir="comprot" />
-    </cores>
-</solr>

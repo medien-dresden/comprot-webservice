@@ -7,7 +7,7 @@
             http://www.springframework.org/schema/data/solr http://www.springframework.org/schema/data/solr/spring-solr-1.0.xsd">
 
     <solr:repositories base-package="de.comprot" />
-    <solr:embedded-solr-server id="solrServer" solrHome="${solr.solr.home}" />
+    <solr:embedded-solr-server id="solrServer" solrHome="classpath:solr" />
 
     <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
         <constructor-arg ref="solrServer"/>

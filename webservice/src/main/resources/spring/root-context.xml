@@ -13,9 +13,8 @@
     <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:api.properties</value>
-                <value>classpath:solr.properties</value>
                 <value>classpath:data.properties</value>
+                <value>classpath:dozer.properties</value>
             </list>
         </property>
         <property name="ignoreUnresolvablePlaceholders" value="true" />

@@ -12,8 +12,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
         DataSourceTransactionManagerAutoConfiguration.class
 ])
 @ImportResource('spring/root-context.xml')
-class Comprot extends WebMvcConfigurerAdapter {
+class ComprotApplication extends WebMvcConfigurerAdapter {
 
-    public static void main(String[] args) { SpringApplication.run(Comprot.class, args) }
+    public static void main(String[] args) { SpringApplication.run(ComprotApplication.class, args) }
 
 }
