@@ -1,6 +1,5 @@
 package de.comprot.core.model
 
-import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.apache.solr.client.solrj.beans.Field
 import org.springframework.data.annotation.Id
 
@@ -9,18 +8,28 @@ import org.springframework.data.annotation.Id
  */
 class ComprotEntity {
 
-    enum Type {
-        PROTEIN,
-        DISEASE,
-        DRUG
-    }
+    public static final String FIELD_ID = 'id'
+
+    public static final String FIELD_COMPROT_ID = 'comprotId'
+
+    public static final String FIELD_TAXONOMY_ID = 'taxonomyId'
+
+    public static final String FIELD_SOURCE_ID = 'sourceId'
+
+    public static final String FIELD_NAME = 'name'
+
+    public static final String FIELD_SYNONYMS = 'synonyms'
+
+    public static final String FIELD_TYPE = 'type'
+
+    enum Type { PROTEIN, DISEASE, DRUG }
 
 	/**
 	 * internal unique search id of this entity 
 	 * this id will be unique for all entities (across all EntityType's)
 	 * it will normally generated/set only for those entities that are obtained through a SearchResult's SearchHit
 	 */
-	@Id @Field Long id
+	@Id @Field String id
 
 	/**
 	 * internal id of this entity in the comprot database
@@ -52,13 +61,5 @@ class ComprotEntity {
      * Type of the entity
      */
     @Field Type type
-
-    @Override int hashCode() {
-        new HashCodeBuilder()
-                .append(comprotId)
-                .append(taxonomyId)
-                .append(sourceId)
-                .toHashCode()
-    }
 
 }

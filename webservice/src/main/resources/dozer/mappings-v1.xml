@@ -12,19 +12,19 @@
     -->
 
     <mapping>
-        <class-a>de.comprot.facade.v1.model.PublicUser</class-a>
+        <class-a>de.comprot.facade.v1.model.UserDto</class-a>
         <class-b>de.comprot.core.model.UserEntity</class-b>
         <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
     </mapping>
 
     <mapping>
-        <class-a>de.comprot.facade.v1.model.UserRegistration</class-a>
+        <class-a>de.comprot.facade.v1.model.RegistrationDto</class-a>
         <class-b>de.comprot.core.model.UserEntity</class-b>
         <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
     </mapping>
 
     <mapping>
-        <class-a>de.comprot.facade.v1.model.Suggestion</class-a>
+        <class-a>de.comprot.facade.v1.model.SuggestionDto</class-a>
         <class-b>de.comprot.core.model.SuggestionEntity</class-b>
         <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
     </mapping>

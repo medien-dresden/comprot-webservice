@@ -5,7 +5,7 @@ import de.comprot.core.model.validation.Username
 
 import javax.validation.constraints.NotNull
 
-class UserRegistration {
+class RegistrationDto {
 
     @Username @NotNull String username
 

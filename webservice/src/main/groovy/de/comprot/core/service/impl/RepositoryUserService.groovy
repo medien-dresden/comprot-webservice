@@ -11,18 +11,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-@Service class DefaultUserService implements UserService, UserDetailsService {
+@Service class RepositoryUserService implements UserService, UserDetailsService {
 
-    @Autowired UserRepository userRepository
+    @Autowired UserRepository repository
 
     @Transactional
     @Override void register(UserEntity user) {
-        userRepository.persist(user)
+        repository.persist(user)
     }
 
     @Transactional(readOnly = true)
     @Override UserEntity loadByUsername(String username) {
-        def user = userRepository.findByUsername(username)
+        def user = repository.findByUsername(username)
 
         if (user == null)
             throw new NoSuchUserException()
@@ -33,7 +33,7 @@ import org.springframework.transaction.annotation.Transactional
     // UserDetailsService
     @Transactional(readOnly = true)
     @Override UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        def user = userRepository.findByUsername(username)
+        def user = repository.findByUsername(username)
 
         if (user == null)
             throw new UsernameNotFoundException('no such user')

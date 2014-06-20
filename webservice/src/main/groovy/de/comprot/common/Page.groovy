@@ -1,4 +1,4 @@
-package de.comprot.core.repository.util
+package de.comprot.common
 
 class Page<E> {
 

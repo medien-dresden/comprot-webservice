@@ -6,8 +6,10 @@
             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
             http://www.springframework.org/schema/data/solr http://www.springframework.org/schema/data/solr/spring-solr-1.0.xsd">
 
-    <solr:repositories base-package="de.comprot" />
+    <bean class="org.springframework.data.solr.core.SolrExceptionTranslator" />
+
     <solr:embedded-solr-server id="solrServer" solrHome="classpath:solr" />
+    <solr:repositories base-package="de.comprot.core.repository" />
 
     <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
         <constructor-arg ref="solrServer"/>

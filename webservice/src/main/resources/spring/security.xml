@@ -7,7 +7,7 @@
             http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <security:authentication-manager alias="authenticationManager">
-        <security:authentication-provider user-service-ref="defaultUserService" />
+        <security:authentication-provider user-service-ref="repositoryUserService" />
     </security:authentication-manager>
 
     <security:global-method-security

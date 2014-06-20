@@ -10,17 +10,17 @@
     <task:scheduler id="scheduler" pool-size="10" />
     <task:executor id="executor" pool-size="10" />
 
-    <bean id="initAdminUserJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
-        p:jobClass="de.comprot.task.InitAdminUserJob" p:durability="true" />
+    <bean id="adminUserCheckJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
+        p:jobClass="de.comprot.task.AdminUserCheckJob" p:durability="true" />
 
-    <bean id="initAdminUserJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean"
-        p:jobDetail-ref="initAdminUserJobDetail" p:startDelay="0" p:repeatCount="0" />
+    <bean id="adminUserCheckJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean"
+        p:jobDetail-ref="adminUserCheckJobDetail" p:startDelay="0" p:repeatCount="0" />
 
-    <bean id="buildProteinIndexJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
-          p:jobClass="de.comprot.task.BuildProteinIndexJob" p:durability="true" />
+    <bean id="proteinIndexingJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
+          p:jobClass="de.comprot.task.ProteinIndexingJob" p:durability="true" />
 
-    <bean id="buildProteinIndexJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean"
-          p:jobDetail-ref="buildProteinIndexJobDetail" p:startDelay="0" p:repeatCount="0" />
+    <bean id="proteinIndexingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean"
+          p:jobDetail-ref="proteinIndexingJobDetail" p:startDelay="0" p:repeatCount="0" />
 
     <!--
         Most of the following is taken from:
@@ -33,8 +33,8 @@
         </property>
         <property name="triggers">
             <list>
-                <ref bean="initAdminUserJobTrigger" />
-                <ref bean="buildProteinIndexJobTrigger" />
+                <ref bean="adminUserCheckJobTrigger" />
+                <ref bean="proteinIndexingJobTrigger" />
             </list>
         </property>
     </bean>

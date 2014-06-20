@@ -11,9 +11,9 @@ import org.springframework.beans.factory.config.BeanDefinition
 import org.springframework.context.annotation.Scope
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-class InitAdminUserJob implements Job {
+class AdminUserCheckJob implements Job {
 
-    static def logger = LoggerFactory.getLogger(InitAdminUserJob.class)
+    static def logger = LoggerFactory.getLogger(AdminUserCheckJob.class)
 
     @Autowired UserService userService
 

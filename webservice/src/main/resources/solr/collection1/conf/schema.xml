@@ -1,21 +1,35 @@
-<!-- more information can be found here: http://wiki.apache.org/solr/SchemaXml -->
+<!--
+ For information, on how to customize this file, please see
+ http://wiki.apache.org/solr/SchemaXml
+
+ PERFORMANCE NOTE: this schema includes many optional features and should not
+ be used for benchmarking.  To improve performance one could
+  - set stored="false" for all fields possible (esp large fields) when you
+    only need to search on the field but don't need to return the original
+    value.
+  - set indexed="false" if you don't need to search on the field, but only
+    return the field as a result of searching on other indexed fields.
+  - remove all unneeded copyField statements
+  - for best index size and searching performance, set "index" to false
+    for all general text fields, use copyField to copy them to the
+    catchall "text" field, and use that for searching.
+  - For maximum indexing performance, use the StreamingUpdateSolrServer
+    java client.
+  - Remember to run the JVM in server mode, and use a higher logging level
+    that avoids logging every request
+-->
 <schema name="collection1" version="1.1">
 	<types>
 		<fieldtype name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true" />
-		<!-- TODO we use the legacy classes for int's and long's because querying 
-			the Trie***Field field did not work for some reason -->
-		<!--<fieldType name="int" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0"/> -->
 		<fieldType name="int" class="solr.TrieIntField" positionIncrementGap="0" />
 		<fieldType name="float" class="solr.TrieFloatField" precisionStep="0" positionIncrementGap="0" />
-		<!--<fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/> -->
 		<fieldType name="long" class="solr.TrieLongField" positionIncrementGap="0" />
 		<fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" positionIncrementGap="0" />
 
 		<fieldType name="string_ci" class="solr.TextField" positionIncrementGap="100">
 			<analyzer>
-				<!-- KeywordTokenizer take the text as is - does not perform any splitting 
-					.... -->
-				<!-- http://wiki.apache.org/solr/AnalyzersTokenizersTokenFilters .... -->
+				<!-- KeywordTokenizer take the text as is - does not perform any splitting -->
+				<!-- http://wiki.apache.org/solr/AnalyzersTokenizersTokenFilters -->
 				<tokenizer class="solr.KeywordTokenizerFactory" />
 				<filter class="solr.LowerCaseFilterFactory" />
 			</analyzer>
@@ -77,7 +91,7 @@
 	</types>
 
 	<fields>
-		<field name="id" type="long" indexed="true" stored="true" required="true" />
+		<field name="id" type="string" indexed="true" stored="true" required="true" />
 		<field name="name" type="text_general" indexed="true" stored="true" required="false" />
 		<!-- TODO do we really need to store the synonyms? maybe for suggestion/spellchecking? -->
 		<field name="synonyms" type="text_general" indexed="true" stored="true" multiValued="true" required="false" />
