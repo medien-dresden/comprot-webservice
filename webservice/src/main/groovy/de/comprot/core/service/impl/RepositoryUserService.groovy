@@ -1,7 +1,7 @@
 package de.comprot.core.service.impl
 
+import de.comprot.common.NoSuchEntityException
 import de.comprot.core.model.UserEntity
-import de.comprot.core.service.NoSuchUserException
 import de.comprot.core.repository.UserRepository
 import de.comprot.core.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional
         def user = repository.findByUsername(username)
 
         if (user == null)
-            throw new NoSuchUserException()
+            throw new NoSuchEntityException()
 
         return user
     }

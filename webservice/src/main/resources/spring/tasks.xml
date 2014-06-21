@@ -16,12 +16,6 @@
     <bean id="adminUserCheckJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean"
         p:jobDetail-ref="adminUserCheckJobDetail" p:startDelay="0" p:repeatCount="0" />
 
-    <bean id="proteinIndexingJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
-          p:jobClass="de.comprot.task.ProteinIndexingJob" p:durability="true" />
-
-    <bean id="proteinIndexingJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean"
-          p:jobDetail-ref="proteinIndexingJobDetail" p:startDelay="0" p:repeatCount="0" />
-
     <!--
         Most of the following is taken from:
         http://www.objectpartners.com/2013/07/09/configuring-quartz-2-with-spring-in-clustered-mode/
@@ -34,7 +28,6 @@
         <property name="triggers">
             <list>
                 <ref bean="adminUserCheckJobTrigger" />
-                <ref bean="proteinIndexingJobTrigger" />
             </list>
         </property>
     </bean>

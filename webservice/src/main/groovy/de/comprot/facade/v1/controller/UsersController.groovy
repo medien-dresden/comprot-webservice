@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+import javax.servlet.http.HttpServletResponse
 import javax.validation.Valid
 
 @RequestMapping(value = 'api/users',
@@ -22,14 +23,12 @@ import javax.validation.Valid
 
     @Autowired MappingService mappingService
 
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
     def post(@Valid @RequestBody RegistrationDto registration) {
         def user = mappingService.map(registration, UserEntity.class)
         userService.register(user)
-        new ResponseEntity<UserDto>(mappingService.map(user, UserDto.class),
-                new HttpHeaders().with {
-                    location: "api/users/${user.getUsername()}"
-                    return it }, HttpStatus.CREATED)
+        mappingService.map(user, UserDto.class)
     }
 
     @ResponseStatus(HttpStatus.OK)

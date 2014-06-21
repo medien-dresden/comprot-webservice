@@ -1,3 +1,3 @@
-package de.comprot.core.service
+package de.comprot.common
 
 class NoSuchEntityException extends RuntimeException {}

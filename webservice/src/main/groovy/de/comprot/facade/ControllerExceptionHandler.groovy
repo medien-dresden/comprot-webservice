@@ -1,6 +1,7 @@
 package de.comprot.facade
 
-import de.comprot.core.service.NoSuchEntityException
+import de.comprot.common.JobSchedulingException
+import de.comprot.common.NoSuchEntityException
 import org.springframework.dao.DataAccessException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
@@ -27,7 +28,8 @@ import javax.validation.ConstraintViolationException
             UnsatisfiedServletRequestParameterException.class,
             HttpRequestMethodNotSupportedException.class,
             ServletRequestBindingException.class,
-            HttpMessageNotReadableException.class])
+            HttpMessageNotReadableException.class,
+            JobSchedulingException.class])
     def handle(Exception exception) {
         [ error: 'request error', cause: exception.message ]
     }
