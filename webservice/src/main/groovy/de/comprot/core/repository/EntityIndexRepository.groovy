@@ -1,12 +1,18 @@
 package de.comprot.core.repository
 
 import de.comprot.core.model.ComprotEntity
+import org.springframework.data.domain.Pageable
+import org.springframework.data.solr.core.query.result.FacetPage
+import org.springframework.data.solr.repository.Facet
 import org.springframework.data.solr.repository.Query
 import org.springframework.data.solr.repository.SolrCrudRepository
 
-interface EntityIndexRepository extends EntityIndexDeletionRepository, SolrCrudRepository<ComprotEntity, String> {
+interface EntityIndexRepository extends SolrCrudRepository<ComprotEntity, String> {
 
-    // FIXME this is NOT the right way, since a full search is triggered
-    @Query('term_suggest:*?0*') List<ComprotEntity> findSuggestions(String query)
+    @Query(value = 'suggest_query:*?0*', requestHandler = '/suggest')
+    List<ComprotEntity> findSuggestions(String query)
+
+    @Query(value = 'type:?0', delete = true)
+    void deleteAll(ComprotEntity.Type entityType)
 
 }

@@ -59,10 +59,10 @@
 		<field name="usage_count" type="long" indexed="true" stored="true" required="false"/>
 		<field name="usage_timestamp" type="long" indexed="true" stored="true" required="false" />
 
-		<field name="term_suggest" type="text_suggest" />
-		<copyField source="name" dest="term_suggest" />
-		<copyField source="synonyms" dest="term_suggest" />
-		<copyField source="sourceId" dest="term_suggest" />
+		<field name="suggest_query" type="text_suggest" />
+		<copyField source="name" dest="suggest_query" />
+		<copyField source="synonyms" dest="suggest_query" />
+		<copyField source="sourceId" dest="suggest_query" />
 
 	</fields>
 
