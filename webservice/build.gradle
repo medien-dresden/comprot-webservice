@@ -4,15 +4,18 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url 'http://repo.spring.io/release' }
+        maven { url 'http://repo.medien-dresden.de/snapshot' }
     }
 
     dependencies {
-        classpath('org.springframework.boot:spring-boot-gradle-plugin:1.1.1.RELEASE')
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.1.1.RELEASE'
+        classpath 'com.ullink.gradle:gradle-repositories-plugin:1.2-SNAPSHOT'
     }
 }
 
 apply plugin: 'spring-boot'
 apply plugin: 'application'
+apply plugin: 'repositories'
 
 jar {
     baseName = 'comprot'
@@ -22,6 +25,8 @@ jar {
 repositories {
     maven { url 'http://repo.spring.io/snapshot' }
     maven { url 'http://maven.restlet.com' } // dependencies used by solr at runtime
+
+    github('medien-dresden')
 }
 
 dependencies {
@@ -63,6 +68,9 @@ dependencies {
 
     // mysql database
     runtime group: 'mysql', name: 'mysql-connector-java', version: '5.1.+'
+
+    // include frontend library
+    runtime group: 'medien-dresden', name: 'comprot-frontend', version: '1.0.+'
 }
 
 build.dependsOn {
