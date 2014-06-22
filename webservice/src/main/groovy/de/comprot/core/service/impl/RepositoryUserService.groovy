@@ -1,6 +1,6 @@
 package de.comprot.core.service.impl
 
-import de.comprot.common.NoSuchEntityException
+import de.comprot.core.service.NoSuchEntityException
 import de.comprot.core.model.UserEntity
 import de.comprot.core.repository.UserRepository
 import de.comprot.core.service.UserService

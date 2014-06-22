@@ -1,10 +1,11 @@
 package de.comprot.core.repository
 
 import de.comprot.core.model.ComprotEntity
-import de.comprot.common.Page
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 
 interface EntitySourceRepository {
 
-    Page<ComprotEntity> findAllProteins(int pageNumber, int pageSize)
+    Page<ComprotEntity> findAllProteins(Pageable pageable)
 
 }

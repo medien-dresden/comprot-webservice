@@ -1,4 +1,4 @@
-package de.comprot.common
+package de.comprot.core.service
 
 class JobSchedulingException extends RuntimeException {
 

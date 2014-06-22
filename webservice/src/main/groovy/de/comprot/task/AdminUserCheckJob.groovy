@@ -1,6 +1,6 @@
 package de.comprot.task
 
-import de.comprot.common.NoSuchEntityException
+import de.comprot.core.service.NoSuchEntityException
 import de.comprot.core.model.UserEntity
 import de.comprot.core.service.UserService
 import org.quartz.Job

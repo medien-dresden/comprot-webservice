@@ -1,7 +1,7 @@
 package de.comprot.core.service.impl
 
-import de.comprot.common.JobSchedulingException
-import de.comprot.common.NoSuchEntityException
+import de.comprot.core.service.JobSchedulingException
+import de.comprot.core.service.NoSuchEntityException
 import de.comprot.core.model.JobEntity
 import de.comprot.core.service.JobService
 import org.quartz.Job
