@@ -47,17 +47,16 @@ import org.springframework.stereotype.Repository
         // fetch a single page of results
         def startRow = (pageNumber - 1) * pageSize
 
+        rowFetchQuery += ' LIMIT :limit OFFSET :offset'
+
+        arguments.put('limit', pageSize)
+        arguments.put('offset', startRow)
+
         template.query(rowFetchQuery, arguments, { resultSet ->
-            def pageItems = page.getItems()
             def currentRow = 0
 
-            while (resultSet.next() && currentRow < startRow + pageSize) {
-                if (currentRow >= startRow) {
-                    //noinspection GroovyAssignabilityCheck
-                    pageItems.add(rowMapper.mapRow(resultSet, currentRow))
-                }
-
-                currentRow++
+            while (resultSet.next()) {
+                page.items.add(rowMapper.mapRow(resultSet, currentRow++))
             }
 
             return page
