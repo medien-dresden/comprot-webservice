@@ -5,6 +5,7 @@ import de.comprot.core.model.SuggestionEntity
 import de.comprot.core.repository.EntityIndexRepository
 import de.comprot.core.service.EntityIndexService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 
 @Service class RepositoryEntityIndexService implements EntityIndexService {
@@ -16,13 +17,13 @@ import org.springframework.stereotype.Service
     }
 
     @Override void deleteAll(ComprotEntity.Type entityType) {
-        repository.deleteAll(entityType)
+        repository.deleteByType(entityType)
     }
 
-    @Override List<SuggestionEntity> getSuggestions(String query) {
-        repository.findSuggestions(query).collect({
-            new SuggestionEntity(label: it.name)
-        })
+    @Override List<SuggestionEntity> getSuggestions(String query, int page, int size) {
+        repository.findSuggestions(query, new PageRequest(page, size))
+                .findAll({ it.name != null })
+                .collect({ new SuggestionEntity(label: it.name) })
     }
 
 }

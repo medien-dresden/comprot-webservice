@@ -9,6 +9,6 @@ interface EntityIndexService {
 
     void deleteAll(ComprotEntity.Type entityType)
 
-    List<SuggestionEntity> getSuggestions(String query)
+    List<SuggestionEntity> getSuggestions(String query, int page, int size)
 
 }

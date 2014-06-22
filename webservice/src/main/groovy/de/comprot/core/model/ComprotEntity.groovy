@@ -2,6 +2,7 @@ package de.comprot.core.model
 
 import org.apache.solr.client.solrj.beans.Field
 import org.springframework.data.annotation.Id
+import org.springframework.data.solr.core.mapping.Indexed
 
 /**
  * represents a single drug, protein or disease
@@ -50,6 +51,7 @@ class ComprotEntity {
 	/**
 	 * the primary name
 	 */
+    @Indexed(boost = 1.0f)
     @Field String name
 
 	/**

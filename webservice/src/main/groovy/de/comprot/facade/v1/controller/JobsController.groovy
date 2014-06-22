@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*
 
 import javax.validation.Valid
 
-@RequestMapping(value = 'api/jobs',
-        produces = Version.V1, consumes = Version.V1)
+@RequestMapping('api/jobs')
 @RestController class JobsController {
 
     @Autowired JobService jobService
@@ -20,7 +19,7 @@ import javax.validation.Valid
     @Autowired MappingService mappingService
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = Version.V1)
     def post(@Valid @RequestBody JobDto job) {
         jobService.startJob(mappingService.map(job, JobEntity.class))
     }
@@ -32,13 +31,13 @@ import javax.validation.Valid
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = '{id}', method = RequestMethod.GET)
+    @RequestMapping(value = '{id}', method = RequestMethod.GET, produces = Version.V1)
     def get(@PathVariable String id) {
         mappingService.map(jobService.getJob(id), JobDto.class)
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = Version.V1)
     def getAll() {
         mappingService.map(jobService.runningJobs, JobDto.class)
     }

@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.*
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, produces = Version.V1)
-    def get(@RequestParam(value = "filter", required = true) String query) {
-        mappingService.map(service.getSuggestions(query), SuggestionDto.class)
+    def get(@RequestParam(value = "filter", required = true) String query,
+            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+        mappingService.map(service.getSuggestions(query, page, size), SuggestionDto.class)
     }
 
 }
