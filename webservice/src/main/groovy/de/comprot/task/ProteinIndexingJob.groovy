@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Component class ProteinIndexingJob implements InterruptableJob {
 
-    static def logger = LoggerFactory.getLogger(ProteinIndexingJob)
+    static def logger = LoggerFactory.getLogger ProteinIndexingJob
 
     @Autowired EntityIndexService indexService
 
@@ -27,30 +27,30 @@ import org.springframework.stereotype.Component
     private boolean interruptRequested = false
 
     @Override void execute(JobExecutionContext context) {
-        logger.info('started')
-        indexService.deleteAll(ComprotEntity.Type.PROTEIN)
+        logger.info 'started'
+        indexService.deleteAll ComprotEntity.Type.PROTEIN
 
         def currentPageable = new PageRequest(0, pageSize)
-        def currentPage = sourceService.getProteins(currentPageable)
+        def currentPage = sourceService.getProteins currentPageable
 
         if (!currentPage.hasContent()) {
-            logger.warn('nothing to index'); return
+            logger.warn 'nothing to index'; return
         } else {
-            indexService.save(currentPage.content)
+            indexService.save currentPage.content
         }
 
         while (currentPage.hasNext() && !interruptRequested) {
             currentPageable = currentPage.nextPageable()
-            logger.info("indexing ${currentPageable.pageNumber}/${currentPage.totalPages}")
-            currentPage = sourceService.getProteins(currentPageable)
-            indexService.save(currentPage.content)
+            logger.info "indexing ${currentPageable.pageNumber}/${currentPage.totalPages}"
+            currentPage = sourceService.getProteins currentPageable
+            indexService.save currentPage.content
         }
 
-        logger.info('finished')
+        logger.info 'finished'
     }
 
-    @Override void interrupt() throws UnableToInterruptJobException {
-        logger.info('stop requested')
+    @Override void interrupt() {
+        logger.info 'stop requested'
         interruptRequested = true
     }
 
