@@ -11,16 +11,16 @@ import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Component
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-@Component class ProteinIndexingJob extends AbstractEntityIndexingJob implements InterruptableJob {
+@Component class DrugIndexingJob extends AbstractEntityIndexingJob implements InterruptableJob {
 
     @Autowired EntitySourceService sourceService
 
     @Override Page<ComprotEntity> fetch(Pageable pageable) {
-        sourceService.getProteins pageable
+        sourceService.getDrugs pageable
     }
 
     @Override def clearIndex() {
-        indexService.deleteAll ComprotEntity.Type.PROTEIN
+        indexService.deleteAll ComprotEntity.Type.DRUG
     }
 
 }

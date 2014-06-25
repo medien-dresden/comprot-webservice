@@ -31,6 +31,21 @@ import org.springframework.stereotype.Repository
         )
     }
 
+    @Override Page<ComprotEntity> findAllDrugs(Pageable pageable) {
+        fetch('SELECT COUNT(*) FROM COMPOUND',
+                'SELECT c.*, GROUP_CONCAT(DISTINCT cs.name SEPARATOR 0x3) AS synonyms FROM COMPOUND c ' +
+                        'LEFT JOIN COMPOUND_SYNONYM cs ON cs.COMPOUND_ID = c.ID GROUP BY c.ID ORDER BY c.id ASC',
+                [:], pageable, { result, rowNumber -> new ComprotEntity(
+                        type:       ComprotEntity.Type.DRUG,
+                        comprotId:  result.getLong('ID'),
+                        sourceId:   result.getString('ID'),
+                        name:       result.getString('NAME'),
+                        synonyms:   result.getString('SYNONYMS')?.split((String) 0x3 as char)
+                )
+            } as ParameterizedRowMapper
+        )
+    }
+
     Page<ComprotEntity> fetch(String rowCountQuery, String rowFetchQuery,
                       Map<String, ?> arguments, Pageable pageable, ParameterizedRowMapper rowMapper) {
 

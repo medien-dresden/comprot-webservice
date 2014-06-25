@@ -8,4 +8,6 @@ interface EntitySourceRepository {
 
     Page<ComprotEntity> findAllProteins(Pageable pageable)
 
+    Page<ComprotEntity> findAllDrugs(Pageable pageable)
+
 }

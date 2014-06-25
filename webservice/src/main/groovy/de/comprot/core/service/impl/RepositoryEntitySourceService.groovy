@@ -14,4 +14,6 @@ import org.springframework.stereotype.Service
 
     @Override Page<ComprotEntity> getProteins(Pageable pageable) { repository.findAllProteins pageable }
 
+    @Override Page<ComprotEntity> getDrugs(Pageable pageable) { repository.findAllDrugs pageable }
+
 }

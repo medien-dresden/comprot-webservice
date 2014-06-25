@@ -9,4 +9,6 @@ interface EntitySourceService {
 
     Page<ComprotEntity> getProteins(Pageable pageable)
 
+    Page<ComprotEntity> getDrugs(Pageable pageable)
+
 }
