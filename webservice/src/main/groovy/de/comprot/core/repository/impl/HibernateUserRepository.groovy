@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository
     }
 
     @Override UserEntity findByUsername(String username) {
-        (UserEntity) currentSession().byId(UserEntity.class).load(username)
+        (UserEntity) currentSession().byId(UserEntity).load(username)
     }
 
 }

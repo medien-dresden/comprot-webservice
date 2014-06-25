@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Component class ProteinIndexingJob implements InterruptableJob {
 
-    static def logger = LoggerFactory.getLogger(ProteinIndexingJob.class)
+    static def logger = LoggerFactory.getLogger(ProteinIndexingJob)
 
     @Autowired EntityIndexService indexService
 

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Component class AdminUserCheckJob implements Job {
 
-    static def logger = LoggerFactory.getLogger(AdminUserCheckJob.class)
+    static def logger = LoggerFactory.getLogger(AdminUserCheckJob)
 
     @Autowired UserService userService
 

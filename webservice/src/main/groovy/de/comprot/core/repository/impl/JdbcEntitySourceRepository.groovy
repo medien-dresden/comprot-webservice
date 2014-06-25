@@ -34,7 +34,7 @@ import org.springframework.stereotype.Repository
     Page<ComprotEntity> fetch(String rowCountQuery, String rowFetchQuery,
                       Map<String, ?> arguments, Pageable pageable, ParameterizedRowMapper rowMapper) {
 
-        def total = template.queryForObject(rowCountQuery, arguments, Long.class)
+        def total = template.queryForObject(rowCountQuery, arguments, Long)
         def page = []
 
         rowFetchQuery += ' LIMIT :limit OFFSET :offset'
