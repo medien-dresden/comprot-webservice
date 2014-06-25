@@ -39,18 +39,18 @@ import org.springframework.stereotype.Repository
 
         rowFetchQuery += ' LIMIT :limit OFFSET :offset'
 
-        arguments.put('limit', pageable.pageSize)
-        arguments.put('offset', pageable.pageNumber * pageable.pageSize)
+        arguments.with {
+            limit  = pageable.pageSize
+            offset = pageable.pageNumber * pageable.pageSize
+        }
 
         template.query(rowFetchQuery, arguments, { resultSet ->
-            while (resultSet.next()) {
-                page.add(rowMapper.mapRow(resultSet, -1))
-            }
-
+            while (resultSet.next()) { page << rowMapper.mapRow(resultSet, -1) }
             return page
+
         } as ResultSetExtractor)
 
-        return new PageImpl<ComprotEntity>(page, pageable, total)
+        new PageImpl<ComprotEntity>(page, pageable, total)
     }
 
 }

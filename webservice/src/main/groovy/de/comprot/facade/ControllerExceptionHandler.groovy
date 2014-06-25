@@ -88,7 +88,7 @@ import javax.validation.ConstraintViolationException
     def handle(HttpMediaTypeNotSupportedException exception) {
         [   error: 'unsupported media type',
             cause: exception.localizedMessage,
-            supported: exception.supportedMediaTypes.collect({ (String) "${it.type}/${it.subtype}" })]
+            supported: exception.supportedMediaTypes.collect { (String) "${it.type}/${it.subtype}" }]
     }
 
     @ResponseBody
@@ -98,7 +98,7 @@ import javax.validation.ConstraintViolationException
     def handle(HttpMediaTypeNotAcceptableException exception) {
         [   error: 'unsupported media type',
             cause: exception.message,
-            supported: exception.supportedMediaTypes.collect({ (String) "${it.type}/${it.subtype}" })]
+            supported: exception.supportedMediaTypes.collect { (String) "${it.type}/${it.subtype}" }]
     }
 
     @ResponseBody

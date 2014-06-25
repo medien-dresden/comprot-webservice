@@ -72,13 +72,13 @@ import static org.quartz.TriggerBuilder.newTrigger
     }
 
     @Override Set<JobEntity> getRunningJobs() {
-        scheduler.currentlyExecutingJobs.collect({
+        scheduler.currentlyExecutingJobs.collect {
             new JobEntity(
                     name: Introspector.decapitalize(it.jobDetail.jobClass.simpleName),
                     id: it.fireInstanceId,
                     since: it.fireTime
             )
-        })
+        }
     }
 
 }

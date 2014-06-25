@@ -7,7 +7,7 @@ import org.springframework.boot.context.web.SpringBootServletInitializer
 class ComprotServletInitializer extends SpringBootServletInitializer {
 
     @Override protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        application.sources(ComprotApplication);
+        application.sources ComprotApplication
     }
 
 }

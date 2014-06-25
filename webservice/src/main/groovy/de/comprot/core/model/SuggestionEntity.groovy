@@ -2,8 +2,8 @@ package de.comprot.core.model
 
 class SuggestionEntity {
 
-    String label;
+    String label
 
-    int hits;
+    int hits
 
 }

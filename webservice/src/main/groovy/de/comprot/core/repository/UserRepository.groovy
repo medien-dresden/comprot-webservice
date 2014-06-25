@@ -4,8 +4,8 @@ import de.comprot.core.model.UserEntity
 
 interface UserRepository {
 
-    void persist(UserEntity user);
+    void persist(UserEntity user)
 
-    UserEntity findByUsername(String username);
+    UserEntity findByUsername(String username)
 
 }

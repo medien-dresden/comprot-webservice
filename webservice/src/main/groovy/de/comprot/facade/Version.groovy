@@ -1,4 +1,4 @@
-package de.comprot.facade;
+package de.comprot.facade
 
 class Version {
 

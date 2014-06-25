@@ -15,8 +15,8 @@ class AutowiringJobFactory extends SpringBeanJobFactory implements ApplicationCo
     }
 
     @Override def createJobInstance(TriggerFiredBundle bundle) {
-        def job = super.createJobInstance(bundle)
-        beanFactory.autowireBean(job)
+        def job = super.createJobInstance bundle
+        beanFactory.autowireBean job
         return job
     }
 

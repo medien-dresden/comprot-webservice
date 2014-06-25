@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull
     @NotNull String[] roles = ['ROLE_USER']
 
     @Override Collection<? extends GrantedAuthority> getAuthorities() {
-        roles.collect({ new SimpleGrantedAuthority(it) })
+        roles.collect { new SimpleGrantedAuthority(it) }
     }
 
     @Override String getPassword() { password }

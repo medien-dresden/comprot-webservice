@@ -16,13 +16,11 @@ import org.springframework.transaction.annotation.Transactional
     @Autowired UserRepository repository
 
     @Transactional
-    @Override void register(UserEntity user) {
-        repository.persist(user)
-    }
+    @Override void register(UserEntity user) { repository.persist user }
 
     @Transactional(readOnly = true)
     @Override UserEntity loadByUsername(String username) {
-        def user = repository.findByUsername(username)
+        def user = repository.findByUsername username
 
         if (user == null)
             throw new NoSuchEntityException()
@@ -33,7 +31,7 @@ import org.springframework.transaction.annotation.Transactional
     // UserDetailsService
     @Transactional(readOnly = true)
     @Override UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        def user = repository.findByUsername(username)
+        def user = repository.findByUsername username
 
         if (user == null)
             throw new UsernameNotFoundException('no such user')

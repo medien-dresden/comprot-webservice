@@ -34,7 +34,8 @@ import org.springframework.stereotype.Component
         def currentPage = sourceService.getProteins currentPageable
 
         if (!currentPage.hasContent()) {
-            logger.warn 'nothing to index'; return
+            logger.warn 'nothing to index'
+            return
         } else {
             indexService.save currentPage.content
         }

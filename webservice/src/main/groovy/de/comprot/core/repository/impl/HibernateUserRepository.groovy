@@ -7,9 +7,7 @@ import org.springframework.stereotype.Repository
 
 @Repository class HibernateUserRepository extends HibernateDaoSupport implements UserRepository {
 
-    @Override void persist(UserEntity user) {
-        currentSession().save(user)
-    }
+    @Override void persist(UserEntity user) { currentSession().save user }
 
     @Override UserEntity findByUsername(String username) {
         (UserEntity) currentSession().byId(UserEntity).load(username)

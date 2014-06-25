@@ -14,6 +14,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @ImportResource('spring/root-context.xml')
 class ComprotApplication extends WebMvcConfigurerAdapter {
 
-    public static void main(String[] args) { SpringApplication.run(ComprotApplication, args) }
+    public static void main(String[] args) { SpringApplication.run ComprotApplication, args }
 
 }

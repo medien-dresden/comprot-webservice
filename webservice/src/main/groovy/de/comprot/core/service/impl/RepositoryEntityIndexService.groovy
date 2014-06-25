@@ -13,17 +13,17 @@ import org.springframework.stereotype.Service
     @Autowired EntityIndexRepository repository
 
     @Override void save(Collection<ComprotEntity> entities) {
-        repository.save(entities)
+        repository.save entities
     }
 
     @Override void deleteAll(ComprotEntity.Type entityType) {
-        repository.deleteByType(entityType)
+        repository.deleteByType entityType
     }
 
     @Override List<SuggestionEntity> getSuggestions(String query, int page, int size) {
         repository.findSuggestions(query, new PageRequest(page, size))
-                .findAll({ it.name != null })
-                .collect({ new SuggestionEntity(label: it.name) })
+                .findAll { it.name != null }
+                .collect { new SuggestionEntity(label: it.name) }
     }
 
 }
