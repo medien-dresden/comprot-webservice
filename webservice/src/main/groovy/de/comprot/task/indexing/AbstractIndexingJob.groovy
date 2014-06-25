@@ -35,7 +35,7 @@ abstract class AbstractIndexingJob implements InterruptableJob {
         def currentPage = fetch currentPageable
 
         if (!currentPage.hasContent()) {
-            logger.warn 'nothing to index'
+            logger.warn 'source is empty'
             return
         } else {
             index currentPage.content
@@ -44,7 +44,7 @@ abstract class AbstractIndexingJob implements InterruptableJob {
         while (currentPage.hasNext() && !interruptRequested) {
             currentPageable = currentPage.nextPageable()
 
-            logger.info "indexing ${ 100 * (currentPageable.pageNumber / currentPage.totalPages) as int }%"
+            logger.info "${ 100 * (currentPageable.pageNumber / currentPage.totalPages) as int }%"
 
             currentPage = fetch currentPageable
             index currentPage.content
@@ -54,7 +54,7 @@ abstract class AbstractIndexingJob implements InterruptableJob {
     }
 
     @Override void interrupt() {
-        logger.info 'stop requested'
+        logger.info 'stopping'
         interruptRequested = true
     }
 
