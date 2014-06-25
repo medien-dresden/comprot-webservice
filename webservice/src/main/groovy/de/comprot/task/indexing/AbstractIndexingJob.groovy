@@ -1,4 +1,4 @@
-package de.comprot.task
+package de.comprot.task.indexing
 
 import de.comprot.core.model.ComprotEntity
 import org.quartz.InterruptableJob
