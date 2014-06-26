@@ -18,12 +18,6 @@ import org.springframework.stereotype.Component
     @Autowired UserService userService
 
     @Override def executeWithinSecurityContext(JobExecutionContext context) {
-        initAdminUser()
-        initAnonymousUser()
-        initSystemUser()
-    }
-
-    def initAdminUser() {
         try {
             userService.loadByUsername 'admin'
         } catch (NoSuchEntityException ignored) {
@@ -32,32 +26,6 @@ import org.springframework.stereotype.Component
                     username: 'admin',
                     password: 'admin123',
                     roles: ['ROLE_ADMIN', 'ROLE_USER'])
-        }
-    }
-
-    def initAnonymousUser() {
-        try {
-            userService.loadByUsername 'anonymous'
-        } catch (NoSuchEntityException ignored) {
-            logger.info 'creating anonymous user'
-            userService.register new UserEntity(
-                    username: 'anonymous',
-                    password: 'anonymous123',
-                    isEnabled: false,
-                    roles: [])
-        }
-    }
-
-    def initSystemUser() {
-        try {
-            userService.loadByUsername 'system'
-        } catch (NoSuchEntityException ignored) {
-            logger.info 'creating system user'
-            userService.register new UserEntity(
-                    username: 'system',
-                    password: 'system123',
-                    isEnabled: false,
-                    roles: [])
         }
     }
 

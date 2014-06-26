@@ -9,7 +9,7 @@
 
     <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider ref="anonymousAuthenticationProvider" />
-        <security:authentication-provider user-service-ref="repositoryUserService">
+        <security:authentication-provider user-service-ref="securityUserDetailsService">
             <security:password-encoder ref="passwordEncoder" />
         </security:authentication-provider>
     </security:authentication-manager>
@@ -33,7 +33,7 @@
                 authentication-failure-handler-ref="authFailureHandler"
                 authentication-success-handler-ref="authSuccessHandler" />
 
-        <security:http-basic />
+        <security:http-basic entry-point-ref="authEntryPoint" />
     </security:http>
 
 

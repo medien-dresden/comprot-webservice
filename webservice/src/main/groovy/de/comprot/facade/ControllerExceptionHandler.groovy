@@ -5,9 +5,11 @@ import de.comprot.core.service.NoSuchEntityException
 import org.springframework.dao.DataAccessException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.orm.ObjectRetrievalFailureException
 import org.springframework.security.access.AccessDeniedException
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.HttpMediaTypeNotAcceptableException
 import org.springframework.web.HttpMediaTypeNotSupportedException
 import org.springframework.web.HttpRequestMethodNotSupportedException
@@ -71,7 +73,7 @@ import javax.validation.ConstraintViolationException
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(DataIntegrityViolationException)
     def handle(DataIntegrityViolationException exception) {
-        [ error: 'data integrity violation', cause: exception.cause.cause.localizedMessage ]
+        [ error: 'data integrity violation', cause: exception.cause?.cause?.localizedMessage ]
     }
 
     @ResponseBody
@@ -115,7 +117,10 @@ import javax.validation.ConstraintViolationException
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AccessDeniedException)
     def handleAccessDenied(AccessDeniedException exception) {
-        [ error: 'access denied', cause: exception.message ]
+        if (SecurityContextHolder.context.authentication.authorities.any { it.authority == 'ROLE_ANONYMOUS' })
+            new ResponseEntity(HttpStatus.UNAUTHORIZED)
+        else
+            [ error: 'access denied' ]
     }
 
     @ResponseBody
