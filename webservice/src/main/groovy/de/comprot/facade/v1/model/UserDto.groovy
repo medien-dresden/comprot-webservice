@@ -6,4 +6,6 @@ class UserDto {
 
     @Username String username
 
+    String[] roles
+
 }

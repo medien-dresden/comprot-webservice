@@ -8,14 +8,15 @@
             http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <security:authentication-manager alias="authenticationManager">
-        <!-- security:authentication-provider ref="rememberMeAuthenticationProvider" /-->
         <security:authentication-provider ref="anonymousAuthenticationProvider" />
         <security:authentication-provider user-service-ref="repositoryUserService">
             <security:password-encoder ref="passwordEncoder" />
         </security:authentication-provider>
     </security:authentication-manager>
 
-    <security:global-method-security pre-post-annotations="enabled">
+    <security:global-method-security
+            pre-post-annotations="enabled"
+            proxy-target-class="true">
         <security:expression-handler ref="expressionHandler" />
     </security:global-method-security>
 
@@ -23,12 +24,11 @@
             auto-config="false"
             create-session="never"
             use-expressions="true"
-            entry-point-ref="restAuthEntryPoint">
+            entry-point-ref="authEntryPoint">
 
         <security:intercept-url pattern="/" access="permitAll" />
         <security:intercept-url pattern="/static/**" access="permitAll" />
 
-        <security:remember-me services-ref="rememberMeServices" />
         <security:form-login
                 authentication-failure-handler-ref="authFailureHandler"
                 authentication-success-handler-ref="authSuccessHandler" />
@@ -54,6 +54,9 @@
     <bean   id="authSuccessHandler"
             class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler" />
 
+    <bean   id="authEntryPoint"
+            class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
+
 
     <!-- ANONYMOUS AUTHENTICATION -->
 
@@ -65,18 +68,5 @@
     <bean   id="anonymousAuthenticationProvider"
             class="org.springframework.security.authentication.AnonymousAuthenticationProvider"
             p:key="token_key" />
-
-
-    <!-- REMEMBER ME -->
-
-    <bean   id="rememberMeServices"
-            class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
-        <constructor-arg value="myAppKey" />
-        <constructor-arg ref="repositoryUserService" />
-        <constructor-arg ref="tokenRepository" />
-    </bean>
-
-    <bean   id="tokenRepository"
-            class="org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl" />
 
 </beans>
