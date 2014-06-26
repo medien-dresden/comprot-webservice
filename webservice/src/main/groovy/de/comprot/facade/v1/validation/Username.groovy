@@ -1,4 +1,6 @@
-package de.comprot.core.model.validation
+package de.comprot.facade.v1.validation
+
+import org.hibernate.validator.constraints.Length
 
 import javax.validation.Constraint
 import javax.validation.Payload
@@ -16,10 +18,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME
 @Target([ METHOD, FIELD, ANNOTATION_TYPE ])
 @Constraint(validatedBy = [])
 @ReportAsSingleViolation
-@Pattern(regexp  = '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,20}$')
-@interface Password {
+@Pattern(regexp = '[\\w]+')
+@Length(min = 3, max = 100)
+@interface Username {
 
-    String message() default '{error.validation.password}'
+    String message() default '{error.validation.username}'
 
     Class<?>[] groups() default []
 

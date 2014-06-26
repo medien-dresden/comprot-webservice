@@ -2,7 +2,6 @@ package de.comprot.task.indexing
 
 import de.comprot.core.model.ComprotEntity
 import de.comprot.core.service.EntitySourceService
-import org.quartz.InterruptableJob
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.config.BeanDefinition
 import org.springframework.context.annotation.Scope
@@ -11,7 +10,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Component
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-@Component class DrugIndexingJob extends AbstractEntityIndexingJob implements InterruptableJob {
+@Component class DrugIndexingJob extends EntityIndexingJob {
 
     @Autowired EntitySourceService sourceService
 

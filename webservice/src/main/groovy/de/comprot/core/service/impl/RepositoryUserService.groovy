@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -15,8 +16,13 @@ import org.springframework.transaction.annotation.Transactional
 
     @Autowired UserRepository repository
 
+    @Autowired PasswordEncoder passwordEncoder
+
     @Transactional
-    @Override void register(UserEntity user) { repository.persist user }
+    @Override void register(UserEntity user) {
+        user.password = passwordEncoder.encode user.password
+        repository.persist user
+    }
 
     @Transactional(readOnly = true)
     @Override UserEntity loadByUsername(String username) {
@@ -31,11 +37,13 @@ import org.springframework.transaction.annotation.Transactional
     // UserDetailsService
     @Transactional(readOnly = true)
     @Override UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        try {
-            loadByUsername(username)
-        } catch (NoSuchEntityException exception) {
-            throw new UsernameNotFoundException('no such user', exception)
-        }
+        // due to security check on loadByUsername
+        def user = repository.findByUsername username
+
+        if (user == null)
+            throw new UsernameNotFoundException('no such user')
+
+        return user
     }
 
 }

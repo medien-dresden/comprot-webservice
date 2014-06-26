@@ -1,6 +1,7 @@
 package de.comprot.task.indexing
 
 import de.comprot.core.model.ComprotEntity
+import de.comprot.task.SecurityContextAwareJob
 import org.quartz.InterruptableJob
 import org.quartz.JobExecutionContext
 import org.slf4j.Logger
@@ -9,7 +10,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 
-abstract class AbstractIndexingJob implements InterruptableJob {
+abstract class IndexingJob extends SecurityContextAwareJob implements InterruptableJob {
 
     int pageSize = 50000
 
@@ -23,11 +24,11 @@ abstract class AbstractIndexingJob implements InterruptableJob {
 
     abstract index(List entities)
 
-    AbstractIndexingJob() {
+    IndexingJob() {
         logger = LoggerFactory.getLogger(getClass())
     }
 
-    @Override void execute(JobExecutionContext context) {
+    @Override def executeWithinSecurityContext(JobExecutionContext context) {
         logger.info 'started'
         clearIndex()
 

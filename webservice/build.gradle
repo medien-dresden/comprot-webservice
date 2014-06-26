@@ -48,8 +48,8 @@ dependencies {
     runtime group: 'org.restlet.jse', name: 'org.restlet', version: '2.2.1'
 
     // spring security
-    compile group: 'org.springframework.security', name: 'spring-security-config', version: '3.2.+'
-    compile group: 'org.springframework.security', name: 'spring-security-web', version: '3.2.+'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '3.2.3.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '3.2.3.RELEASE'
 
     // hibernate for persistence and validation
     compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.+'

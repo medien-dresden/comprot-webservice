@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.orm.ObjectRetrievalFailureException
+import org.springframework.security.access.AccessDeniedException
 import org.springframework.web.HttpMediaTypeNotAcceptableException
 import org.springframework.web.HttpMediaTypeNotSupportedException
 import org.springframework.web.HttpRequestMethodNotSupportedException
@@ -107,6 +108,14 @@ import javax.validation.ConstraintViolationException
     @ExceptionHandler(Exception)
     def handleUncaughtException(Exception exception) {
         [ error: 'unknown error', cause: exception.message ]
+    }
+
+    @ResponseBody
+    @RequestMapping(produces = Version.V1)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(AccessDeniedException)
+    def handleAccessDenied(AccessDeniedException exception) {
+        [ error: 'access denied', cause: exception.message ]
     }
 
     @ResponseBody
