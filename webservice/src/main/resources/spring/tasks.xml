@@ -10,11 +10,11 @@
     <task:scheduler id="scheduler" pool-size="10" />
     <task:executor id="executor" pool-size="10" />
 
-    <bean id="adminUserCheckJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
+    <bean id="predefinedUsersCheckJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
         p:jobClass="de.comprot.task.PredefinedUsersCheckJob" p:durability="true" />
 
     <bean id="adminUserCheckJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean"
-        p:jobDetail-ref="adminUserCheckJobDetail" p:startDelay="0" p:repeatCount="0" />
+        p:jobDetail-ref="predefinedUsersCheckJobDetail" p:startDelay="0" p:repeatCount="0" />
 
     <!--
         Most of the following is taken from:
@@ -27,7 +27,7 @@
         </property>
         <property name="triggers">
             <list>
-                <ref bean="adminUserCheckJobTrigger" />
+                <ref bean="predefinedUsersCheckJobTrigger" />
             </list>
         </property>
     </bean>
