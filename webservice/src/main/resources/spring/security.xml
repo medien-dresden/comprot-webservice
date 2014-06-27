@@ -24,7 +24,7 @@
             auto-config="false"
             create-session="never"
             use-expressions="true"
-            entry-point-ref="authEntryPoint">
+            entry-point-ref="restAuthEntryPoint">
 
         <security:intercept-url pattern="/" access="permitAll" />
         <security:intercept-url pattern="/static/**" access="permitAll" />
@@ -33,7 +33,7 @@
                 authentication-failure-handler-ref="authFailureHandler"
                 authentication-success-handler-ref="authSuccessHandler" />
 
-        <security:http-basic entry-point-ref="authEntryPoint" />
+        <security:http-basic />
     </security:http>
 
 

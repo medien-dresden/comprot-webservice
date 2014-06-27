@@ -12,8 +12,9 @@ import javax.servlet.ServletResponse
 
     @Override void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) {
         response.setHeader 'Access-Control-Allow-Origin', '*'
+        response.setHeader 'Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization'
         response.setHeader 'Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'
-        response.setHeader 'Access-Control-Allow-Headers', 'Content-Type'
+        response.setHeader 'Allow', 'GET, POST, PUT, DELETE'
 
         chain.doFilter request, response
     }
