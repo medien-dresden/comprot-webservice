@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
-@Service class RepositoryUserService implements UserService {
+@Service class RepositoryUserService implements UserService, UserDetailsService {
 
     @Autowired UserRepository repository
 
@@ -40,6 +40,14 @@ import org.springframework.transaction.annotation.Transactional
 
         def user = repository.findByUsername username
         if (!user) throw new NoSuchEntityException()
+        return user
+    }
+
+    // UserDetailsService
+    @Transactional(readOnly = true)
+    @Override UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        def user = repository.findByUsername username
+        if (!user) throw new UsernameNotFoundException('no such user')
         return user
     }
 
