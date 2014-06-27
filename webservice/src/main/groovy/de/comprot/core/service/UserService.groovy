@@ -14,7 +14,7 @@ interface UserService {
     @PreAuthorize('\
         hasRole("ROLE_ADMIN") \
         or #username == authentication.name \
-        or #username == "me" \
+        or (#username == "me" and isAuthenticated()) \
     ') UserEntity loadByUsername(String username)
 
 }
