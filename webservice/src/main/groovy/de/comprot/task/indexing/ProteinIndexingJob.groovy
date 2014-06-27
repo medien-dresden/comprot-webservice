@@ -14,12 +14,8 @@ import org.springframework.stereotype.Component
 
     @Autowired EntitySourceService sourceService
 
-    @Override Page<ComprotEntity> fetch(Pageable pageable) {
-        sourceService.getProteins pageable
-    }
+    @Override Page<ComprotEntity> fetch(Pageable pageable) { sourceService.getProteins pageable }
 
-    @Override def clearIndex() {
-        indexService.deleteAll ComprotEntity.Type.PROTEIN
-    }
+    @Override def clearIndex() { indexService.deleteAll ComprotEntity.Type.PROTEIN }
 
 }

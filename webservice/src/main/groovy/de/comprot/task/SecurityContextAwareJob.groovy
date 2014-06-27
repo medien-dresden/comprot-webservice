@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 abstract class SecurityContextAwareJob implements Job {
 
     @Override void execute(JobExecutionContext context) {
-        if (SecurityContextHolder.context.authentication == null) {
+        if (!SecurityContextHolder.context.authentication) {
             def securityContext = SecurityContextHolder.createEmptyContext()
             def user = new UserEntity(username: 'system', roles: [ 'ROLE_ADMIN' ])
 

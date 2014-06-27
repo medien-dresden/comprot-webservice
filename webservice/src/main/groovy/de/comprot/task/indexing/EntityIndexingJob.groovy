@@ -7,8 +7,6 @@ abstract class EntityIndexingJob extends IndexingJob {
 
     @Autowired EntityIndexService indexService
 
-    @Override def index(List entities) {
-        indexService.save entities
-    }
+    @Override def index(List entities) { indexService.save entities }
 
 }

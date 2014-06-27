@@ -24,9 +24,7 @@ abstract class IndexingJob extends SecurityContextAwareJob implements Interrupta
 
     abstract index(List entities)
 
-    IndexingJob() {
-        logger = LoggerFactory.getLogger(getClass())
-    }
+    IndexingJob() { logger = LoggerFactory.getLogger(getClass()) }
 
     @Override def executeWithinSecurityContext(JobExecutionContext context) {
         logger.info 'started'

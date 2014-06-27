@@ -39,10 +39,7 @@ import org.springframework.transaction.annotation.Transactional
         }
 
         def user = repository.findByUsername username
-
-        if (user == null)
-            throw new NoSuchEntityException()
-
+        if (!user) throw new NoSuchEntityException()
         return user
     }
 
