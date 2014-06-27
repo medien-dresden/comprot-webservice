@@ -12,4 +12,18 @@
         <map-null>false</map-null>
     </configuration>
 
+    <mapping>
+        <class-a>de.comprot.core.model.SuggestionEntity</class-a>
+        <class-b>org.springframework.data.solr.core.query.result.SimpleFacetFieldEntry</class-b>
+        <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
+        <field>
+            <a>label</a>
+            <b>value</b>
+        </field>
+        <field>
+            <a>hits</a>
+            <b>valueCount</b>
+        </field>
+    </mapping>
+
 </mappings>

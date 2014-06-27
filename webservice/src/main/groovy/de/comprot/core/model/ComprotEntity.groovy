@@ -55,7 +55,6 @@ class ComprotEntity {
 	/**
 	 * the primary name
 	 */
-    @Indexed(boost = 1.0f)
     @Field String name
 
 	/**
