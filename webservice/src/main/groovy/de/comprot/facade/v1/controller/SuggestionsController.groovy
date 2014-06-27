@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*
     @RequestMapping(method = RequestMethod.GET, produces = Version.V1)
     def get(@RequestParam(value = "filter", required = true) String query,
             @RequestParam(value = "page", required = false, defaultValue = "0") int page,
-            @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
+            @RequestParam(value = "size", required = false, defaultValue = "20") int size) {
         mappingService.map service.getSuggestions(query, page, size), SuggestionDto
     }
 

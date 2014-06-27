@@ -4,6 +4,7 @@ import de.comprot.core.model.ComprotEntity
 import de.comprot.core.model.SuggestionEntity
 import de.comprot.core.repository.EntityIndexRepository
 import de.comprot.core.service.EntityIndexService
+import de.comprot.facade.v1.model.SuggestionDto
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
@@ -21,9 +22,15 @@ import org.springframework.stereotype.Service
     }
 
     @Override List<SuggestionEntity> getSuggestions(String query, int page, int size) {
-        repository.findSuggestions(query, new PageRequest(page, size))
-                .findAll { it.name != null }
-                .collect { new SuggestionEntity(label: it.name) }
+        def result = []
+
+        repository.findSuggestions(query, new PageRequest(page, size)).facetResultPages.each {
+            it.content.each {
+                result << new SuggestionEntity(label: it.value, hits: it.valueCount)
+            }
+        }
+
+        return result
     }
 
 }
