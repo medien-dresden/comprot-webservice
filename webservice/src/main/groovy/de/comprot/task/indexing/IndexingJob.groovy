@@ -6,13 +6,14 @@ import org.quartz.InterruptableJob
 import org.quartz.JobExecutionContext
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 
 abstract class IndexingJob extends SecurityContextAwareJob implements InterruptableJob {
 
-    int pageSize = 50000
+    @Value('${indexing.pageSize}') int pageSize
 
     private Logger logger
 
@@ -27,7 +28,7 @@ abstract class IndexingJob extends SecurityContextAwareJob implements Interrupta
     IndexingJob() { logger = LoggerFactory.getLogger(getClass()) }
 
     @Override def executeWithinSecurityContext(JobExecutionContext context) {
-        logger.info 'started'
+        logger.info "started with $pageSize entities per page"
         clearIndex()
 
         def currentPageable = new PageRequest(0, pageSize)
