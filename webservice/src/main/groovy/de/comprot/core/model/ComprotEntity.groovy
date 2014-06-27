@@ -1,5 +1,6 @@
 package de.comprot.core.model
 
+import groovy.transform.EqualsAndHashCode
 import org.apache.solr.client.solrj.beans.Field
 import org.springframework.data.annotation.Id
 import org.springframework.data.solr.core.mapping.Indexed
@@ -7,6 +8,9 @@ import org.springframework.data.solr.core.mapping.Indexed
 /**
  * represents a single drug, protein or disease
  */
+@EqualsAndHashCode(
+        includeFields = true,
+        excludes = ['name', 'synonyms'])
 class ComprotEntity {
 
     public static final String FIELD_ID = 'id'

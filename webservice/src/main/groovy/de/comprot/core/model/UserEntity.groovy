@@ -1,5 +1,6 @@
 package de.comprot.core.model
 
+import groovy.transform.EqualsAndHashCode
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -10,6 +11,7 @@ import javax.persistence.Table
 import javax.validation.constraints.NotNull
 
 @Table(name = 'comprot_user')
+@EqualsAndHashCode(includeFields = true, includes = 'username')
 @Entity class UserEntity implements UserDetails {
 
     @Id @NotNull String username
@@ -17,8 +19,6 @@ import javax.validation.constraints.NotNull
     @NotNull String password
 
     @NotNull String[] roles = ['ROLE_USER']
-
-    boolean isEnabled = true
 
     @Override Collection<? extends GrantedAuthority> getAuthorities() {
         roles.collect { new SimpleGrantedAuthority(it) }
@@ -32,6 +32,6 @@ import javax.validation.constraints.NotNull
     @Override boolean isAccountNonExpired()     { true }
     @Override boolean isAccountNonLocked()      { true }
     @Override boolean isCredentialsNonExpired() { true }
-    @Override boolean isEnabled()               { isEnabled }
+    @Override boolean isEnabled()               { true }
 
 }
