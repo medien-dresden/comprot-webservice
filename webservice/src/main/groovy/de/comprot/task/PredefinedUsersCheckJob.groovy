@@ -25,6 +25,8 @@ import org.springframework.stereotype.Component
             userService.register new UserEntity(
                     username: 'admin',
                     password: 'admin123',
+                    displayName: 'Administrator',
+                    email: 'administrator@comprot.de',
                     roles: ['ROLE_ADMIN', 'ROLE_USER'])
         }
     }

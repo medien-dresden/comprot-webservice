@@ -1,20 +1,33 @@
 package de.comprot.core.model
 
 import groovy.transform.EqualsAndHashCode
+import org.hibernate.annotations.NaturalId
+import org.hibernate.validator.constraints.Email
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.Table
+import javax.persistence.UniqueConstraint
 import javax.validation.constraints.NotNull
 
-@Table(name = 'comprot_user')
+@Table(name = 'comprot_user', uniqueConstraints = [
+        @UniqueConstraint(name = 'unique_username', columnNames = 'username'),
+        @UniqueConstraint(name = 'unique_email', columnNames = 'email')
+])
 @EqualsAndHashCode(includeFields = true, includes = 'username')
 @Entity class UserEntity implements UserDetails {
 
-    @Id @NotNull String username
+    @GeneratedValue @Id Long id
+
+    @NotNull @NaturalId String username
+
+    @NotNull @Email String email
+
+    @NotNull String displayName
 
     @NotNull String password
 

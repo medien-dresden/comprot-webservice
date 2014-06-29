@@ -10,7 +10,10 @@ import org.springframework.stereotype.Repository
     @Override void persist(UserEntity user) { currentSession().save user }
 
     @Override UserEntity findByUsername(String username) {
-        (UserEntity) currentSession().byId(UserEntity).load(username)
+        (UserEntity) currentSession()
+                .byNaturalId(UserEntity)
+                .using('username', username)
+                .load()
     }
 
 }

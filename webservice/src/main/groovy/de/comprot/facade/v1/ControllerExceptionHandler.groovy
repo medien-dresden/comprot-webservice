@@ -1,7 +1,9 @@
-package de.comprot.facade
+package de.comprot.facade.v1
 
+import de.comprot.core.service.EntityPropertyConstraintException
 import de.comprot.core.service.JobSchedulingException
 import de.comprot.core.service.NoSuchEntityException
+import de.comprot.facade.Version
 import org.springframework.dao.DataAccessException
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
@@ -17,7 +19,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.MissingServletRequestParameterException
 import org.springframework.web.bind.ServletRequestBindingException
 import org.springframework.web.bind.UnsatisfiedServletRequestParameterException
-import org.springframework.web.bind.annotation.*
+
+import org.springframework.web.bind.annotation.ControllerAdvice
+import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.ResponseStatus
 
 import javax.validation.ConstraintViolationException
 
@@ -73,7 +80,29 @@ import javax.validation.ConstraintViolationException
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(DataIntegrityViolationException)
     def handle(DataIntegrityViolationException exception) {
-        [ error: 'data integrity violation', cause: exception.cause?.cause?.localizedMessage ]
+        String constraintName = exception.cause?.constraintName
+
+        if (constraintName?.startsWith('unique_')) return [
+                error: 'unique constraint violation',
+                violations: [[
+                    field: constraintName.replace('unique_', ''),
+                    message: 'is already taken'
+                ]]]
+
+        else return [
+                error: 'data integrity violation',
+                cause: exception.cause?.cause?.localizedMessage ]
+    }
+
+    @ResponseBody
+    @RequestMapping(produces = Version.V1)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(EntityPropertyConstraintException)
+    def handle(EntityPropertyConstraintException exception) {
+        [   error: 'constraint violation',
+            violations: [[
+                field: exception.propertyName,
+                message: exception.message ]]]
     }
 
     @ResponseBody

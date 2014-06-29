@@ -1,12 +1,12 @@
 package de.comprot.core.service.impl
 
-import de.comprot.core.service.NoSuchEntityException
 import de.comprot.core.model.UserEntity
 import de.comprot.core.repository.UserRepository
+import de.comprot.core.service.EntityPropertyConstraintException
+import de.comprot.core.service.NoSuchEntityException
 import de.comprot.core.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -26,9 +26,14 @@ import org.springframework.transaction.annotation.Transactional
     @Transactional
     @Override void register(UserEntity user) {
         if (predefinedUsers.contains(user.username))
-            throw new DataIntegrityViolationException('username is not allowed')
+            throw new EntityPropertyConstraintException('username', 'is not allowed')
 
-        user.password = passwordEncoder.encode user.password
+        if (user.displayName == null)
+            user.displayName = user.username
+
+        user.password = passwordEncoder.encode user?.password
+        user.email = user.email?.toLowerCase()
+
         repository.persist user
     }
 
