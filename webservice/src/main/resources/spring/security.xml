@@ -26,6 +26,7 @@
             use-expressions="true"
             entry-point-ref="restAuthEntryPoint">
 
+        <security:intercept-url pattern="/**" requires-channel="${http.channel}" />
         <security:intercept-url pattern="/" access="permitAll" />
         <security:intercept-url pattern="/static/**" access="permitAll" />
 
