@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RequestMapping('api/jobs')
-@RestController class JobsController {
+@RestController class JobController {
 
     @Autowired JobService jobService
 

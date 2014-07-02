@@ -7,6 +7,7 @@ import de.comprot.core.service.EntityIndexService
 import de.comprot.core.service.MappingService
 import de.comprot.facade.v1.model.SuggestionDto
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 
@@ -24,9 +25,13 @@ import org.springframework.stereotype.Service
         repository.deleteByType entityType
     }
 
-    @Override List<SuggestionEntity> getSuggestions(String query, int page, int size) {
-        repository.findSuggestions(query, new PageRequest(page, size)).facetResultPages
+    @Override List<SuggestionEntity> getSuggestions(String query, int limit) {
+        repository.findSuggestions(query, new PageRequest(0, limit)).facetResultPages
                 .collectNested { mappingService.map(it.content, SuggestionEntity) }.flatten()
+    }
+
+    @Override Page<ComprotEntity> search(String query, int page, int size) {
+        repository.findByQuery query, new PageRequest(page, size)
     }
 
 }

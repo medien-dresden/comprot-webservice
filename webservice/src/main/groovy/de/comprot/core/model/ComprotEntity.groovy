@@ -13,20 +13,6 @@ import org.springframework.data.solr.core.mapping.Indexed
         excludes = ['name', 'synonyms'])
 class ComprotEntity {
 
-    public static final String FIELD_ID = 'id'
-
-    public static final String FIELD_COMPROT_ID = 'comprotId'
-
-    public static final String FIELD_TAXONOMY_ID = 'taxonomyId'
-
-    public static final String FIELD_SOURCE_ID = 'sourceId'
-
-    public static final String FIELD_NAME = 'name'
-
-    public static final String FIELD_SYNONYMS = 'synonyms'
-
-    public static final String FIELD_TYPE = 'type'
-
     enum Type { PROTEIN, DISEASE, DRUG }
 
 	/**

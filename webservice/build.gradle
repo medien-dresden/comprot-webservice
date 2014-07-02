@@ -4,7 +4,7 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url 'http://repo.spring.io/release' }
-        maven { url 'http://repo.medien-dresden.de/snapshot' }
+        maven { url 'http://repo.medien-dresden.de/snapshot' } // gradle-repositories-plugin
     }
 
     dependencies {
@@ -24,6 +24,7 @@ jar {
 
 repositories {
     maven { url 'http://repo.spring.io/snapshot' }
+    maven { url 'http://repo.medien-dresden.de/snapshot' } // dozer
     maven { url 'http://maven.restlet.com' } // dependencies used by solr at runtime
 
     github('medien-dresden')
@@ -60,7 +61,8 @@ dependencies {
     compile group: 'org.quartz-scheduler', name: 'quartz-jobs', version: '2.2.+'
 
     // object mapping
-    compile group: 'net.sf.dozer', name: 'dozer', version: '5.5.+'
+    compile group: 'net.sf.dozer', name: 'dozer', version: '5.5.1-FIX153'
+    runtime ('commons-beanutils:commons-beanutils:1.9.1') { exclude group: 'commons-logging' }
     compile group: 'net.sf.dozer', name: 'dozer-spring', version: '5.5.+'
 
     // json entity mapping for rest service

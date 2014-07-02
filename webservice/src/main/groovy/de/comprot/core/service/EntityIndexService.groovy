@@ -2,6 +2,7 @@ package de.comprot.core.service
 
 import de.comprot.core.model.ComprotEntity
 import de.comprot.core.model.SuggestionEntity
+import org.springframework.data.domain.Page
 import org.springframework.security.access.prepost.PreAuthorize
 
 interface EntityIndexService {
@@ -13,6 +14,9 @@ interface EntityIndexService {
     void deleteAll(ComprotEntity.Type entityType)
 
     @PreAuthorize('permitAll')
-    List<SuggestionEntity> getSuggestions(String query, int page, int size)
+    List<SuggestionEntity> getSuggestions(String query, int limit)
+
+    @PreAuthorize('permitAll')
+    Page<ComprotEntity> search(String query, int page, int size)
 
 }

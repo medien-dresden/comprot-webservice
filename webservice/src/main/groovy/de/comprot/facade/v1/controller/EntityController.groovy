@@ -3,13 +3,13 @@ package de.comprot.facade.v1.controller
 import de.comprot.core.service.EntityIndexService
 import de.comprot.core.service.MappingService
 import de.comprot.facade.Version
-import de.comprot.facade.v1.model.SuggestionDto
+import de.comprot.facade.v1.model.SearchResultDto
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
-@RequestMapping('api/suggestions')
-@RestController class SuggestionsController {
+@RequestMapping('api/entities')
+@RestController class EntityController {
 
     @Autowired EntityIndexService service
 
@@ -17,9 +17,10 @@ import org.springframework.web.bind.annotation.*
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, produces = Version.V1)
-    def suggest(@RequestParam(value = "q", required = true) String query,
-                @RequestParam(value = "limit", required = false, defaultValue = "20") int limit) {
-        mappingService.map service.getSuggestions(query, limit), SuggestionDto
+    def search( @RequestParam(value = "q", required = true) String query,
+                @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                @RequestParam(value = "size", required = false, defaultValue = "20") int size) {
+        mappingService.map service.search(query, page, size), SearchResultDto
     }
 
 }
