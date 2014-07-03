@@ -5,6 +5,10 @@ import de.comprot.core.service.MappingService
 import de.comprot.facade.Version
 import de.comprot.facade.v1.model.EntityDto
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
+import org.springframework.data.web.PagedResourcesAssembler
+import org.springframework.hateoas.ResourceAssembler
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
@@ -15,12 +19,14 @@ import org.springframework.web.bind.annotation.*
 
     @Autowired MappingService mappingService
 
+    @Autowired PagedResourcesAssembler assembler
+
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, produces = Version.V1)
     def search( @RequestParam(value = "q", required = true) String query,
-                @RequestParam(value = "page", required = false, defaultValue = "0") int page,
-                @RequestParam(value = "size", required = false, defaultValue = "20") int size) {
-        mappingService.generate service.search(query, page, size), EntityDto
+                @PageableDefault Pageable pageable) {
+        assembler.toResource(service.search(query, pageable),
+                { mappingService.generate(it, EntityDto) } as ResourceAssembler)
     }
 
 }

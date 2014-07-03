@@ -2,13 +2,31 @@
 <beans  xmlns="http://www.springframework.org/schema/beans"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
         xsi:schemaLocation="
             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"
 
         default-lazy-init="true">
 
     <context:component-scan base-package="de.comprot" />
+
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean class="org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver" />
+            <bean class="org.springframework.data.web.HateoasSortHandlerMethodArgumentResolver" />
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+
+    <bean id="pagedResourcesAssembler" class="org.springframework.data.web.PagedResourcesAssembler">
+        <constructor-arg>
+            <bean class="org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver" />
+        </constructor-arg>
+        <constructor-arg><null /></constructor-arg>
+    </bean>
+
+    <bean class="org.springframework.data.web.config.HateoasAwareSpringDataWebConfiguration" />
 
     <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="locations">

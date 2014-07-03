@@ -8,6 +8,7 @@ import de.comprot.core.service.MappingService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service class RepositoryEntityIndexService implements EntityIndexService {
@@ -29,8 +30,8 @@ import org.springframework.stereotype.Service
                 .collectNested { mappingService.generateList(it.content as List, SuggestionEntity) }.flatten()
     }
 
-    @Override Page<ComprotEntity> search(String query, int page, int size) {
-        repository.findByQuery query, new PageRequest(page, size)
+    @Override Page<ComprotEntity> search(String query, Pageable pageable) {
+        repository.findByQuery query, pageable
     }
 
 }

@@ -5,6 +5,6 @@ import org.springframework.hateoas.ResourceSupport
 
 class EntityDto extends ResourceSupport {
 
-    @Delegate ComprotEntity entity = new ComprotEntity()
+    @Delegate private ComprotEntity delegate = new ComprotEntity()
 
 }
