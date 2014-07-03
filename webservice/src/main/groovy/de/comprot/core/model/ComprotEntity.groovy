@@ -4,6 +4,7 @@ import groovy.transform.EqualsAndHashCode
 import org.apache.solr.client.solrj.beans.Field
 import org.springframework.data.annotation.Id
 import org.springframework.data.solr.core.mapping.Indexed
+import org.springframework.hateoas.Identifiable
 
 /**
  * represents a single drug, protein or disease
@@ -11,7 +12,7 @@ import org.springframework.data.solr.core.mapping.Indexed
 @EqualsAndHashCode(
         includeFields = true,
         excludes = ['name', 'synonyms'])
-class ComprotEntity {
+class ComprotEntity implements Identifiable<String> {
 
     enum Type { PROTEIN, DISEASE, DRUG }
 
