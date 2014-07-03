@@ -53,10 +53,7 @@ class UserControllerTest extends ControllerTest {
 
         // white-box
         verify(userService, times(1)).loadByUsername 'paul'
-        verify(mappingService, times(1)).generate any(), eq(UserDto)
-
         verifyNoMoreInteractions userService
-        verifyNoMoreInteractions mappingService
     }
 
     @Test void testPositiveRegistration() {

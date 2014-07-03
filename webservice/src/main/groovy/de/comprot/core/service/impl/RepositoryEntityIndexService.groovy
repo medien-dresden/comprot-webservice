@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service
 
     @Override List<SuggestionEntity> getSuggestions(String query, int limit) {
         repository.findSuggestions(query, new PageRequest(0, limit)).facetResultPages
-                .collectNested { mappingService.generate(it.content, SuggestionEntity) }.flatten()
+                .collectNested { mappingService.generateList(it.content as List, SuggestionEntity) }.flatten()
     }
 
     @Override Page<ComprotEntity> search(String query, int page, int size) {
