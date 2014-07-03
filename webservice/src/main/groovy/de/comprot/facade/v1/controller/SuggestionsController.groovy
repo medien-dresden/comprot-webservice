@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*
     @RequestMapping(method = RequestMethod.GET, produces = Version.V1)
     def suggest(@RequestParam(value = "q", required = true) String query,
                 @RequestParam(value = "limit", required = false, defaultValue = "20") int limit) {
-        mappingService.map service.getSuggestions(query, limit), SuggestionDto
+        mappingService.generateList service.getSuggestions(query, limit), SuggestionDto
     }
 
 }

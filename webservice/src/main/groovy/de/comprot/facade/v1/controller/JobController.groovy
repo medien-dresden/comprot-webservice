@@ -20,7 +20,7 @@ import javax.validation.Valid
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST, consumes = Version.V1)
-    def post(@Valid @RequestBody JobDto job) { jobService.startJob mappingService.map(job, JobEntity) }
+    def post(@Valid @RequestBody JobDto job) { jobService.startJob mappingService.generate(job, JobEntity) }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = '{id}', method = RequestMethod.DELETE)
@@ -28,10 +28,10 @@ import javax.validation.Valid
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = '{id}', method = RequestMethod.GET, produces = Version.V1)
-    def get(@PathVariable String id) { mappingService.map jobService.getJob(id), JobDto }
+    def get(@PathVariable String id) { mappingService.generate jobService.getJob(id), JobDto }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, produces = Version.V1)
-    def getAll() { mappingService.map jobService.runningJobs, JobDto }
+    def getAll() { mappingService.transferSet jobService.runningJobs, JobDto }
 
 }

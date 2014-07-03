@@ -35,9 +35,4 @@
         <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
     </mapping>
 
-    <mapping>
-        <class-a>de.comprot.facade.v1.model.SearchResultDto</class-a>
-        <class-b>org.springframework.data.domain.Page</class-b>
-    </mapping>
-
 </mappings>

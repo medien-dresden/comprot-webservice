@@ -1,6 +1,8 @@
 package de.comprot.facade.v1.model
 
-class UserDto {
+import org.springframework.hateoas.ResourceSupport
+
+class UserDto extends ResourceSupport {
 
     String username
 
