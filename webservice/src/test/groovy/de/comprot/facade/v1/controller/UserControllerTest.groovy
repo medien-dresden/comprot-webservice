@@ -1,11 +1,14 @@
 package de.comprot.facade.v1.controller
 
 import de.comprot.core.model.UserEntity
+import de.comprot.core.service.UserService
 import de.comprot.facade.ControllerTest
 import de.comprot.facade.v1.model.RegistrationDto
 import de.comprot.facade.v1.model.UserDto
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.InjectMocks
+import org.mockito.Mock
 import org.mockito.runners.MockitoJUnitRunner
 import org.springframework.http.MediaType
 
@@ -28,6 +31,10 @@ class UserControllerTest extends ControllerTest {
     def userDto = new UserDto(username: 'paul')
 
     def registrationDto = new RegistrationDto(username: 'paul', password: 'paul123456', email: 'paul@comprot.de')
+
+    @Mock UserService userService
+
+    @InjectMocks UserController controller
 
     @Test void testPositiveRetrieval() {
         // mocking
