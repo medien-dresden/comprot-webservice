@@ -3,8 +3,6 @@ package de.comprot.core.model
 import groovy.transform.EqualsAndHashCode
 import org.apache.solr.client.solrj.beans.Field
 import org.springframework.data.annotation.Id
-import org.springframework.data.solr.core.mapping.Indexed
-import org.springframework.hateoas.Identifiable
 
 /**
  * represents a single drug, protein or disease
@@ -12,14 +10,17 @@ import org.springframework.hateoas.Identifiable
 @EqualsAndHashCode(
         includeFields = true,
         excludes = ['name', 'synonyms'])
-class ComprotEntity implements Identifiable<String> {
+class ComprotEntity {
 
-    enum Type { PROTEIN, DISEASE, DRUG }
+    /**
+     * First letter is used for resource id
+     * and therefore has to be UNIQUE ACROSS ALL TYPES!
+     */
+    enum Type { PROTEIN, DISEASE, MEDICINE }
 
 	/**
 	 * internal unique search id of this entity 
 	 * this id will be unique for all entities (across all EntityType's)
-	 * it will normally generated/set only for those entities that are obtained through a SearchResult's SearchHit
 	 */
 	@Id @Field String id
 
@@ -53,5 +54,8 @@ class ComprotEntity implements Identifiable<String> {
      * Type of the entity
      */
     @Field Type type
+
+    /** @return unique entity id */
+    String getEntityId() { "${type.name()[0].toLowerCase()}${comprotId}" }
 
 }

@@ -16,6 +16,6 @@ import org.springframework.stereotype.Component
 
     @Override Page<ComprotEntity> fetch(Pageable pageable) { sourceService.getDrugs pageable }
 
-    @Override def clearIndex() { indexService.deleteAll ComprotEntity.Type.DRUG }
+    @Override def clearIndex() { indexService.deleteAll ComprotEntity.Type.MEDICINE }
 
 }
