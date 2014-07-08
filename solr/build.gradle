@@ -13,27 +13,36 @@ configurations {
 dependencies {
     solrApp 'org.apache.solr:solr:4.9.0@war'
 
-    solrDep group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
-    solrDep group: 'log4j', name: 'log4j', version: '1.2.+'
+    runtime group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
+    runtime group: 'log4j', name: 'log4j', version: '1.2.+'
 }
 
-task copySolrDeps(type: Copy) {
-    into "$buildDir/tmp/start/webapp/WEB-INF/lib"
-    from configurations.solrDep
+task copySolrConfig(type: Copy) {
+    from "$projectDir/config"
+    into "$buildDir/config"
+
+    // prevent up-to-date state
+    outputs.upToDateWhen { false }
 }
 
-task start(type: JettyRunWar) {
-    webApp = configurations.solrApp.singleFile
+task unzipSolr(type: Copy) {
+    from zipTree(configurations.solrApp.singleFile)
+    into "$buildDir/webapp"
+}
 
-    httpPort = 8983
+task run(type: JettyRun) {
+    dependsOn copySolrConfig, \
+              unzipSolr, \
+              jettyStop
+
+    webAppSourceDirectory = file("$buildDir/webapp")
     contextPath = 'solr'
+    httpPort = 8983
 
-    dependsOn copySolrDeps
-
-    doFirst { System.setProperty('solr.solr.home', './config') }
+    doFirst { System.setProperty('solr.solr.home', "$buildDir/config") }
 }
 
 task stop() { dependsOn jettyStop }
 
-[ start, jettyStop ]*.stopPort = 8984
-[ start, jettyStop ]*.stopKey = 'stopKey'
+[ run, jettyStop ]*.stopPort = 8984
+[ run, jettyStop ]*.stopKey = 'stopKey'

@@ -36,7 +36,7 @@ import org.springframework.stereotype.Repository
                 'SELECT c.*, GROUP_CONCAT(DISTINCT cs.name SEPARATOR 0x3) AS synonyms FROM COMPOUND c ' +
                         'LEFT JOIN COMPOUND_SYNONYM cs ON cs.COMPOUND_ID = c.ID GROUP BY c.ID ORDER BY c.id ASC',
                 [:], pageable, { result, rowNumber -> new ComprotEntity(
-                        type:       ComprotEntity.Type.MEDICINE,
+                        type:       ComprotEntity.Type.DRUG,
                         comprotId:  result.getLong('ID'),
                         sourceId:   result.getString('ID'),
                         name:       result.getString('NAME'),

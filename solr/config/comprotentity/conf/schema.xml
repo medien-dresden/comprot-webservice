@@ -39,8 +39,11 @@
 				<filter class="solr.RemoveDuplicatesTokenFilterFactory" />
 			</analyzer>
 		</fieldType>
-
 	</types>
+
+    <fields>
+        <field name="suggestSource" type="text_suggest" />
+    </fields>
 
 </schema>
 

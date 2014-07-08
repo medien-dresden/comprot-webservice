@@ -8,11 +8,11 @@
 
     <bean class="org.springframework.data.solr.core.SolrExceptionTranslator" />
 
-    <solr:embedded-solr-server id="solrServer" solrHome="classpath:solr" />
-    <solr:repositories base-package="de.comprot.core.repository" />
+    <solr:solr-server id="solrServer" url="http://localhost:8983/solr" />
 
-    <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
-        <constructor-arg ref="solrServer"/>
-    </bean>
+    <solr:repositories
+            base-package="de.comprot.core.repository"
+            multicore-support="true"
+            schema-creation-support="true" />
 
 </beans>

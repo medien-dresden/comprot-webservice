@@ -24,7 +24,8 @@
 * run with
 
     ```
-    ./gradlew run
+    ./gradlew solr:run
+    ./gradlew webservice:run
     ```
     
 * for [Hot code swapping](http://en.wikipedia.org/wiki/Hot_swapping) with IntelliJ IDEA use

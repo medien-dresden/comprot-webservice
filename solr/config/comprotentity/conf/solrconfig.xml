@@ -31,6 +31,23 @@
 
 	<requestHandler name="standard" class="solr.StandardRequestHandler" default="true" />
 	<requestHandler name="/update" class="solr.UpdateRequestHandler" />
+    <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />
+    <requestHandler name="/admin/system" class="org.apache.solr.handler.admin.SystemInfoHandler" />
+    <requestHandler name="/admin/mbeans" class="org.apache.solr.handler.admin.SolrInfoMBeanHandler" />
+    <requestHandler name="/admin/ping" class="solr.PingRequestHandler">
+        <requestHandler name="/admin/ping" class="solr.PingRequestHandler">
+            <str name="healthcheckFile">server-enabled.txt</str>
+            <lst name="invariants">
+                <str name="qt">/search</str>
+                <str name="q">aspirin</str>
+            </lst>
+        </requestHandler>
+    </requestHandler>
+    <requestHandler name="/admin/file" class="org.apache.solr.handler.admin.ShowFileRequestHandler" >
+        <lst name="defaults">
+            <str name="echoParams">explicit</str>
+        </lst>
+    </requestHandler>
 
     <searchComponent name="suggest" class="solr.SpellCheckComponent">
         <lst name="spellchecker">
