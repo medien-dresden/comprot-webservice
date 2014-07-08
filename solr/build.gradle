@@ -1,0 +1,39 @@
+description = 'Solr Service'
+
+apply plugin: 'java'
+apply plugin: 'jetty'
+
+repositories { mavenCentral() }
+
+configurations {
+    solrApp
+    solrDep
+}
+
+dependencies {
+    solrApp 'org.apache.solr:solr:4.9.0@war'
+
+    solrDep group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
+    solrDep group: 'log4j', name: 'log4j', version: '1.2.+'
+}
+
+task copySolrDeps(type: Copy) {
+    into "$buildDir/tmp/start/webapp/WEB-INF/lib"
+    from configurations.solrDep
+}
+
+task start(type: JettyRunWar) {
+    webApp = configurations.solrApp.singleFile
+
+    httpPort = 8983
+    contextPath = 'solr'
+
+    dependsOn copySolrDeps
+
+    doFirst { System.setProperty('solr.solr.home', './config') }
+}
+
+task stop() { dependsOn jettyStop }
+
+[ start, jettyStop ]*.stopPort = 8984
+[ start, jettyStop ]*.stopKey = 'stopKey'

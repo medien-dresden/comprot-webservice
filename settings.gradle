@@ -1,3 +1,5 @@
 rootProject.name = 'comprot-webservice'
 
 include 'webservice'
+include 'solr'
+
