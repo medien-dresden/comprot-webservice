@@ -1,5 +1,4 @@
 rootProject.name = 'comprot'
-description = 'COMPROT Search Engine'
 
 include 'webservice'
 include 'solr'

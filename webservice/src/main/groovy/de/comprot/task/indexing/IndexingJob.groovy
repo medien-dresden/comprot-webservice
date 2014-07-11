@@ -1,6 +1,5 @@
 package de.comprot.task.indexing
 
-import de.comprot.core.model.ComprotEntity
 import de.comprot.task.SecurityContextAwareJob
 import org.quartz.InterruptableJob
 import org.quartz.JobExecutionContext
@@ -11,7 +10,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 
-abstract class IndexingJob extends SecurityContextAwareJob implements InterruptableJob {
+abstract class IndexingJob<T> extends SecurityContextAwareJob implements InterruptableJob {
 
     @Value('${indexing.pageSize}') int pageSize
 
@@ -19,7 +18,7 @@ abstract class IndexingJob extends SecurityContextAwareJob implements Interrupta
 
     private boolean interruptRequested = false
 
-    abstract Page<ComprotEntity> fetch(Pageable pageable)
+    abstract Page<T> fetch(Pageable pageable)
 
     abstract clearIndex()
 

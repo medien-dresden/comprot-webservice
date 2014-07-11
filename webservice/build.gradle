@@ -4,24 +4,19 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url 'http://repo.spring.io/release' }
-        maven { url 'http://repo.medien-dresden.de/snapshot' } // gradle-repositories-plugin
     }
 
     dependencies {
         classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.1.1.RELEASE'
-        classpath 'com.ullink.gradle:gradle-repositories-plugin:1.2-SNAPSHOT'
     }
 }
 
 apply plugin: 'spring-boot'
 apply plugin: 'application'
-apply plugin: 'repositories'
 
 repositories {
     maven { url 'http://repo.spring.io/snapshot' }
     maven { url 'http://repo.medien-dresden.de/snapshot' } // dozer
-
-    github('medien-dresden')
 }
 
 dependencies {
@@ -65,9 +60,6 @@ dependencies {
 
     // mysql database
     runtime group: 'mysql', name: 'mysql-connector-java', version: '5.1.+'
-
-    // include frontend library
-    runtime group: 'medien-dresden', name: 'comprot-frontend', version: '1.0.+'
 
     // testing
     testCompile group: 'junit', name: 'junit', version: '4.+'
