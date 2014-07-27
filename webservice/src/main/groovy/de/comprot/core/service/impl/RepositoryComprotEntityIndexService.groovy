@@ -3,6 +3,7 @@ package de.comprot.core.service.impl
 import de.comprot.core.model.ComprotEntity
 import de.comprot.core.model.SuggestionEntity
 import de.comprot.core.repository.BindingEntityIndexRepository
+import de.comprot.core.repository.ComprotEntityIndexRepository
 import de.comprot.core.service.ComprotEntityIndexService
 import de.comprot.core.service.MappingService
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service
 
 @Service class RepositoryComprotEntityIndexService implements ComprotEntityIndexService {
 
-    @Autowired BindingEntityIndexRepository repository
+    @Autowired ComprotEntityIndexRepository repository
 
     @Autowired MappingService mappingService
 

@@ -1,7 +1,7 @@
 package de.comprot.facade.v1.controller
 
 import de.comprot.core.service.ComprotEntityIndexService
-import de.comprot.facade.v1.assembler.EntityResourceAssembler
+import de.comprot.facade.v1.assembler.ComprotEntityResourceAssembler
 import de.comprot.facade.Version
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*
 
     @Autowired PagedResourcesAssembler pagedAssembler
 
-    @Autowired EntityResourceAssembler resourceAssembler
+    @Autowired ComprotEntityResourceAssembler resourceAssembler
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, produces = Version.V1)

@@ -16,10 +16,9 @@ import org.springframework.data.solr.core.mapping.SolrDocument
 class ComprotEntity {
 
     /**
-     * First letter is used for resource id
-     * and therefore has to be UNIQUE ACROSS ALL TYPES!
+     * Type is used for resource id
      */
-    enum Type { PROTEIN, DISEASE, DRUG }
+    enum Type { PROTEIN, DRUG }
 
 	/**
 	 * internal unique search id of this entity 
@@ -57,10 +56,5 @@ class ComprotEntity {
      * Type of the entity
      */
     @Indexed(type = 'enum') Type type
-
-    /**
-     * Unique constant entity id
-     */
-    String getEntityId() { "${type.name().substring(0, 2).toLowerCase()}${comprotId}" }
 
 }

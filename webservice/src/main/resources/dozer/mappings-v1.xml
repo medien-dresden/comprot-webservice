@@ -36,7 +36,7 @@
     </mapping>
 
     <mapping>
-        <class-a>de.comprot.facade.v1.model.EntityDto</class-a>
+        <class-a>de.comprot.facade.v1.model.ComprotEntityDto</class-a>
         <class-b>de.comprot.core.model.ComprotEntity</class-b>
         <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
     </mapping>
