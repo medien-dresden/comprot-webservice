@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.security.access.prepost.PreAuthorize
 
-interface EntityIndexService {
+interface ComprotEntityIndexService {
 
     @PreAuthorize('hasRole("ROLE_ADMIN")')
     void save(Collection<ComprotEntity> entities)

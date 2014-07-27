@@ -1,8 +1,8 @@
 package de.comprot.task.indexing
 
 import de.comprot.core.model.ComprotEntity
-import de.comprot.core.service.EntityIndexService
-import de.comprot.core.service.EntitySourceService
+import de.comprot.core.service.ComprotEntityIndexService
+import de.comprot.core.service.ComprotEntitySourceService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.config.BeanDefinition
 import org.springframework.context.annotation.Scope
@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Component class DrugIndexingJob extends IndexingJob<ComprotEntity> {
 
-    @Autowired EntitySourceService sourceService
+    @Autowired ComprotEntitySourceService sourceService
 
-    @Autowired EntityIndexService indexService
+    @Autowired ComprotEntityIndexService indexService
 
     @Override Page<ComprotEntity> fetch(Pageable pageable) { sourceService.getDrugs pageable }
 

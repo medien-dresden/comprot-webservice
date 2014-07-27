@@ -1,6 +1,6 @@
 package de.comprot.facade.v1.controller
 
-import de.comprot.core.service.EntityIndexService
+import de.comprot.core.service.ComprotEntityIndexService
 import de.comprot.facade.v1.assembler.EntityResourceAssembler
 import de.comprot.facade.Version
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping('api/entities')
 @RestController class EntityController {
 
-    @Autowired EntityIndexService service
+    @Autowired ComprotEntityIndexService service
 
     @Autowired PagedResourcesAssembler pagedAssembler
 

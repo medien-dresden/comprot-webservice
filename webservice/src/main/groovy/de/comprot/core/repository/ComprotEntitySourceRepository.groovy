@@ -4,7 +4,7 @@ import de.comprot.core.model.ComprotEntity
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 
-interface EntitySourceRepository {
+interface ComprotEntitySourceRepository {
 
     Page<ComprotEntity> findAllProteins(Pageable pageable)
 

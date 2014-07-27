@@ -2,8 +2,8 @@ package de.comprot.core.service.impl
 
 import de.comprot.core.model.ComprotEntity
 import de.comprot.core.model.SuggestionEntity
-import de.comprot.core.repository.EntityIndexRepository
-import de.comprot.core.service.EntityIndexService
+import de.comprot.core.repository.BindingEntityIndexRepository
+import de.comprot.core.service.ComprotEntityIndexService
 import de.comprot.core.service.MappingService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
@@ -11,9 +11,9 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
-@Service class RepositoryEntityIndexService implements EntityIndexService {
+@Service class RepositoryComprotEntityIndexService implements ComprotEntityIndexService {
 
-    @Autowired EntityIndexRepository repository
+    @Autowired BindingEntityIndexRepository repository
 
     @Autowired MappingService mappingService
 

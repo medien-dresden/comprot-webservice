@@ -12,8 +12,12 @@
             class="de.comprot.core.repository.impl.HibernateUserRepository"
             p:sessionFactory-ref="sessionFactory" />
 
-    <bean   id="jdbcEntitySourceRepository"
-            class="de.comprot.core.repository.impl.JdbcEntitySourceRepository"
+    <bean   id="jdbcComprotEntitySourceRepository"
+            class="de.comprot.core.repository.impl.JdbcComprotEntitySourceRepository"
+            p:template-ref="comprotJdbcTemplate" />
+
+    <bean   id="jdbcBindingEntitySourceRepository"
+            class="de.comprot.core.repository.impl.JdbcBindingEntitySourceRepository"
             p:template-ref="comprotJdbcTemplate" />
 
 </beans>
