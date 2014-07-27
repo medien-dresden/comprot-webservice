@@ -38,7 +38,6 @@ task run(type: JettyRun) {
     webAppSourceDirectory = file("$buildDir/webapp")
     contextPath = 'solr'
     httpPort = 8983
-    daemon = true
 
     doFirst { System.setProperty('solr.solr.home', "$buildDir/config") }
 }
