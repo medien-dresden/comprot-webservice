@@ -21,10 +21,9 @@ class ComprotEntity {
     enum Type { PROTEIN, DRUG }
 
 	/**
-	 * internal unique search id of this entity 
-	 * this id will be unique for all entities (across all EntityType's)
+	 * ID of this entity
 	 */
-	@Id String id
+	@Id String getId() { "${comprotId}${type.ordinal()}" }
 
 	/**
 	 * internal id of this entity in the comprot database
