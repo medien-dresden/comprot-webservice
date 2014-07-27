@@ -26,4 +26,10 @@ import org.springframework.web.bind.annotation.*
         pagedAssembler.toResource service.search(query, pageable), resourceAssembler
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = '{id}', method = RequestMethod.GET, produces = Version.V1)
+    def getOne( @PathVariable('id') int id) {
+        
+    }
+
 }

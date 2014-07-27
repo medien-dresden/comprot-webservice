@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository
                 'SELECT * FROM BINDS_DRUG_TARGET AS b INNER JOIN RT_DRUG_TARGET_INTERACTION_TYPE it ' +
                         'ON b.RT_DRUG_TARGET_INTERACTION_TYPE_ID = it.ID',
                 [:], pageable, { result, rowNumber -> new BindingEntity(
-                        id:                 result.getLong('ID'),
+                        entityId:           result.getLong('ID'),
                         targetId:           result.getLong('TARGET_ID'),
                         compoundId:         result.getLong('COMPOUND_ID'),
                         interactionType:    result.getString('INTERACTION_TYPE')

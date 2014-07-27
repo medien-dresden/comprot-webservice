@@ -15,10 +15,15 @@ import org.springframework.data.solr.core.mapping.SolrDocument
 @SolrDocument(solrCoreName = 'bindingentity')
 class BindingEntity {
 
+    /**
+     * ID of this entity within the index
+     */
+    @Id String indexId
+
 	/**
 	 * Binding id
 	 */
-	@Id Long id
+    @Indexed(type = 'long') Long entityId
 
 	/**
 	 * Protein id

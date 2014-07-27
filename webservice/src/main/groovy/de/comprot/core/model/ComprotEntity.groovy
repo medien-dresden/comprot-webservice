@@ -21,9 +21,9 @@ class ComprotEntity {
     enum Type { PROTEIN, DRUG }
 
 	/**
-	 * ID of this entity
+	 * ID of this entity within the index
 	 */
-	@Id String getId() { "${comprotId}${type.ordinal()}" }
+	@Id String indexId
 
 	/**
 	 * internal id of this entity in the comprot database
@@ -55,5 +55,10 @@ class ComprotEntity {
      * Type of the entity
      */
     @Indexed(type = 'enum') Type type
+
+    /**
+     * Application wide identifier
+     */
+    String getEntityId() { "${comprotId}${type.ordinal()}" }
 
 }
