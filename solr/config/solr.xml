@@ -2,5 +2,6 @@
 <solr persistent="true">
     <cores adminPath="/admin/cores">
         <core name="comprotentity" instanceDir="comprotentity" />
+        <core name="bindingentity" instanceDir="bindingentity" />
     </cores>
 </solr>

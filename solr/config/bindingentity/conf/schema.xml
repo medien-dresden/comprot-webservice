@@ -1,0 +1,49 @@
+<schema name="bindingentity" version="1.1">
+	<types>
+		<fieldtype name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true" />
+		<fieldType name="int" class="solr.TrieIntField" positionIncrementGap="0" />
+		<fieldType name="float" class="solr.TrieFloatField" precisionStep="0" positionIncrementGap="0" />
+		<fieldType name="long" class="solr.TrieLongField" positionIncrementGap="0" />
+		<fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" positionIncrementGap="0" />
+        <fieldType name="enum" class="solr.TextField" positionIncrementGap="100" multiValued="true" />
+
+		<fieldType name="string_ci" class="solr.TextField" positionIncrementGap="100">
+			<analyzer>
+				<tokenizer class="solr.KeywordTokenizerFactory" />
+				<filter class="solr.LowerCaseFilterFactory" />
+			</analyzer>
+		</fieldType>
+
+		<fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
+			<analyzer type="index">
+				<tokenizer class="solr.StandardTokenizerFactory" />
+				<filter class="solr.LowerCaseFilterFactory" />
+			</analyzer>
+			<analyzer type="query">
+				<tokenizer class="solr.StandardTokenizerFactory" />
+				<filter class="solr.LowerCaseFilterFactory" />
+			</analyzer>
+		</fieldType>
+
+		<fieldType name="text_suggest" class="solr.TextField" positionIncrementGap="100" stored="false" multiValued="true">
+			<analyzer type="index">
+				<tokenizer class="solr.StandardTokenizerFactory" />
+				<filter class="solr.LowerCaseFilterFactory" />
+				<filter class="solr.StandardFilterFactory" />
+				<filter class="solr.RemoveDuplicatesTokenFilterFactory" />
+			</analyzer>
+			<analyzer type="query">
+				<tokenizer class="solr.StandardTokenizerFactory" />
+				<filter class="solr.LowerCaseFilterFactory" />
+				<filter class="solr.StandardFilterFactory" />
+				<filter class="solr.RemoveDuplicatesTokenFilterFactory" />
+			</analyzer>
+		</fieldType>
+	</types>
+
+    <fields>
+        <field name="suggestSource" type="text_suggest" />
+    </fields>
+
+</schema>
+

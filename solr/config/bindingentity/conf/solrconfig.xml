@@ -12,14 +12,6 @@
 		<maxPendingDeletes>100</maxPendingDeletes>
 	</updateHandler>
 
-    <updateRequestProcessorChain>
-        <processor class="solr.UUIDUpdateProcessorFactory">
-            <str name="fieldName">id</str>
-        </processor>
-        <processor class="solr.LogUpdateProcessorFactory" />
-        <processor class="solr.RunUpdateProcessorFactory" />
-    </updateRequestProcessorChain>
-
 	<requestDispatcher handleSelect="true">
 		<requestParsers enableRemoteStreaming="false" multipartUploadLimitInKB="2048" />
 	</requestDispatcher>
