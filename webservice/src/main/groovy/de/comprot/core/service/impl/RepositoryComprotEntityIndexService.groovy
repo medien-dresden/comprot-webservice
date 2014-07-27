@@ -35,4 +35,8 @@ import org.springframework.stereotype.Service
         repository.findByQuery query, pageable
     }
 
+    @Override ComprotEntity getEntity(ComprotEntity.Type type, Long comprotId) {
+        repository.findByTypeAndComprotId type, comprotId
+    }
+
 }

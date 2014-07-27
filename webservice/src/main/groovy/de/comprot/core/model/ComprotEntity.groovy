@@ -56,9 +56,4 @@ class ComprotEntity {
      */
     @Indexed(type = 'enum') Type type
 
-    /**
-     * Application wide identifier
-     */
-    String getEntityId() { "${comprotId}${type.ordinal()}" }
-
 }

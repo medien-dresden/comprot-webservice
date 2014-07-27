@@ -17,6 +17,8 @@ interface ComprotEntityIndexRepository extends SolrCrudRepository<ComprotEntity,
     @Query('name:*?0* OR synonyms:*?0* OR sourceId:*?0*')
     Page<ComprotEntity> findByQuery(String query, Pageable pageable)
 
+    ComprotEntity findByTypeAndComprotId(ComprotEntity.Type type, Long comprotId)
+
     void deleteByType(ComprotEntity.Type entityType)
 
 }

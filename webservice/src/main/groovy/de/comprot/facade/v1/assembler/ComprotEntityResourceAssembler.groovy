@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component
     }
 
     @Override ComprotEntityDto toResource(ComprotEntity entity) {
-        createResourceWithId(entity.entityId, entity)
+        createResourceWithId("${entity.type.name()}-${entity.comprotId}", entity)
     }
 
     @Override protected ComprotEntityDto instantiateResource(ComprotEntity entity) {
