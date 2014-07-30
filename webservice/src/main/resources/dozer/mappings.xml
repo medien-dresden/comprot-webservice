@@ -10,6 +10,7 @@
         <wildcard>true</wildcard>
         <trim-strings>true</trim-strings>
         <map-null>false</map-null>
+        <map-empty-string>false</map-empty-string>
     </configuration>
 
     <mapping>
