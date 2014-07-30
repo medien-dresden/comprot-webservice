@@ -4,6 +4,8 @@ import de.comprot.core.model.BindingEntity
 import de.comprot.core.repository.BindingEntityIndexRepository
 import de.comprot.core.service.BindingEntityIndexService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service class RepositoryBindingEntityIndexService implements BindingEntityIndexService {
@@ -14,4 +16,11 @@ import org.springframework.stereotype.Service
 
     @Override void deleteAll() { repository.deleteAll() }
 
+    @Override Page<BindingEntity> getBindingsForDrug(Long comprotId, Pageable pageable) {
+        repository.findByCompoundId comprotId, pageable
+    }
+
+    @Override Page<BindingEntity> getBindingsForProtein(Long comprotId, Pageable pageable) {
+        repository.findByTargetId comprotId, pageable
+    }
 }

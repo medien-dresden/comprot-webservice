@@ -39,7 +39,12 @@
         <class-a>de.comprot.facade.v1.model.ComprotEntityDto</class-a>
         <class-b>de.comprot.core.model.ComprotEntity</class-b>
         <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
-        <field-exclude><a>indexId</a><b>indexId</b></field-exclude>
+    </mapping>
+
+    <mapping>
+        <class-a>de.comprot.facade.v1.model.BindingEntityDto</class-a>
+        <class-b>de.comprot.core.model.BindingEntity</class-b>
+        <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
     </mapping>
 
 </mappings>
