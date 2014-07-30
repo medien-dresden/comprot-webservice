@@ -20,14 +20,21 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
         super(BindingController, BindingEntityDto)
     }
 
+    @SuppressWarnings("UnnecessaryQualifiedReference")
     @Override BindingEntityDto toResource(BindingEntity entity) {
         def dto = createResourceWithId(entity.entityId, entity)
 
         dto.add(linkTo(EntityController).slash(
-                "${ComprotEntity.Type.PROTEIN.name()}-${entity.targetId}").withRel('target'))
+                ComprotEntityResourceAssembler.assembleId(new ComprotEntity(
+                    type: ComprotEntity.Type.PROTEIN,
+                    comprotId: entity.targetId
+                ))).withRel('target'))
 
         dto.add(linkTo(EntityController).slash(
-                "${ComprotEntity.Type.DRUG.name()}-${entity.compoundId}").withRel('compound'))
+                ComprotEntityResourceAssembler.assembleId(new ComprotEntity(
+                    type: ComprotEntity.Type.DRUG,
+                    comprotId: entity.compoundId
+                ))).withRel('compound'))
 
         return dto
     }

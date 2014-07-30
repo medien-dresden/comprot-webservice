@@ -45,6 +45,10 @@
         <class-a>de.comprot.facade.v1.model.BindingEntityDto</class-a>
         <class-b>de.comprot.core.model.BindingEntity</class-b>
         <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
+        <field>
+            <a>interaction</a>
+            <b>interactionType</b>
+        </field>
     </mapping>
 
 </mappings>

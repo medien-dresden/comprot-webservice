@@ -36,28 +36,25 @@ import org.springframework.web.bind.annotation.*
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = '{id}', method = RequestMethod.GET, produces = Version.V1)
     def getOne( @PathVariable('id') String id) {
-        def (typeString, comprotIdString) = id.tokenize('-')
-        comprotEntityResourceAssembler.toResource entityService.getEntity(
-                typeString as ComprotEntity.Type,
-                comprotIdString as Long)
+        def did = ComprotEntityResourceAssembler.disassembleId(id)
+        comprotEntityResourceAssembler.toResource entityService.getEntity(did.type, did.comprotId)
     }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = '{id}/bindings', method = RequestMethod.GET, produces = Version.V1)
     def getBindings( @PathVariable('id') String id,
                      @PageableDefault Pageable pageable) {
-        def (typeString, comprotIdString) = id.tokenize('-')
-        def comprotId = comprotIdString as Long
+        def did = ComprotEntityResourceAssembler.disassembleId(id)
         def bindings
 
-        switch (typeString as ComprotEntity.Type) {
+        switch (did.type) {
             case ComprotEntity.Type.DRUG:
-                bindings = bindingService.getBindingsForDrug comprotId, pageable
+                bindings = bindingService.getBindingsForDrug did.comprotId, pageable
                 break
 
             case ComprotEntity.Type.PROTEIN:
             default:
-                bindings = bindingService.getBindingsForProtein comprotId, pageable
+                bindings = bindingService.getBindingsForProtein did.comprotId, pageable
                 break
         }
 
