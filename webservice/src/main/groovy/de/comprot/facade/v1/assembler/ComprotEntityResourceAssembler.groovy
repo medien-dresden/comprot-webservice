@@ -26,6 +26,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
                 .slash('bindings')
                 .withRel('bindings'))
 
+        if (dto.name == null && dto.sourceId != null) {
+            dto.name = dto.sourceId
+        }
+
         return dto
     }
 
