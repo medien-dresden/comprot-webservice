@@ -6,7 +6,7 @@ import org.springframework.data.solr.core.mapping.Indexed
 import org.springframework.data.solr.core.mapping.SolrDocument
 
 /**
- * Represents a single drug, protein or disease.
+ * Represents a single compound or target.
  * All field types are defined in solr schema.xml.
  */
 @EqualsAndHashCode(
@@ -18,7 +18,7 @@ class ComprotEntity {
     /**
      * Type is used for resource id
      */
-    enum Type { PROTEIN, DRUG }
+    enum Type { TARGET, COMPOUND }
 
 	/**
 	 * ID of this entity within the index
@@ -32,7 +32,7 @@ class ComprotEntity {
     @Indexed(type = 'long') Long comprotId
 
 	/**
-	 * (NCBI) taxonomy id (null/not relevant for some entity types (e.g. for drugs))
+	 * (NCBI) taxonomy id (null/not relevant for some entity types (e.g. for compounds))
 	 */
     @Indexed(type = 'int') Integer taxonomyId
 

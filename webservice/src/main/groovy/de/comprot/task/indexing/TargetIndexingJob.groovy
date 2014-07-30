@@ -11,15 +11,15 @@ import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Component
 
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-@Component class DrugIndexingJob extends IndexingJob<ComprotEntity> {
+@Component class TargetIndexingJob extends IndexingJob<ComprotEntity> {
 
     @Autowired ComprotEntitySourceService sourceService
 
     @Autowired ComprotEntityIndexService indexService
 
-    @Override Page<ComprotEntity> fetch(Pageable pageable) { sourceService.getDrugs pageable }
+    @Override Page<ComprotEntity> fetch(Pageable pageable) { sourceService.getTargets pageable }
 
-    @Override def clearIndex() { indexService.deleteAll ComprotEntity.Type.DRUG }
+    @Override def clearIndex() { indexService.deleteAll ComprotEntity.Type.TARGET }
 
     @Override def index(List entities) { indexService.save entities }
 

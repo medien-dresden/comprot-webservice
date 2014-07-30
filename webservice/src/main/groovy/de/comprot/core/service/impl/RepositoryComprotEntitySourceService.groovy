@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service
 
     @Autowired ComprotEntitySourceRepository repository
 
-    @Override Page<ComprotEntity> getProteins(Pageable pageable) { repository.findAllProteins pageable }
+    @Override Page<ComprotEntity> getTargets(Pageable pageable) { repository.findAllTargets pageable }
 
-    @Override Page<ComprotEntity> getDrugs(Pageable pageable) { repository.findAllDrugs pageable }
+    @Override Page<ComprotEntity> getCompounds(Pageable pageable) { repository.findAllCompounds pageable }
 
 }

@@ -48,13 +48,13 @@ import org.springframework.web.bind.annotation.*
         def bindings
 
         switch (did.type) {
-            case ComprotEntity.Type.DRUG:
-                bindings = bindingService.getBindingsForDrug did.comprotId, pageable
+            case ComprotEntity.Type.COMPOUND:
+                bindings = bindingService.getBindingsForCompound did.comprotId, pageable
                 break
 
-            case ComprotEntity.Type.PROTEIN:
+            case ComprotEntity.Type.TARGET:
             default:
-                bindings = bindingService.getBindingsForProtein did.comprotId, pageable
+                bindings = bindingService.getBindingsForTarget did.comprotId, pageable
                 break
         }
 

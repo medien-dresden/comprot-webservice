@@ -34,15 +34,25 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
     }
 
     static String assembleId(ComprotEntity entity) {
-        "${entity.type.name()}-${entity.comprotId}"
+        "${entity.type.name()[0]}${entity.comprotId}"
     }
 
+    @SuppressWarnings("GroovyUnusedAssignment")
     static def disassembleId(String id) {
-        def (typeString, comprotIdString) = id.tokenize('-')
+        def (_, type, comprotId) = (id =~ /^(\w)(\d+)$/)[0]
+
+        switch (type) {
+            case "C": type = "COMPOUND"
+                break
+
+            case "T":
+            default: type = "TARGET"
+                break
+        }
 
         [
-            comprotId:  comprotIdString as Long,
-            type:       typeString as ComprotEntity.Type
+            comprotId:  comprotId as Long,
+            type:       type as ComprotEntity.Type
         ]
     }
 

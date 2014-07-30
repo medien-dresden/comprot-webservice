@@ -6,8 +6,8 @@ import org.springframework.data.domain.Pageable
 
 interface ComprotEntitySourceRepository {
 
-    Page<ComprotEntity> findAllProteins(Pageable pageable)
+    Page<ComprotEntity> findAllTargets(Pageable pageable)
 
-    Page<ComprotEntity> findAllDrugs(Pageable pageable)
+    Page<ComprotEntity> findAllCompounds(Pageable pageable)
 
 }

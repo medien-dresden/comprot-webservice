@@ -26,13 +26,13 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
 
         dto.add(linkTo(EntityController).slash(
                 ComprotEntityResourceAssembler.assembleId(new ComprotEntity(
-                    type: ComprotEntity.Type.PROTEIN,
+                    type: ComprotEntity.Type.TARGET,
                     comprotId: entity.targetId
                 ))).withRel('target'))
 
         dto.add(linkTo(EntityController).slash(
                 ComprotEntityResourceAssembler.assembleId(new ComprotEntity(
-                    type: ComprotEntity.Type.DRUG,
+                    type: ComprotEntity.Type.COMPOUND,
                     comprotId: entity.compoundId
                 ))).withRel('compound'))
 

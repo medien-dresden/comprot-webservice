@@ -8,9 +8,9 @@ import org.springframework.security.access.prepost.PreAuthorize
 interface ComprotEntitySourceService {
 
     @PreAuthorize('hasRole("ROLE_ADMIN")')
-    Page<ComprotEntity> getProteins(Pageable pageable)
+    Page<ComprotEntity> getTargets(Pageable pageable)
 
     @PreAuthorize('hasRole("ROLE_ADMIN")')
-    Page<ComprotEntity> getDrugs(Pageable pageable)
+    Page<ComprotEntity> getCompounds(Pageable pageable)
 
 }

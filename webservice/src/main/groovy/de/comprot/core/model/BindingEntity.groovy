@@ -6,7 +6,7 @@ import org.springframework.data.solr.core.mapping.Indexed
 import org.springframework.data.solr.core.mapping.SolrDocument
 
 /**
- * Represents the binding between drugs and proteins.
+ * Represents the binding between compounds and targets.
  * All field types are defined in solr schema.xml.
  */
 @EqualsAndHashCode(
@@ -26,12 +26,12 @@ class BindingEntity {
     @Indexed(type = 'long') Long entityId
 
 	/**
-	 * Protein id
+	 * Target id
 	 */
     @Indexed(type = 'long') Long targetId
 
     /**
-     * Drug id
+     * Compound id
      */
     @Indexed(type = 'long') Long compoundId
 

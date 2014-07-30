@@ -10,4 +10,8 @@ class ComprotEntityDto extends ResourceSupport {
 
     String[] synonyms
 
+    Long taxonomyId
+
+    String sourceId
+
 }
