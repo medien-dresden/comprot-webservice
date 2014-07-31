@@ -13,7 +13,7 @@ import org.springframework.data.solr.core.mapping.SolrDocument
         includeFields = true,
         excludes = ['name', 'synonyms'])
 @SolrDocument(solrCoreName = 'comprotentity')
-class ComprotEntity {
+class ComprotEntity implements Serializable {
 
     /**
      * Type is used for resource id
@@ -23,7 +23,7 @@ class ComprotEntity {
 	/**
 	 * ID of this entity within the index
 	 */
-	@Id String indexId
+	@Id transient String indexId
 
 	/**
 	 * internal id of this entity in the comprot database
@@ -34,22 +34,22 @@ class ComprotEntity {
 	/**
 	 * (NCBI) taxonomy id (null/not relevant for some entity types (e.g. for compounds))
 	 */
-    @Indexed(type = 'int') Integer taxonomyId
+    @Indexed(type = 'int') transient Integer taxonomyId
 
 	/**
 	 * the id of this entity in its source database
 	 */
-    @Indexed(type = 'string_ci', copyTo = 'suggestSource') String sourceId
+    @Indexed(type = 'string_ci', copyTo = 'suggestSource') transient String sourceId
 
 	/**
 	 * the primary name
 	 */
-    @Indexed(type = 'text_general', copyTo = 'suggestSource') String name
+    @Indexed(type = 'text_general', copyTo = 'suggestSource') transient String name
 
 	/**
 	 * known secondary names or synonyms
 	 */
-    @Indexed(type = 'text_general', copyTo = 'suggestSource') String[] synonyms = []
+    @Indexed(type = 'text_general', copyTo = 'suggestSource') transient String[] synonyms = []
 
     /**
      * Type of the entity

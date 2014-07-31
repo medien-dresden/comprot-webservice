@@ -18,6 +18,12 @@
     </mapping>
 
     <mapping>
+        <class-a>de.comprot.facade.v1.model.WorkbenchDto</class-a>
+        <class-b>de.comprot.core.model.WorkbenchEntity</class-b>
+        <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
+    </mapping>
+
+    <mapping>
         <class-a>de.comprot.facade.v1.model.RegistrationDto</class-a>
         <class-b>de.comprot.core.model.UserEntity</class-b>
         <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>

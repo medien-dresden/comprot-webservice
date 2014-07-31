@@ -1,6 +1,7 @@
 package de.comprot.core.service.impl
 
 import de.comprot.core.model.UserEntity
+import de.comprot.core.model.WorkbenchEntity
 import de.comprot.core.repository.UserRepository
 import de.comprot.core.service.EntityPropertyConstraintException
 import de.comprot.core.service.NoSuchEntityException
@@ -33,6 +34,10 @@ import org.springframework.transaction.annotation.Transactional
 
         user.password = passwordEncoder.encode user?.password
         user.email = user.email?.toLowerCase()
+
+        if (user.workbenches.isEmpty()) {
+            user.workbenches.add new WorkbenchEntity(user: user)
+        }
 
         repository.persist user
     }

@@ -7,11 +7,7 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.Table
-import javax.persistence.UniqueConstraint
+import javax.persistence.*
 import javax.validation.constraints.NotNull
 
 @Table(name = 'comprot_user', uniqueConstraints = [
@@ -32,6 +28,10 @@ import javax.validation.constraints.NotNull
     @NotNull String password
 
     @NotNull String[] roles = ['ROLE_USER']
+
+    @OrderColumn
+    @OneToMany(mappedBy = 'user', cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @NotNull List<WorkbenchEntity> workbenches = []
 
     @Override Collection<? extends GrantedAuthority> getAuthorities() {
         roles.collect { new SimpleGrantedAuthority(it) }
