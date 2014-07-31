@@ -32,7 +32,7 @@ import org.springframework.stereotype.Service
     }
 
     @Override Page<ComprotEntity> search(String query, Pageable pageable) {
-        repository.findByQuery query, pageable
+        repository.findByQuery query.replace(' ', '\\ '), pageable
     }
 
     @Override ComprotEntity getEntity(ComprotEntity.Type type, Long comprotId) {
