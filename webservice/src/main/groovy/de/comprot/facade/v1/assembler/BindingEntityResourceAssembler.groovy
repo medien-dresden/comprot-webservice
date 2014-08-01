@@ -2,6 +2,7 @@ package de.comprot.facade.v1.assembler
 
 import de.comprot.core.model.BindingEntity
 import de.comprot.core.model.ComprotEntity
+import de.comprot.core.service.ComprotEntityIndexService
 import de.comprot.core.service.MappingService
 import de.comprot.facade.v1.controller.BindingController
 import de.comprot.facade.v1.controller.EntityController
@@ -16,6 +17,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
 
     @Autowired MappingService mappingService
 
+    @Autowired ComprotEntityIndexService indexService
+
+    @Autowired ComprotEntityResourceAssembler entityResourceAssembler
+
     BindingEntityResourceAssembler() {
         super(BindingController, BindingEntityDto)
     }
@@ -24,17 +29,11 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
     @Override BindingEntityDto toResource(BindingEntity entity) {
         def dto = createResourceWithId(entity.entityId, entity)
 
-        dto.add(linkTo(EntityController).slash(
-                ComprotEntityResourceAssembler.assembleId(new ComprotEntity(
-                    type: ComprotEntity.Type.TARGET,
-                    comprotId: entity.targetId
-                ))).withRel('target'))
+        dto.compound = entityResourceAssembler.toResource indexService.getEntity(
+                ComprotEntity.Type.COMPOUND, entity.compoundId)
 
-        dto.add(linkTo(EntityController).slash(
-                ComprotEntityResourceAssembler.assembleId(new ComprotEntity(
-                    type: ComprotEntity.Type.COMPOUND,
-                    comprotId: entity.compoundId
-                ))).withRel('compound'))
+        dto.target = entityResourceAssembler.toResource indexService.getEntity(
+                ComprotEntity.Type.TARGET, entity.targetId)
 
         return dto
     }

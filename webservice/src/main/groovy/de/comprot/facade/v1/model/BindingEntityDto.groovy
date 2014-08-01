@@ -6,4 +6,8 @@ class BindingEntityDto extends ResourceSupport {
 
     String interaction
 
+    ComprotEntityDto compound
+
+    ComprotEntityDto target
+
 }
