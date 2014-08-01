@@ -1,13 +1,18 @@
 package de.comprot.facade.v1.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import org.hibernate.validator.constraints.NotEmpty
 import org.springframework.hateoas.ResourceSupport
 
+import javax.validation.constraints.NotNull
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 class WorkbenchDto extends ResourceSupport {
 
-    String label
+    @NotEmpty String label
 
-    List<ComprotEntityDto> targets
+    @NotNull List<ComprotEntityDto> targets
 
-    List<ComprotEntityDto> compounds
+    @NotNull List<ComprotEntityDto> compounds
 
 }
