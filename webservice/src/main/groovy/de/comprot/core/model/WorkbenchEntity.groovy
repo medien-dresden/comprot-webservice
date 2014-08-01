@@ -11,14 +11,22 @@ import javax.validation.constraints.NotNull
 
     @GeneratedValue @Id Long id
 
+    @NotNull String label = 'Default'
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = 'userId')
     @NotNull UserEntity user
 
-    @NotNull String label = 'Default'
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = 'comprot_workbench_target',
+            joinColumns = [ @JoinColumn(name = 'workbenchId') ],
+            inverseJoinColumns = [ @JoinColumn(name = 'entityId') ])
+    @NotNull List<ComprotEntity> targets = []
 
-    @NotNull ComprotEntity[] targets = []
-
-    @NotNull ComprotEntity[] compounds = []
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = 'comprot_workbench_compound',
+            joinColumns = [ @JoinColumn(name = 'workbenchId') ],
+            inverseJoinColumns = [ @JoinColumn(name = 'entityId') ])
+    @NotNull List<ComprotEntity> compounds = []
 
 }

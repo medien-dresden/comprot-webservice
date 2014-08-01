@@ -1,5 +1,6 @@
 package de.comprot.core.service.impl
 
+import de.comprot.core.model.ComprotEntity
 import de.comprot.core.model.UserEntity
 import de.comprot.core.model.WorkbenchEntity
 import de.comprot.core.repository.UserRepository
@@ -36,7 +37,8 @@ import org.springframework.transaction.annotation.Transactional
         user.email = user.email?.toLowerCase()
 
         if (user.workbenches.isEmpty()) {
-            user.workbenches.add new WorkbenchEntity(user: user)
+            user.workbenches.add new WorkbenchEntity(user: user,
+                    targets: [ new ComprotEntity(comprotId: 703, type: ComprotEntity.Type.COMPOUND) ]) // XXX
         }
 
         repository.persist user
