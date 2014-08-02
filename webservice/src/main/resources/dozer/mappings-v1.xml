@@ -21,6 +21,7 @@
         <class-a>de.comprot.facade.v1.model.WorkbenchDto</class-a>
         <class-b>de.comprot.core.model.WorkbenchEntity</class-b>
         <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
+        <field-exclude><a>id</a><b>id</b></field-exclude>
     </mapping>
 
     <mapping>
@@ -45,6 +46,10 @@
         <class-a>de.comprot.facade.v1.model.ComprotEntityDto</class-a>
         <class-b>de.comprot.core.model.ComprotEntity</class-b>
         <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
+        <field type="one-way"
+               custom-converter="de.comprot.facade.v1.assembler.ComprotEntityResourceAssembler.LinkConverter">
+            <a>id</a><b>id</b>
+        </field>
     </mapping>
 
     <mapping>
