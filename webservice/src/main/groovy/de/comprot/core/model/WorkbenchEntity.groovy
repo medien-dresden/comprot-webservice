@@ -21,12 +21,12 @@ import javax.validation.constraints.NotNull
     @JoinTable(name = 'comprot_workbench_target',
             joinColumns = [ @JoinColumn(name = 'workbenchId') ],
             inverseJoinColumns = [ @JoinColumn(name = 'entityRefId') ])
-    @NotNull List<ComprotEntityRef> targets = []
+    @NotNull Set<ComprotEntityRef> targets = []
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = 'comprot_workbench_compound',
             joinColumns = [ @JoinColumn(name = 'workbenchId') ],
             inverseJoinColumns = [ @JoinColumn(name = 'entityRefId') ])
-    @NotNull List<ComprotEntityRef> compounds = []
+    @NotNull Set<ComprotEntityRef> compounds = []
 
 }

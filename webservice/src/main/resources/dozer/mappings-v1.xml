@@ -22,6 +22,12 @@
         <class-b>de.comprot.core.model.WorkbenchEntity</class-b>
         <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
         <field-exclude><a>id</a><b>id</b></field-exclude>
+        <field remove-orphans="true">
+            <a>targets</a><b>targets</b>
+        </field>
+        <field remove-orphans="true">
+            <a>compounds</a><b>compounds</b>
+        </field>
     </mapping>
 
     <mapping>
@@ -46,8 +52,13 @@
         <class-a>de.comprot.facade.v1.model.ComprotEntityDto</class-a>
         <class-b>de.comprot.core.model.ComprotEntity</class-b>
         <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
-        <field type="one-way"
-               custom-converter="de.comprot.facade.v1.assembler.ComprotEntityResourceAssembler.LinkConverter">
+    </mapping>
+
+    <mapping>
+        <class-a>de.comprot.facade.v1.model.ComprotEntityDto</class-a>
+        <class-b>de.comprot.core.model.ComprotEntityRef</class-b>
+        <field-exclude><a>metaClass</a><b>metaClass</b></field-exclude>
+        <field custom-converter="de.comprot.facade.v1.converter.SelfLinkToIdConverter" type="one-way">
             <a>id</a><b>id</b>
         </field>
     </mapping>

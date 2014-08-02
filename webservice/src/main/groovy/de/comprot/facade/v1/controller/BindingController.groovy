@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping('api/bindings')
 @RestController class BindingController {
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.LOCKED)
     @RequestMapping(value = '{id}', method = RequestMethod.GET, produces = Version.V1)
     def getOne( @PathVariable('id') String id) {
 

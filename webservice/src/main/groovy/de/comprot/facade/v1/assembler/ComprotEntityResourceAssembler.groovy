@@ -4,9 +4,7 @@ import de.comprot.core.model.ComprotEntity
 import de.comprot.core.service.MappingService
 import de.comprot.facade.v1.controller.EntityController
 import de.comprot.facade.v1.model.ComprotEntityDto
-import org.dozer.CustomConverter
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.hateoas.Link
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport
 import org.springframework.stereotype.Component
 
@@ -37,14 +35,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
 
     @Override protected ComprotEntityDto instantiateResource(ComprotEntity entity) {
         mappingService.generate(entity, ComprotEntityDto)
-    }
-
-    static class LinkConverter implements CustomConverter {
-
-        @Override Object convert(Object destination, Object source, Class<?> destinationClass, Class<?> sourceClass) {
-            (source as Link).href.split('/').last() as String
-        }
-
     }
 
 }

@@ -12,4 +12,9 @@ interface WorkbenchService {
         or returnObject.user.id == principal.id \
     ') WorkbenchEntity loadById(Long id)
 
+    @PreAuthorize('\
+        hasRole("ROLE_ADMIN") \
+        or #workbench.user.id == principal.id \
+    ') void save(WorkbenchEntity workbench)
+
 }

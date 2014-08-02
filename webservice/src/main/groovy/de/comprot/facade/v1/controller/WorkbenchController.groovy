@@ -1,6 +1,5 @@
 package de.comprot.facade.v1.controller
 
-import de.comprot.core.model.WorkbenchEntity
 import de.comprot.core.service.MappingService
 import de.comprot.core.service.WorkbenchService
 import de.comprot.facade.Version
@@ -27,9 +26,12 @@ import javax.validation.Valid
 
     @SuppressWarnings('GroovyAssignabilityCheck')
     @RequestMapping(value = '{id}', method = RequestMethod.PUT, produces = Version.V1, consumes = Version.V1)
-    def patch(@Valid @RequestBody WorkbenchDto workbenchDto, @PathVariable('id') Long id) {
-        def workbench = mappingService.generate workbenchDto, WorkbenchEntity
-        println workbench
+    def put(@Valid @RequestBody WorkbenchDto workbenchDto,
+              @PathVariable('id') Long id) {
+        def currentWorkbench = workbenchService.loadById id
+        mappingService.transfer workbenchDto, currentWorkbench
+        workbenchService.save currentWorkbench
+        resourceAssembler.toResource currentWorkbench
     }
 
 }

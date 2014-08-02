@@ -11,6 +11,7 @@
         <trim-strings>true</trim-strings>
         <map-null>false</map-null>
         <map-empty-string>false</map-empty-string>
+        <relationship-type>non-cumulative</relationship-type>
     </configuration>
 
     <mapping>
