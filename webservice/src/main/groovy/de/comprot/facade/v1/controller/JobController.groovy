@@ -24,11 +24,11 @@ import javax.validation.Valid
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = '{id}', method = RequestMethod.DELETE)
-    def delete(@PathVariable String id) { jobService.stopJob id }
+    def delete(@PathVariable('id') String id) { jobService.stopJob id }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = '{id}', method = RequestMethod.GET, produces = Version.V1)
-    def get(@PathVariable String id) { mappingService.generate jobService.getJob(id), JobDto }
+    def get(@PathVariable('id') String id) { mappingService.generate jobService.getJob(id), JobDto }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, produces = Version.V1)

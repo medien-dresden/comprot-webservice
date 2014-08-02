@@ -5,11 +5,6 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.solr.core.mapping.Indexed
 import org.springframework.data.solr.core.mapping.SolrDocument
 
-import javax.persistence.Entity
-import javax.persistence.EnumType
-import javax.persistence.Enumerated
-import javax.persistence.Table
-
 /**
  * Represents a single compound or target.
  * All field types are defined in solr schema.xml.
@@ -18,8 +13,7 @@ import javax.persistence.Table
         includeFields = true,
         excludes = ['name', 'synonyms'])
 @SolrDocument(solrCoreName = 'comprotentity')
-@Table(name = 'comprot_entity')
-@Entity class ComprotEntity {
+class ComprotEntity {
 
     /**
      * Type is used for resource id
@@ -27,27 +21,9 @@ import javax.persistence.Table
     enum Type { TARGET, COMPOUND }
 
     /**
-     * ID of this entity within the index
+     * ID of this entity
      */
-    @Id String indexId
-
-	/**
-	 * ID of this entity within the application database
-	 */
-    @javax.persistence.Id
-	String getId() { "${type}-${comprotId}" }
-
-    void setId(String id) {
-        def (typeString, comprotIdString) = id.tokenize('-')
-        type = typeString as Type
-        comprotId = comprotIdString as Long
-    }
-
-	/**
-	 * internal id of this entity in the comprot database
-	 * NOTE: this id is only unique together with the entityType!
-	 */
-    @Indexed(type = 'long') Long comprotId
+    @Id String id
 
 	/**
 	 * (NCBI) taxonomy id (null/not relevant for some entity types (e.g. for compounds))
@@ -72,7 +48,6 @@ import javax.persistence.Table
     /**
      * Type of the entity
      */
-    @Enumerated(EnumType.STRING)
     @Indexed(type = 'enum') Type type
 
 }

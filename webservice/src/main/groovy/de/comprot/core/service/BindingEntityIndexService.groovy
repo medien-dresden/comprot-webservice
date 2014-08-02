@@ -14,9 +14,6 @@ interface BindingEntityIndexService {
     void deleteAll()
 
     @PreAuthorize('permitAll')
-    Page<BindingEntity> getBindingsForCompound(Long comprotId, Pageable pageable)
-
-    @PreAuthorize('permitAll')
-    Page<BindingEntity> getBindingsForTarget(Long comprotId, Pageable pageable)
+    Page<BindingEntity> getBindings(String id, Pageable pageable)
 
 }

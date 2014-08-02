@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = '{id}', method = RequestMethod.GET, produces = Version.V1)
-    def getOne( @PathVariable('id') Long id) {
+    def getOne( @PathVariable('id') String id) {
 
     }
 

@@ -34,12 +34,12 @@ import javax.validation.Valid
     }
 
     @RequestMapping(value = '{username}', method = RequestMethod.GET, produces = Version.V1)
-    def getOne(@PathVariable String username) {
+    def getOne(@PathVariable('username') String username) {
         userResourceAssembler.toResource userService.loadByUsername(username)
     }
 
     @RequestMapping(value = '{username}/workbenches', method = RequestMethod.GET, produces = Version.V1)
-    def getWorkbenches(@PathVariable String username) {
+    def getWorkbenches(@PathVariable('username') String username) {
         workbenchResourceAssembler.toResources userService.loadByUsername(username).workbenches
     }
 

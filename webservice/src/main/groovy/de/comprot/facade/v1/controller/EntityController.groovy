@@ -1,11 +1,10 @@
 package de.comprot.facade.v1.controller
 
-import de.comprot.core.model.ComprotEntity
 import de.comprot.core.service.BindingEntityIndexService
 import de.comprot.core.service.ComprotEntityIndexService
+import de.comprot.facade.Version
 import de.comprot.facade.v1.assembler.BindingEntityResourceAssembler
 import de.comprot.facade.v1.assembler.ComprotEntityResourceAssembler
-import de.comprot.facade.Version
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
@@ -36,29 +35,14 @@ import org.springframework.web.bind.annotation.*
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = '{id}', method = RequestMethod.GET, produces = Version.V1)
     def getOne( @PathVariable('id') String id) {
-        def did = ComprotEntityResourceAssembler.disassembleId(id)
-        comprotEntityResourceAssembler.toResource entityService.getEntity(did.type, did.comprotId)
+        comprotEntityResourceAssembler.toResource entityService.getEntity(id)
     }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = '{id}/bindings', method = RequestMethod.GET, produces = Version.V1)
     def getBindings( @PathVariable('id') String id,
                      @PageableDefault Pageable pageable) {
-        def did = ComprotEntityResourceAssembler.disassembleId(id)
-        def bindings
-
-        switch (did.type) {
-            case ComprotEntity.Type.COMPOUND:
-                bindings = bindingService.getBindingsForCompound did.comprotId, pageable
-                break
-
-            case ComprotEntity.Type.TARGET:
-            default:
-                bindings = bindingService.getBindingsForTarget did.comprotId, pageable
-                break
-        }
-
-        pagedAssembler.toResource bindings, bindingEntityResourceAssembler
+        pagedAssembler.toResource bindingService.getBindings(id, pageable), bindingEntityResourceAssembler
     }
 
 }

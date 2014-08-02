@@ -21,6 +21,6 @@ interface ComprotEntityIndexService {
     Page<ComprotEntity> search(String query, Pageable pageable)
 
     @PreAuthorize('permitAll')
-    ComprotEntity getEntity(ComprotEntity.Type type, Long comprotId)
+    ComprotEntity getEntity(String id)
 
 }

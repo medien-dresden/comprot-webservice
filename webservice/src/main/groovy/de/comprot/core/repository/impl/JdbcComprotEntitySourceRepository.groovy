@@ -15,8 +15,8 @@ import org.springframework.stereotype.Repository
                 'SELECT t.*, GROUP_CONCAT(DISTINCT ts.name SEPARATOR 0x3) AS synonyms FROM TARGET t ' +
                         'LEFT JOIN TARGET_SYNONYM ts ON ts.TARGET_ID = t.ID GROUP BY t.ID ORDER BY t.id ASC',
                 [:], pageable, { result, rowNumber -> new ComprotEntity(
+                        id:         "T${result.getLong('ID')}",
                         type:       ComprotEntity.Type.TARGET,
-                        comprotId:  result.getLong('ID'),
                         sourceId:   result.getString('UNIPROTAC'),
                         taxonomyId: result.getInt('NCBI_TAXONOMY_ID'),
                         name:       result.getString('NAME'),
@@ -31,8 +31,8 @@ import org.springframework.stereotype.Repository
                 'SELECT c.*, GROUP_CONCAT(DISTINCT cs.name SEPARATOR 0x3) AS synonyms FROM COMPOUND c ' +
                         'LEFT JOIN COMPOUND_SYNONYM cs ON cs.COMPOUND_ID = c.ID GROUP BY c.ID ORDER BY c.id ASC',
                 [:], pageable, { result, rowNumber -> new ComprotEntity(
+                        id:         "C${result.getLong('ID')}",
                         type:       ComprotEntity.Type.COMPOUND,
-                        comprotId:  result.getLong('ID'),
                         sourceId:   result.getString('ID'),
                         name:       result.getString('NAME'),
                         synonyms:   result.getString('SYNONYMS')?.split((String) 0x3 as char)

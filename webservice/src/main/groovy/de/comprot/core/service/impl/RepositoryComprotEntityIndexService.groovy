@@ -35,8 +35,8 @@ import org.springframework.stereotype.Service
         repository.findByQuery query.replace(' ', '\\ '), pageable
     }
 
-    @Override ComprotEntity getEntity(ComprotEntity.Type type, Long comprotId) {
-        repository.findByTypeAndComprotId type, comprotId
+    @Override ComprotEntity getEntity(String id) {
+        repository.findById id
     }
 
 }

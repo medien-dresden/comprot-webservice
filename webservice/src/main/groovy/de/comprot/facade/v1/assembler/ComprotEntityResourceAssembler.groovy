@@ -21,10 +21,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
     }
 
     @Override ComprotEntityDto toResource(ComprotEntity entity) {
-        def dto = createResourceWithId(assembleId(entity), entity)
+        def dto = createResourceWithId(entity.id, entity)
 
         dto.add(linkTo(EntityController)
-                .slash(assembleId(entity))
+                .slash(entity.id)
                 .slash('bindings')
                 .withRel('bindings'))
 
@@ -37,29 +37,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
 
     @Override protected ComprotEntityDto instantiateResource(ComprotEntity entity) {
         mappingService.generate(entity, ComprotEntityDto)
-    }
-
-    static String assembleId(ComprotEntity entity) {
-        "${entity.type.name()[0]}${entity.comprotId}"
-    }
-
-    @SuppressWarnings("GroovyUnusedAssignment")
-    static def disassembleId(String id) {
-        def (_, type, comprotId) = (id =~ /^(\w)(\d+)$/)[0]
-
-        switch (type) {
-            case "C": type = "COMPOUND"
-                break
-
-            case "T":
-            default: type = "TARGET"
-                break
-        }
-
-        [
-            comprotId:  comprotId as Long,
-            type:       type as ComprotEntity.Type
-        ]
     }
 
     static class LinkConverter implements CustomConverter {

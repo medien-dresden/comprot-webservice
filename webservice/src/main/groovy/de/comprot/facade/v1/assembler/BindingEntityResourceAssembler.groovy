@@ -27,13 +27,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
 
     @SuppressWarnings("UnnecessaryQualifiedReference")
     @Override BindingEntityDto toResource(BindingEntity entity) {
-        def dto = createResourceWithId(entity.entityId, entity)
+        def dto = createResourceWithId(entity.id, entity)
 
-        dto.compound = entityResourceAssembler.toResource indexService.getEntity(
-                ComprotEntity.Type.COMPOUND, entity.compoundId)
-
-        dto.target = entityResourceAssembler.toResource indexService.getEntity(
-                ComprotEntity.Type.TARGET, entity.targetId)
+        dto.compound = entityResourceAssembler.toResource indexService.getEntity(entity.compoundId)
+        dto.target = entityResourceAssembler.toResource indexService.getEntity(entity.targetId)
 
         return dto
     }

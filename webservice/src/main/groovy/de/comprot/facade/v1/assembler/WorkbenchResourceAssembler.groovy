@@ -30,18 +30,11 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
         dto.targets = []
         dto.compounds = []
 
-        workbench.compounds.each { entity ->
-            def indexEntity = indexService.getEntity entity.type, entity.comprotId
-            def entityResource = entityResourceAssembler.toResource indexEntity
-
-            dto.compounds.add entityResource
-        }
-
-        workbench.targets.each { entity ->
-            def indexEntity = indexService.getEntity entity.type, entity.comprotId
-            def entityResource = entityResourceAssembler.toResource indexEntity
-
-            dto.targets.add entityResource
+        ['targets', 'compounds'].each {
+            workbench."$it".each { id ->
+                //noinspection GroovyAssignabilityCheck
+                dto."$it".add entityResourceAssembler.toResource(indexService.getEntity(id as String))
+            }
         }
 
         dto.add(linkTo(UserController)

@@ -16,11 +16,8 @@ import org.springframework.stereotype.Service
 
     @Override void deleteAll() { repository.deleteAll() }
 
-    @Override Page<BindingEntity> getBindingsForCompound(Long comprotId, Pageable pageable) {
-        repository.findByCompoundId comprotId, pageable
+    @Override Page<BindingEntity> getBindings(String id, Pageable pageable) {
+        repository.findByEntity id, pageable
     }
 
-    @Override Page<BindingEntity> getBindingsForTarget(Long comprotId, Pageable pageable) {
-        repository.findByTargetId comprotId, pageable
-    }
 }
