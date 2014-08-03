@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 
 @Service class RepositoryComprotEntityIndexService implements ComprotEntityIndexService {
@@ -37,6 +38,16 @@ import org.springframework.stereotype.Service
 
     @Override ComprotEntity getEntity(String id) {
         repository.findById id
+    }
+
+    @Override void increasePopularity(String id) {
+        def entity = repository.findById(id)
+        repository.updatePopularity id, entity.popularity + 1
+    }
+
+    @Override void decreasePopularity(String id) {
+        def entity = repository.findById(id)
+        repository.updatePopularity id, entity.popularity - 1
     }
 
 }

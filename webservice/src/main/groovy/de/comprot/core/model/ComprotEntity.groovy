@@ -50,4 +50,9 @@ class ComprotEntity {
      */
     @Indexed(type = 'enum') Type type
 
+    /**
+     * Entity popularity
+     */
+    @Indexed(type = 'int') Integer popularity = 0
+
 }

@@ -23,4 +23,10 @@ interface ComprotEntityIndexService {
     @PreAuthorize('permitAll')
     ComprotEntity getEntity(String id)
 
+    @PreAuthorize('isAuthenticated()')
+    void increasePopularity(String id)
+
+    @PreAuthorize('isAuthenticated()')
+    void decreasePopularity(String id)
+
 }

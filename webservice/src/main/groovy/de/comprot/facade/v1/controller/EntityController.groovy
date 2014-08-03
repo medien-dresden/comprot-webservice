@@ -7,6 +7,7 @@ import de.comprot.facade.v1.assembler.BindingEntityResourceAssembler
 import de.comprot.facade.v1.assembler.ComprotEntityResourceAssembler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
 import org.springframework.data.web.PageableDefault
 import org.springframework.data.web.PagedResourcesAssembler
 import org.springframework.http.HttpStatus
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.*
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET, produces = Version.V1)
     def search( @RequestParam(value = "q", required = true) String query,
-                @PageableDefault Pageable pageable) {
+                @PageableDefault(sort = ['score', 'popularity'], direction = Sort.Direction.DESC) Pageable pageable) {
         pagedAssembler.toResource entityService.search(query, pageable), comprotEntityResourceAssembler
     }
 

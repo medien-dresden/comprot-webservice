@@ -8,7 +8,8 @@ import org.springframework.data.solr.repository.Facet
 import org.springframework.data.solr.repository.Query
 import org.springframework.data.solr.repository.SolrCrudRepository
 
-interface ComprotEntityIndexRepository extends SolrCrudRepository<ComprotEntity, String> {
+interface ComprotEntityIndexRepository
+        extends ComprotEntityUpdateRepository, SolrCrudRepository<ComprotEntity, String> {
 
     @Query(value = '*:*', requestHandler = '/suggest')
     @Facet(prefix = '?0', fields = 'suggestSource', limit = 20, minCount = 1)

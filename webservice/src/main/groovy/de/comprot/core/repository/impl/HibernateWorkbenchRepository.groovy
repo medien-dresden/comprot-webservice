@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository
 
 @Repository class HibernateWorkbenchRepository extends HibernateDaoSupport implements WorkbenchRepository {
 
-    @Override void persist(WorkbenchEntity workbench) { currentSession().saveOrUpdate workbench }
+    @Override void persist(WorkbenchEntity workbench) { currentSession().merge workbench }
 
     @Override WorkbenchEntity findById(Long id) {
         (WorkbenchEntity) currentSession().byId(WorkbenchEntity).load(id)
