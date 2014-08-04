@@ -15,4 +15,14 @@
             multicore-support="true"
             schema-creation-support="true" />
 
+    <bean   id="solrServerFactory"
+            class="org.springframework.data.solr.server.support.MulticoreSolrServerFactory">
+        <constructor-arg name="solrServer" ref="solrServer" />
+    </bean>
+
+    <bean   id="solrTemplate"
+            class="org.springframework.data.solr.core.SolrTemplate">
+        <constructor-arg name="solrServerFactory" ref="solrServerFactory" />
+    </bean>
+
 </beans>

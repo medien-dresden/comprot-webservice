@@ -43,6 +43,7 @@
 
     <fields>
         <field name="suggestSource" type="text_suggest" />
+        <field name="_version_" indexed="true" type="long" stored="true" multiValued="false" />
     </fields>
 
 </schema>

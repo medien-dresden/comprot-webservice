@@ -9,7 +9,9 @@
     </schemaFactory>
 
 	<updateHandler class="solr.DirectUpdateHandler2">
-		<maxPendingDeletes>100</maxPendingDeletes>
+        <updateLog> 
+            <str name="dir">${solr.ulog.dir:}</str> 
+        </updateLog>
 	</updateHandler>
 
 	<requestDispatcher handleSelect="true">

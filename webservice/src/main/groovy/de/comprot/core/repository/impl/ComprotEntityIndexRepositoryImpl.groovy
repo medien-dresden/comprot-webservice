@@ -8,15 +8,16 @@ import org.springframework.stereotype.Repository
 
 @Repository class ComprotEntityIndexRepositoryImpl implements ComprotEntityUpdateRepository {
 
-    //@Autowired SolrTemplate solrTemplate
+    @Autowired SolrTemplate template
 
     @Override void updatePopularity(String id, Long popularity) {
         def update = new PartialUpdate('id', id)
 
         update.add 'popularity', popularity
 
-        //solrTemplate.saveBean update
-        //solrTemplate.commit()
+        template.setSolrCore 'comprotentity'
+        // template.saveBean update
+        // template.commit()
     }
 
 }
