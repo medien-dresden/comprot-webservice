@@ -42,7 +42,7 @@ import org.springframework.transaction.annotation.Transactional
     }
 
     // FIXME just a hack due to atomic update issues
-    @Override void increasePopularity(String id) {
+    @Transactional @Override void increasePopularity(String id) {
         def entity = repository.findById id
         entity.popularity++
 
@@ -51,7 +51,7 @@ import org.springframework.transaction.annotation.Transactional
     }
 
     // FIXME just a hack due to atomic update issues
-    @Override void decreasePopularity(String id) {
+    @Transactional @Override void decreasePopularity(String id) {
         def entity = repository.findById id
         entity.popularity--
 

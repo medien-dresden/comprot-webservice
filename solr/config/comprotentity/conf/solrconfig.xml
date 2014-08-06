@@ -12,6 +12,9 @@
         <updateLog> 
             <str name="dir">${solr.comprotentity.data.dir:}</str> 
         </updateLog>
+        <autoSoftCommit>
+            <maxTime>1000</maxTime>
+        </autoSoftCommit>
     </updateHandler>
 
     <requestHandler name="/replication" class="solr.ReplicationHandler" startup="lazy" /> 
