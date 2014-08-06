@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service class RepositoryComprotEntityIndexService implements ComprotEntityIndexService {
 
@@ -40,14 +41,22 @@ import org.springframework.stereotype.Service
         repository.findById id
     }
 
+    // FIXME just a hack due to atomic update issues
     @Override void increasePopularity(String id) {
-        def entity = repository.findById(id)
-        repository.updatePopularity id, entity.popularity + 1
+        def entity = repository.findById id
+        entity.popularity++
+
+        repository.deleteById id
+        repository.save entity
     }
 
+    // FIXME just a hack due to atomic update issues
     @Override void decreasePopularity(String id) {
-        def entity = repository.findById(id)
-        repository.updatePopularity id, entity.popularity - 1
+        def entity = repository.findById id
+        entity.popularity--
+
+        repository.deleteById id
+        repository.save entity
     }
 
 }

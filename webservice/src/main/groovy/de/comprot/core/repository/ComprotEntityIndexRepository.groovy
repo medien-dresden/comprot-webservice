@@ -22,4 +22,7 @@ interface ComprotEntityIndexRepository
 
     void deleteByType(ComprotEntity.Type entityType)
 
+    // XXX
+    void deleteById(String id)
+
 }

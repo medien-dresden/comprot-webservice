@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
-	<luceneMatchVersion>LUCENE_40</luceneMatchVersion>
-	<directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.StandardDirectoryFactory}" />
+    <luceneMatchVersion>4.9</luceneMatchVersion>
+    <directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.StandardDirectoryFactory}" />
 
     <schemaFactory class="ManagedIndexSchemaFactory">
         <bool name="mutable">true</bool>
         <str name="managedSchemaResourceName">managed-schema</str>
     </schemaFactory>
 
-	<updateHandler class="solr.DirectUpdateHandler2">
+    <updateHandler class="solr.DirectUpdateHandler2">
         <updateLog> 
-            <str name="dir">${solr.ulog.dir:}</str> 
+            <str name="dir">${solr.comprotentity.data.dir:}</str> 
         </updateLog>
-	</updateHandler>
+    </updateHandler>
 
-	<requestDispatcher handleSelect="true">
-		<requestParsers enableRemoteStreaming="false" multipartUploadLimitInKB="2048" />
-	</requestDispatcher>
+    <requestHandler name="/replication" class="solr.ReplicationHandler" startup="lazy" /> 
 
-	<requestHandler name="standard" class="solr.StandardRequestHandler" default="true" />
-	<requestHandler name="/update" class="solr.UpdateRequestHandler" />
-    <requestHandler name="/admin/luke" class="org.apache.solr.handler.admin.LukeRequestHandler" />
-    <requestHandler name="/admin/system" class="org.apache.solr.handler.admin.SystemInfoHandler" />
-    <requestHandler name="/admin/mbeans" class="org.apache.solr.handler.admin.SolrInfoMBeanHandler" />
+    <requestDispatcher handleSelect="true">
+        <requestParsers enableRemoteStreaming="false" multipartUploadLimitInKB="2048" />
+    </requestDispatcher>
+
+    <requestHandler name="standard" class="solr.StandardRequestHandler" default="true" />
+    <requestHandler name="/analysis/field" startup="lazy" class="solr.FieldAnalysisRequestHandler" />
+    <requestHandler name="/update" class="solr.UpdateRequestHandler" />
+    <requestHandler name="/admin/" class="org.apache.solr.handler.admin.AdminHandlers" />
+    
     <requestHandler name="/admin/ping" class="solr.PingRequestHandler">
         <requestHandler name="/admin/ping" class="solr.PingRequestHandler">
             <str name="healthcheckFile">server-enabled.txt</str>
