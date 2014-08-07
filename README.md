@@ -18,13 +18,22 @@
     app.database.username=ralf
     app.database.password=flar
     ```
+    
+* indexing is done by three different jobs, access those through the REST API the following way
+
+    ```
+    curl -v -u admin:admin123 -H "Content-Type: application/vnd.comprot-v1.0+json" -d '{"name":"targetIndexingJob"}' http://localhost:8080/api/jobs/
+    curl -v -u admin:admin123 -H "Content-Type: application/vnd.comprot-v1.0+json" -d '{"name":"compoundIndexingJob"}' http://localhost:8080/api/jobs/
+    curl -v -u admin:admin123 -H "Content-Type: application/vnd.comprot-v1.0+json" -d '{"name":"bindingIndexingJob"}' http://localhost:8080/api/jobs/
+    ```
 
 ### Platform & tools
 
-* run with
+* run in different terminals
 
     ```
-    ./gradlew solr:run && ./gradlew webservice:run
+    ./gradlew solr:run
+    ./gradlew webservice:run
     ```
     
 * for [Hot code swapping](http://en.wikipedia.org/wiki/Hot_swapping) with IntelliJ IDEA use
