@@ -19,16 +19,10 @@
     app.database.password=flar
     ```
     
-* indexing is done by three different jobs, access those through the REST API the following way
-
-    ```
-    curl -v -u admin:admin123 -H "Content-Type: application/vnd.comprot-v1.0+json" -d '{"name":"targetIndexingJob"}' http://localhost:8080/api/jobs/
-    curl -v -u admin:admin123 -H "Content-Type: application/vnd.comprot-v1.0+json" -d '{"name":"compoundIndexingJob"}' http://localhost:8080/api/jobs/
-    curl -v -u admin:admin123 -H "Content-Type: application/vnd.comprot-v1.0+json" -d '{"name":"bindingIndexingJob"}' http://localhost:8080/api/jobs/
-    ```
-
-### Platform & tools
-
+* set up app-database creation
+  * manually by executing an [SQL-script]()
+  * automatically by setting _database.schema_ to _update_ (```webservice/src/main/resources/app.properties```)
+    
 * run in different terminals
 
     ```
@@ -36,6 +30,17 @@
     ./gradlew webservice:run
     ```
     
+    
+* indexing is done by three different jobs, access those through the REST API the following way
+
+    ```
+    curl -v -u admin:admin123 -H "Content-Type: application/vnd.comprot-v1.0+json" -d '{"name":"targetIndexingJob"}' http://localhost:8080/api/jobs/
+    curl -v -u admin:admin123 -H "Content-Type: application/vnd.comprot-v1.0+json" -d '{"name":"compoundIndexingJob"}' http://localhost:8080/api/jobs/
+    curl -v -u admin:admin123 -H "Content-Type: application/vnd.comprot-v1.0+json" -d '{"name":"bindingIndexingJob"}' http://localhost:8080/api/jobs/
+    ```
+    
+### Platform & tools
+
 * for [Hot code swapping](http://en.wikipedia.org/wiki/Hot_swapping) with IntelliJ IDEA use
     * [DCEVM plugin](http://blog.jetbrains.com/idea/2013/07/get-true-hot-swap-in-java-with-dcevm-and-intellij-idea/)
     * [Spring Loaded](https://github.com/spring-projects/spring-loaded)
