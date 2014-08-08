@@ -39,7 +39,7 @@
     curl -v -u admin:admin123 -H "Content-Type: application/vnd.comprot-v1.0+json" -d '{"name":"bindingIndexingJob"}' http://localhost:8080/api/jobs/
     ```
     
-### Platform & tools
+## Platform & tools
 
 * for [Hot code swapping](http://en.wikipedia.org/wiki/Hot_swapping) with IntelliJ IDEA use
     * [DCEVM plugin](http://blog.jetbrains.com/idea/2013/07/get-true-hot-swap-in-java-with-dcevm-and-intellij-idea/)
