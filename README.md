@@ -19,10 +19,9 @@
     app.database.password=flar
     ```
     
-* set up app-database creation
-  * manually by executing an [SQL-script](https://gist.github.com/phdd/fdc1e46f302cef7cdb32)
+* set up app-database creation either
+  * manually by executing a [SQL-script](https://gist.github.com/phdd/fdc1e46f302cef7cdb32) or
   * automatically by setting _database.schema_ to _update_ (```webservice/src/main/resources/app.properties```)
-
 
 * run in different terminals
 
