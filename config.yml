@@ -12,18 +12,18 @@ indexing:
 database:
 
     comprot:
-        host: wp027.webpack.hosteurope.de
+        host: 
         port: 3306
-        name: db1084663-comprot
-        username: db1084663-bio
-        password: mqVc93XAdbrY8g7l
+        name: 
+        username: 
+        password: 
 
     application:
-        host: wp027.webpack.hosteurope.de
+        host: 
         port: 3306
-        name: db1084663-comprot
-        username: db1084663-bio
-        password: mqVc93XAdbrY8g7l
+        name: 
+        username: 
+        password: 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
